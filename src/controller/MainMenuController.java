@@ -1,12 +1,11 @@
 package controller;
 
-import model.Student;
 import view.MenuView;
-public class MenuController {
+public class MainMenuController {
 
     private final MenuView menuView;
     private final StudentController studentController;
-    public MenuController(MenuView menuView, StudentController studentController) {
+    public MainMenuController(MenuView menuView, StudentController studentController) {
         this.menuView = menuView;
         this.studentController = studentController;
     }

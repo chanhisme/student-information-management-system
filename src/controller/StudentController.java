@@ -2,16 +2,16 @@ package controller;
 
 import view.MenuStudentView;
 
-import java.util.Scanner;
 
 public class StudentController {
     private final MenuStudentView menuStudentView;
     private final StudentManageController studentManageController;
-
+    private final CourseRegistrationController courseRegistrationController;
     public StudentController(MenuStudentView menuStudentView,
-                             StudentManageController studentManageController) {
+                             StudentManageController studentManageController, CourseRegistrationController courseRegistrationController) {
         this.menuStudentView = menuStudentView;
         this.studentManageController = studentManageController;
+        this.courseRegistrationController = courseRegistrationController;
     }
 
     public void run() {
@@ -22,6 +22,9 @@ public class StudentController {
             switch (choice) {
                 case 1:
                     studentManageController.run();
+                    break;
+                case 2:
+                    courseRegistrationController.run();
                     break;
                 case 0:
                     return;

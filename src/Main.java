@@ -11,12 +11,17 @@ public class Main {
         MenuView menuView = new MenuView(scanner);
         MenuStudentView menuStudentView = new MenuStudentView(scanner);
         MenuStudentManageView menuStudentManageView = new MenuStudentManageView(scanner);
+        MenuCourseRegistrationView menuCourseRegistrationView = new MenuCourseRegistrationView(scanner);
 
+        CourseRegistrationController courseRegistrationController = new CourseRegistrationController(menuCourseRegistrationView);
         StudentManageController studentManageController = new StudentManageController(menuStudentManageView);
-        StudentController studentController = new StudentController(menuStudentView, studentManageController);
-        MenuController menuController = new MenuController(menuView, studentController);
+        StudentController studentController = new StudentController(menuStudentView,
+                studentManageController, courseRegistrationController);
 
 
-        menuController.run();
+        MainMenuController mainMenuController = new MainMenuController(menuView, studentController);
+
+
+        mainMenuController.run();
     }
 }
