@@ -11,6 +11,17 @@ public class MenuController {
     }
 
     public void run() {
-        menuView.showMainMenu();
+        while(true){
+            menuView.showMainMenu();
+            int choice = menuView.inputChoice();
+            switch (choice){
+                case 0:
+                    menuView.showExitMessage();
+                    break;
+                default:
+                    menuView.showInvalidChoice();
+            }
+        }
     }
+
 }
