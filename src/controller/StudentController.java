@@ -1,7 +1,9 @@
 package controller;
 
 import view.MenuStudentView;
+
 import java.util.Scanner;
+
 public class StudentController {
     private final MenuStudentView menuStudentView;
 
@@ -10,20 +12,22 @@ public class StudentController {
         this.menuStudentView = menuStudentView;
     }
 
-    public void run(){
-
+    public void run() {
+        int choice = 0;
         while(true){
             menuStudentView.showMenu();
-            int choice = menuStudentView.inputChoice();
-            switch (choice){
+            choice = menuStudentView.inputChoice();
+            switch (choice) {
+                case 1:
 
                 case 0:
-                    break;
+                    return;
                 default:
                     menuStudentView.showInvalidChoice();
                     break;
             }
         }
+
     }
 
 }

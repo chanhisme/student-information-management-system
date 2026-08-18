@@ -10,7 +10,7 @@ public class MenuStudentView {
     }
 
     public void showMenu() {
-        System.out.println("========== STUDENT MANAGEMENT ==========");
+        System.out.println("\n========== STUDENT MANAGEMENT ==========");
         System.out.println("1. Student Management");
         System.out.println("2. Course Registration");
         System.out.println("3. Student Information");

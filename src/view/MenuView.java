@@ -11,7 +11,7 @@ public class MenuView {
     }
 
     public void showMenu() {
-        System.out.println("\n===== STUDENT MANAGEMENT SYSTEM =====");
+        System.out.println("\n===== MAIN MENU =====");
         System.out.println("1. Manage Students");
         System.out.println("2. Manage Subjects");
         System.out.println("3. Manage Faculties");
