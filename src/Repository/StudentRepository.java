@@ -1,8 +1,8 @@
-package Repository;
+package repository;
 
 import java.util.Map;
 import java.util.TreeMap;
-import Model.Student;
+import model.Student;
 
 public class StudentRepository {
 
