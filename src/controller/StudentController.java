@@ -18,7 +18,7 @@ public class StudentController {
         int choice = 0;
         while(true){
             menuStudentView.showMenu();
-            choice = menuStudentView.inputChoice();
+            choice = menuStudentView.inputChoice(0,5);
             switch (choice) {
                 case 1:
                     studentManageController.run();
@@ -28,9 +28,6 @@ public class StudentController {
                     break;
                 case 0:
                     return;
-                default:
-                    menuStudentView.showInvalidChoice();
-                    break;
             }
         }
 

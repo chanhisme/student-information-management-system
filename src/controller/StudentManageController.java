@@ -11,14 +11,10 @@ public class StudentManageController {
     public void run  (){
         while(true){
             menuStudentManageView.showMenu();
-            int choice = menuStudentManageView.inputChoice();
+            int choice = menuStudentManageView.inputChoice(0,5);
             switch (choice){
-
                 case 0:
                     return;
-                default:
-                    menuStudentManageView.showInvalidChoice();
-                    break;
             }
         }
     }

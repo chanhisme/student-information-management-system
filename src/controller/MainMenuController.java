@@ -11,10 +11,9 @@ public class MainMenuController {
     }
 
     public void run() {
-        int choice = 0;
         while(true){
             menuView.showMenu();
-            choice = menuView.inputChoice();
+            int choice = menuView.inputChoice(0,3);
             switch (choice){
                 case 1:
                     studentController.run();
@@ -23,9 +22,6 @@ public class MainMenuController {
                 case 0:
                     menuView.showExitMessage();
                     return;
-                default:
-                    menuView.showInvalidChoice();
-                    break;
 
             }
         }

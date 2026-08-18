@@ -18,6 +18,5 @@ public class MenuCourseRegistrationView extends BaseMenuView {
         System.out.println("5. Redo Last Operation");
         System.out.println("0. Back");
         System.out.println("==========================================");
-        System.out.print("Enter your choice: ");
     }
 }

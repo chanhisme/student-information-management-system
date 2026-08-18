@@ -13,15 +13,12 @@ public class CourseRegistrationController {
         int choice = 0;
         while (true) {
             menuCourseRegistrationView.showMenu();
-            choice = menuCourseRegistrationView.inputChoice();
+            choice = menuCourseRegistrationView.inputChoice(0,5);
             switch (choice) {
                 case 1:
 
                 case 0:
                     return;
-                default:
-                    menuCourseRegistrationView.showInvalidChoice();
-                    break;
             }
         }
     }

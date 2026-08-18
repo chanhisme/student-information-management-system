@@ -14,8 +14,25 @@ public abstract class BaseMenuView {
 
     public int inputChoice() {
         while (true) {
+            System.out.print("Enter your choice: ");
             try {
                 return Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                showInvalidChoice();
+            }
+        }
+    }
+
+    public int inputChoice(int min, int max) {
+        while (true) {
+            System.out.print("Enter your choice: ");
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                if (choice < min || choice > max) {
+                    showInvalidChoice();
+                    continue;
+                }
+                return choice;
             } catch (NumberFormatException e) {
                 showInvalidChoice();
             }

@@ -18,6 +18,5 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println("5. Graduation Progress");
         System.out.println("0. Back");
         System.out.println("========================================");
-        System.out.print("Enter your choice: ");
     }
 }
