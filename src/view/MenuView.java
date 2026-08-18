@@ -10,7 +10,7 @@ public class MenuView {
         this.scanner = scanner;
     }
 
-    public void showMainMenu() {
+    public void showMenu() {
         System.out.println("\n===== STUDENT MANAGEMENT SYSTEM =====");
         System.out.println("1. Manage Students");
         System.out.println("2. Manage Subjects");

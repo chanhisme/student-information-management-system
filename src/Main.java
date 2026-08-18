@@ -1,5 +1,5 @@
-import controller.MenuController;
-import view.MenuView;
+import controller.*;
+import view.*;
 
 import java.util.Scanner;
 
@@ -9,7 +9,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         MenuView menuView = new MenuView(scanner);
-        MenuController menuController = new MenuController(menuView);
+        MenuStudentView menuStudentView = new MenuStudentView(scanner);
+        MenuController menuController = new MenuController(menuView, menuStudentView);
 
         menuController.run();
     }
