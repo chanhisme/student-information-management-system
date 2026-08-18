@@ -1,17 +1,14 @@
 package controller;
 
-import view.MenuStudentView;
+import model.Student;
 import view.MenuView;
-
-import java.awt.*;
-
 public class MenuController {
 
     private final MenuView menuView;
-    private final MenuStudentView menuStudentView;
-    public MenuController(MenuView menuView, MenuStudentView menuStudentView) {
+    private final StudentController studentController;
+    public MenuController(MenuView menuView, StudentController studentController) {
         this.menuView = menuView;
-        this.menuStudentView = menuStudentView;
+        this.studentController = studentController;
     }
 
     public void run() {
@@ -20,14 +17,15 @@ public class MenuController {
             int choice = menuView.inputChoice();
             switch (choice){
                 case 1:
-                    menuStudentView.showMenu();
-                    int studentChoice = menuStudentView.inputChoice();
+                    studentController.run();
+                    break;
 
                 case 0:
                     menuView.showExitMessage();
                     break;
                 default:
                     menuView.showInvalidChoice();
+
             }
         }
     }

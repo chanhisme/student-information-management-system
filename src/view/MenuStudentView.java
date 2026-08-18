@@ -9,7 +9,7 @@ public class MenuStudentView {
         this.scanner = scanner;
     }
 
-    public void showMenu(){
+    public void showMenu() {
         System.out.println("========== STUDENT MANAGEMENT ==========");
         System.out.println("1. Student Management");
         System.out.println("2. Course Registration");
@@ -20,8 +20,13 @@ public class MenuStudentView {
         System.out.println("========================================");
         System.out.print("Enter your choice: ");
     }
-    public int inputChoice(){
+
+    public int inputChoice() {
         return Integer.parseInt(scanner.nextLine());
+    }
+
+    public void showInvalidChoice() {
+        System.err.println("Invalid choice. Please try again.");
     }
 
 }
