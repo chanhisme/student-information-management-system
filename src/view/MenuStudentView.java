@@ -2,13 +2,13 @@ package view;
 
 import java.util.Scanner;
 
-public class MenuStudentView {
-    private final Scanner scanner;
+public class MenuStudentView extends BaseMenuView {
 
     public MenuStudentView(Scanner scanner) {
-        this.scanner = scanner;
+        super(scanner);
     }
 
+    @Override
     public void showMenu() {
         System.out.println("\n========== STUDENT MENU ==========");
         System.out.println("1. Student Management");
@@ -20,13 +20,4 @@ public class MenuStudentView {
         System.out.println("========================================");
         System.out.print("Enter your choice: ");
     }
-
-    public int inputChoice() {
-        return Integer.parseInt(scanner.nextLine());
-    }
-
-    public void showInvalidChoice() {
-        System.err.println("Invalid choice. Please try again.");
-    }
-
 }

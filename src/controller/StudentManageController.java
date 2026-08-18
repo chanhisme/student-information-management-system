@@ -17,7 +17,7 @@ public class StudentManageController {
                 case 0:
                     return;
                 default:
-                    menuStudentManageView.showInvalidInput();
+                    menuStudentManageView.showInvalidChoice();
                     break;
             }
         }
