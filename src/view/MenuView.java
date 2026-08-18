@@ -15,6 +15,7 @@ public class MenuView extends BaseMenuView {
         System.out.println("2. Manage Subjects");
         System.out.println("3. Manage Faculties");
         System.out.println("0. Exit");
+        System.out.print("Enter your choice: ");
     }
 
     public void showExitMessage() {
