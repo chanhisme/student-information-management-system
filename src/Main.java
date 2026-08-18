@@ -10,8 +10,12 @@ public class Main {
 
         MenuView menuView = new MenuView(scanner);
         MenuStudentView menuStudentView = new MenuStudentView(scanner);
-        StudentController studentController = new StudentController(menuStudentView);
+        MenuStudentManageView menuStudentManageView = new MenuStudentManageView(scanner);
+
+        StudentManageController studentManageController = new StudentManageController(menuStudentManageView);
+        StudentController studentController = new StudentController(menuStudentView, studentManageController);
         MenuController menuController = new MenuController(menuView, studentController);
+
 
         menuController.run();
     }

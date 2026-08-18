@@ -23,7 +23,7 @@ public class MenuController {
 
                 case 0:
                     menuView.showExitMessage();
-                    break;
+                    return;
                 default:
                     menuView.showInvalidChoice();
                     break;

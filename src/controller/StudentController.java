@@ -6,10 +6,12 @@ import java.util.Scanner;
 
 public class StudentController {
     private final MenuStudentView menuStudentView;
+    private final StudentManageController studentManageController;
 
-
-    public StudentController(MenuStudentView menuStudentView) {
+    public StudentController(MenuStudentView menuStudentView,
+                             StudentManageController studentManageController) {
         this.menuStudentView = menuStudentView;
+        this.studentManageController = studentManageController;
     }
 
     public void run() {
@@ -19,7 +21,8 @@ public class StudentController {
             choice = menuStudentView.inputChoice();
             switch (choice) {
                 case 1:
-
+                    studentManageController.run();
+                    break;
                 case 0:
                     return;
                 default:
