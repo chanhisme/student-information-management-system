@@ -6,7 +6,11 @@ import model.Student;
 
 public class StudentRepository {
 
-    private final Map<String, Student> students = new TreeMap<>();
+    private final Map<String, Student> students;
+
+    public StudentRepository(Map<String, Student> students) {
+        this.students = students;
+    }
 
     public void load() {
         // TXT → TreeMap
