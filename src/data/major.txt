@@ -1,0 +1,39 @@
+1. Information Technology
+2. Multimedia Communications
+3. Law
+4. Software Engineering
+5. Public Relations
+6. English Language
+7. Business English
+8. Marketing
+9. Artificial Intelligence and Data Science
+10. Economic Law
+11. International Business
+12. Cybersecurity and Digital Safety
+13. Artificial Intelligence
+14. Integrated Marketing Communications
+15. Korean Language
+16. E-Commerce
+17. Applied Data Science
+18. Brand Communications
+19. Business Korean
+20. Business Administration
+21. Information Security
+22. Entertainment and Event Management
+23. Chinese Language
+24. Semiconductor IC Design
+25. Business Chinese
+26. Customer Experience Management
+27. Digital Automotive Technology
+28. Procurement Management
+29. Information Systems
+30. Hospitality Management
+31. Graphic and Digital Art Design
+32. Tourism and Travel Services Management
+33. Robotics and Artificial Intelligence (UAV and Humanoid Specialization)
+34. Business Analytics
+35. Logistics and Global Supply Chain Management
+36. Financial Technology (Fintech)
+37. Corporate Finance
+38. Smart Finance
+39. Banking and Finance
