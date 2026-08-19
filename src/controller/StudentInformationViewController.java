@@ -12,7 +12,7 @@ public class StudentInformationViewController {
     public void run(){
         while(true){
             menuStudentInformationView.showMenu();
-            int choice = menuStudentInformationView.inputChoice();
+            int choice = menuStudentInformationView.inputChoice(0,5);
             switch (choice){
                 case 0:
                     return;
