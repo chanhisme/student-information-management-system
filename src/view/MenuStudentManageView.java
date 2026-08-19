@@ -1,6 +1,10 @@
 package view;
 
 import model.Student;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class MenuStudentManageView extends BaseMenuView {
@@ -22,15 +26,62 @@ public class MenuStudentManageView extends BaseMenuView {
 
     public Student inputStudentData() {
         System.out.println("\n--- Enter Student Details ---");
-        System.out.print("Enter Student ID: ");
-        String id = scanner.nextLine().trim();
 
-        System.out.print("Enter Student Name: ");
-        String name = scanner.nextLine().trim();
+        String id;
+        while (true) {
+            System.out.print("Enter Student ID: ");
+            id = scanner.nextLine().trim();
 
-        System.out.print("Enter Major: ");
-        String major = scanner.nextLine().trim();
+            if (id.isEmpty()) {
+                System.out.println("Student ID cannot be empty.");
+                continue;
+            }
 
-        return new Student(name, id, major, null, null);
+            break;
+        }
+
+        String name;
+        while (true) {
+            System.out.print("Enter Student Name: ");
+            name = scanner.nextLine().trim();
+
+            if (name.isEmpty()) {
+                System.out.println("Student name cannot be empty.");
+                continue;
+            }
+            if (!name.matches("[\\p{L} ]+")) {
+                System.out.println("Student name can only contain letters and spaces.");
+                continue;
+            }
+            break;
+        }
+
+        String major;
+        while (true) {
+            System.out.print("Enter Major: ");
+            major = scanner.nextLine().trim();
+
+            if (major.isEmpty()) {
+                System.out.println("Major cannot be empty.");
+                continue;
+            }
+            break;
+        }
+
+        LocalDate birth;
+
+        while (true) {
+            try {
+                System.out.print("Enter Birth Date (dd/MM/yyyy): ");
+                String birthInput = scanner.nextLine().trim();
+
+                birth = LocalDate.parse(birthInput, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date. Please use dd/MM/yyyy.");
+            }
+        }
+
+        return new Student(name, id, major, birth, null);
     }
 }

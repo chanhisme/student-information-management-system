@@ -11,7 +11,6 @@ public class StudentService {
     }
 
     public void addStudent(Student student) {
-        // Business validation can be added here (e.g. check duplicate ID)
         if (studentRepository != null) {
             studentRepository.add(student);
         }

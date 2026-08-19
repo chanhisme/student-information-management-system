@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Student {
     public enum StudentStatus {
@@ -13,11 +13,11 @@ public class Student {
     private String name;
     private String id;
     private String major;
-    private Date birth;
+    private LocalDate birth;
     private StudentStatus status;
     private Faculty faculty;
 
-    public Student(String name, String id, String major, Date birth, Faculty faculty) {
+    public Student(String name, String id, String major, LocalDate birth, Faculty faculty) {
         this.name = name;
         this.id = id;
         this.major = major;
@@ -50,11 +50,11 @@ public class Student {
         this.major = major;
     }
 
-    public Date getBirth() {
+    public LocalDate getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(LocalDate birth) {
         this.birth = birth;
     }
 
