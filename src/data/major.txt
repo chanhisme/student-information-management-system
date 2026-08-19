@@ -1,39 +1,52 @@
-1. Information Technology
-2. Multimedia Communications
-3. Law
-4. Software Engineering
-5. Public Relations
-6. English Language
-7. Business English
-8. Marketing
-9. Artificial Intelligence and Data Science
-10. Economic Law
-11. International Business
-12. Cybersecurity and Digital Safety
-13. Artificial Intelligence
-14. Integrated Marketing Communications
-15. Korean Language
-16. E-Commerce
-17. Applied Data Science
-18. Brand Communications
-19. Business Korean
-20. Business Administration
-21. Information Security
-22. Entertainment and Event Management
-23. Chinese Language
-24. Semiconductor IC Design
-25. Business Chinese
-26. Customer Experience Management
-27. Digital Automotive Technology
-28. Procurement Management
-29. Information Systems
-30. Hospitality Management
-31. Graphic and Digital Art Design
-32. Tourism and Travel Services Management
-33. Robotics and Artificial Intelligence (UAV and Humanoid Specialization)
-34. Business Analytics
-35. Logistics and Global Supply Chain Management
-36. Financial Technology (Fintech)
-37. Corporate Finance
-38. Smart Finance
-39. Banking and Finance
+FACULTY|TE|Faculty of Technology & Engineering
+MAJOR|Information Technology
+MAJOR|Software Engineering
+MAJOR|Information Systems
+MAJOR|Artificial Intelligence
+MAJOR|Applied Data Science
+MAJOR|Artificial Intelligence and Data Science
+MAJOR|Cybersecurity and Digital Safety
+MAJOR|Information Security
+MAJOR|Semiconductor IC Design
+MAJOR|Digital Automotive Technology
+MAJOR|Robotics and Artificial Intelligence (UAV and Humanoid Specialization)
+
+FACULTY|BA|Faculty of Business Administration
+MAJOR|Business Administration
+MAJOR|International Business
+MAJOR|E-Commerce
+MAJOR|Logistics and Global Supply Chain Management
+MAJOR|Procurement Management
+MAJOR|Customer Experience Management
+MAJOR|Business Analytics
+
+FACULTY|FB|Faculty of Finance & Banking
+MAJOR|Corporate Finance
+MAJOR|Banking and Finance
+MAJOR|Smart Finance
+MAJOR|Financial Technology (Fintech)
+
+FACULTY|MC|Faculty of Media & Communications
+MAJOR|Marketing
+MAJOR|Integrated Marketing Communications
+MAJOR|Brand Communications
+MAJOR|Multimedia Communications
+MAJOR|Public Relations
+MAJOR|Graphic and Digital Art Design
+MAJOR|Entertainment and Event Management
+
+FACULTY|FL|Faculty of Foreign Languages
+MAJOR|English Language
+MAJOR|Business English
+MAJOR|Korean Language
+MAJOR|Business Korean
+MAJOR|Chinese Language
+MAJOR|Business Chinese
+
+FACULTY|HT|Faculty of Hospitality & Tourism
+MAJOR|Hospitality Management
+MAJOR|Tourism and Travel Services Management
+
+FACULTY|LW|Faculty of Law
+MAJOR|Law
+MAJOR|Economic Law
