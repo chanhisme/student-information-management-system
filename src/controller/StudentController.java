@@ -7,11 +7,13 @@ public class StudentController {
     private final MenuStudentView menuStudentView;
     private final StudentManageController studentManageController;
     private final CourseRegistrationController courseRegistrationController;
+    private final StudentInformationViewController studentInformationViewController;
     public StudentController(MenuStudentView menuStudentView,
-                             StudentManageController studentManageController, CourseRegistrationController courseRegistrationController) {
+                             StudentManageController studentManageController, CourseRegistrationController courseRegistrationController, StudentInformationViewController studentInformationViewController) {
         this.menuStudentView = menuStudentView;
         this.studentManageController = studentManageController;
         this.courseRegistrationController = courseRegistrationController;
+        this.studentInformationViewController = studentInformationViewController;
     }
 
     public void run() {
@@ -26,6 +28,8 @@ public class StudentController {
                 case 2:
                     courseRegistrationController.run();
                     break;
+                case 3:
+                    studentInformationViewController.run();
                 case 0:
                     return;
             }
