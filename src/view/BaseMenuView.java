@@ -40,6 +40,6 @@ public abstract class BaseMenuView {
     }
 
     public void showInvalidChoice() {
-        System.err.println("Invalid choice. Please try again.");
+        ConsoleColor.printError("Invalid choice. Please try again.");
     }
-}
+}   
