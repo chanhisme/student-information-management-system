@@ -11,8 +11,9 @@ public class StudentService {
     }
 
     public void addStudent(Student student) {
-        if (studentRepository != null) {
-            studentRepository.add(student);
+        if(studentRepository.findById(student.getId()) != null){
+            throw new IllegalArgumentException("Student ID already exists.");
         }
+        studentRepository.add(student);
     }
 }

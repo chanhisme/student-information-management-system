@@ -21,8 +21,12 @@ public class StudentManageController {
             switch (choice) {
                 case 1:
                     Student student = menuStudentManageView.inputStudentData();
-                    studentService.addStudent(student);
-                    ConsoleColor.printSuccess("Student added successfully!");
+                    try {
+                        studentService.addStudent(student);
+                        ConsoleColor.printSuccess("Student added successfully!");
+                    } catch (IllegalArgumentException e) {
+                        ConsoleColor.printError(e.getMessage());
+                    }
                     break;
                 case 0:
                     return;

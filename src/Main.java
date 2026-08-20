@@ -1,5 +1,6 @@
 import controller.*;
 import model.Student;
+import repository.FacultyRepository;
 import repository.StudentRepository;
 import service.StudentService;
 import view.*;
@@ -14,12 +15,13 @@ public class Main {
 
         Map<String, Student> students = new TreeMap<>();
         StudentRepository studentRepository = new StudentRepository(students);
-
+        FacultyRepository facultyRepository = new FacultyRepository();
+        facultyRepository.load();
 
         // 1. Initialize Views
         MenuView menuView = new MenuView(scanner);
         MenuStudentView menuStudentView = new MenuStudentView(scanner);
-        MenuStudentManageView menuStudentManageView = new MenuStudentManageView(scanner);
+        MenuStudentManageView menuStudentManageView = new MenuStudentManageView(scanner, facultyRepository.getAll());
         MenuCourseRegistrationView menuCourseRegistrationView = new MenuCourseRegistrationView(scanner);
         MenuStudentInformationView menuStudentInformationView = new MenuStudentInformationView(scanner);
         MenuAcademicManagementView menuAcademicManagementView = new MenuAcademicManagementView(scanner);

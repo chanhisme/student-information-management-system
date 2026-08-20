@@ -1,15 +1,25 @@
 package model;
 
-public class Faculty {
-    private String id;
-    private String name;
+import java.util.ArrayList;
 
-    public String getId() {
-        return id;
+public class Faculty {
+
+    private String prefix;
+    private String name;
+    private final ArrayList<Major> majors;
+
+    public Faculty(String prefix, String name) {
+        this.prefix = prefix;
+        this.name = name;
+        this.majors = new ArrayList<>();
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
     public String getName() {
@@ -20,8 +30,11 @@ public class Faculty {
         this.name = name;
     }
 
-    public Faculty(String id, String name) {
-        this.id = id;
-        this.name = name;
+    public ArrayList<Major> getMajors() {
+        return majors;
+    }
+
+    public void addMajor(Major major) {
+        majors.add(major);
     }
 }

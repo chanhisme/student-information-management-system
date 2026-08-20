@@ -12,12 +12,12 @@ public class Student {
 
     private String name;
     private String id;
-    private String major;
+    private Major major;
     private LocalDate birth;
     private StudentStatus status;
     private Faculty faculty;
 
-    public Student(String name, String id, String major, LocalDate birth, Faculty faculty) {
+    public Student(String name, String id, Major major, LocalDate birth, Faculty faculty) {
         this.name = name;
         this.id = id;
         this.major = major;
@@ -42,11 +42,11 @@ public class Student {
         this.id = id;
     }
 
-    public String getMajor() {
+    public Major getMajor() {
         return major;
     }
 
-    public void setMajor(String major) {
+    public void setMajor(Major major) {
         this.major = major;
     }
 
