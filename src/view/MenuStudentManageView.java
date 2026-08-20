@@ -57,7 +57,10 @@ public class MenuStudentManageView extends BaseMenuView {
         int currentPage = 0;
 
         while (true) {
-            int totalPages = (majors.size() + PAGE_SIZE - 1) / PAGE_SIZE;
+            int totalPages = majors.size() / PAGE_SIZE;
+            if (majors.size() % PAGE_SIZE != 0) {
+                ++totalPages;
+            }
 
             System.out.println("\n========== MAJOR ==========");
 
@@ -123,17 +126,17 @@ public class MenuStudentManageView extends BaseMenuView {
             System.out.println("0. Back");
             System.out.print("Enter choice: ");
 
-            String choice = scanner.nextLine().trim();
+            int choice = Integer.parseInt(scanner.nextLine());
 
-            if (choice.equals("0")) {
+            if (choice == 0) {
                 return null;
             }
 
             try {
-                int selected = Integer.parseInt(choice);
 
-                if (selected >= 1 && selected <= faculties.size()) {
-                    return faculties.get(selected - 1);
+
+                if (choice >= 1 && choice <= faculties.size()) {
+                    return faculties.get(choice - 1);
                 }
 
                 ConsoleColor.printError("Invalid faculty choice.");
