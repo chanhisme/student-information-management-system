@@ -23,70 +23,83 @@ public class StudentRepository {
     public void load(FacultyRepository facultyRepository) {
         String filePath = "src/data/students.txt";
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            String id = null;
-            String name = null;
-            LocalDate birth = null;
-            Student.StudentStatus status = Student.StudentStatus.ACTIVE;
-            Faculty faculty = null;
-            Major major = null;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+            String currentLine;
+            String studentId = null;
+            String studentName = null;
+            LocalDate birthDate = null;
+            Student.StudentStatus studentStatus = Student.StudentStatus.ACTIVE;
+            Faculty studentFaculty = null;
+            Major studentMajor = null;
 
-            while ((line = reader.readLine()) != null) {
-                line = line.trim();
+            while ((currentLine = bufferedReader.readLine()) != null) {
+                currentLine = currentLine.trim();
 
-                if (line.isEmpty()) {
+                if (currentLine.isEmpty()) {
                     continue;
                 }
 
-                if (line.startsWith("++++++++++++++++")) {
-                    if (id != null && faculty != null) {
-                        Student student = new Student(name, id, major, birth, faculty);
-                        student.setStatus(status);
-                        students.put(id, student);
+                if (currentLine.startsWith("++++++++++++++++")) {
+                    if (studentId != null && studentFaculty != null) {
+                        Student student = new
+                                Student(studentName, studentId, studentMajor, birthDate, studentFaculty);
+
+                        student.setStatus(studentStatus);
+                        students.put(studentId, student);
                     }
-                    id = null;
-                    name = null;
-                    birth = null;
-                    status = Student.StudentStatus.ACTIVE;
-                    faculty = null;
-                    major = null;
+                    studentId = null;
+                    studentName = null;
+                    birthDate = null;
+                    studentStatus = Student.StudentStatus.ACTIVE;
+                    studentFaculty = null;
+                    studentMajor = null;
                     continue;
                 }
 
-                if (line.startsWith("Student ID:")) {
-                    id = line.substring("Student ID:".length()).trim();
-                } else if (line.startsWith("Name:")) {
-                    name = line.substring("Name:".length()).trim();
-                } else if (line.startsWith("Date of Birth:")) {
-                    String birthStr = line.substring("Date of Birth:".length()).trim();
-                    try {
-                        birth = LocalDate.parse(birthStr);
-                    } catch (Exception e) {
-                        birth = null;
-                    }
-                } else if (line.startsWith("Status:")) {
-                    String statusStr = line.substring("Status:".length()).trim();
-                    try {
-                        status = Student.StudentStatus.valueOf(statusStr);
-                    } catch (Exception e) {
-                        status = Student.StudentStatus.ACTIVE;
-                    }
-                } else if (line.startsWith("Faculty ID:")) {
-                    String facultyId = line.substring("Faculty ID:".length()).trim();
-                    faculty = facultyRepository.getFacultyByPrefix(facultyId);
-                } else if (line.startsWith("Major ID:")) {
-                    String majorId = line.substring("Major ID:".length()).trim();
-                    if (faculty != null) {
-                        major = faculty.getMajorById(majorId);
-                    }
+                String[] keyAndValue = currentLine.split(":", 2);
+                if (keyAndValue.length < 2) {
+                    continue;
+                }
+
+                String key = keyAndValue[0].trim();
+                String value = keyAndValue[1].trim();
+
+                switch (key) {
+                    case "Student ID":
+                        studentId = value;
+                        break;
+                    case "Name":
+                        studentName = value;
+                        break;
+                    case "Date of Birth":
+                        try {
+                            birthDate = LocalDate.parse(value);
+                        } catch (Exception e) {
+                            birthDate = null;
+                        }
+                        break;
+                    case "Status":
+                        try {
+                            studentStatus = Student.StudentStatus.valueOf(value);
+                        } catch (Exception e) {
+                            studentStatus = Student.StudentStatus.ACTIVE;
+                        }
+                        break;
+                    case "Faculty ID":
+                        studentFaculty = facultyRepository.getFacultyByPrefix(value);
+                        break;
+                    case "Major ID":
+                        if (studentFaculty != null) {
+                            studentMajor = studentFaculty.getMajorById(value);
+                        }
+                        break;
                 }
             }
 
-            if (id != null && faculty != null) {
-                Student student = new Student(name, id, major, birth, faculty);
-                student.setStatus(status);
-                students.put(id, student);
+            if (studentId != null && studentFaculty != null) {
+                Student student = new Student(studentName, studentId, studentMajor, birthDate, studentFaculty);
+                student.setStatus(studentStatus);
+                students.put(studentId, student);
             }
 
         } catch (IOException e) {
