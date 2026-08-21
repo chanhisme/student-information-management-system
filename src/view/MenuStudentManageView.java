@@ -193,31 +193,38 @@ public class MenuStudentManageView extends BaseMenuView {
     }
 
     public void displayAllStudent(Map<String, Student> students) {
+        if (students == null || students.isEmpty()) {
+            System.out.println("\nNo students found.");
+            return;
+        }
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         System.out.println();
-        System.out.println("==================================== STUDENT LIST ====================================");
-
+        System.out.println("================================================= STUDENT LIST =================================================");
         System.out.printf(
-                "%-12s %-25s %-30s %-15s %-15s %-15s%n",
-                "ID", "Name", "Major", "Faculty", "Birth", "Status"
+                "%-12s | %-22s | %-32s | %-10s | %-12s | %-10s%n",
+                "ID", "Name", "Major", "Faculty", "Birth Date", "Status"
         );
+        System.out.println("----------------------------------------------------------------------------------------------------------------");
 
-        System.out.println("--------------------------------------------------------------------------------------");
-
-        for (Map.Entry<String, Student> entry : students.entrySet()) {
-            Student student = entry.getValue();
+        for (Student student : students.values()) {
+            String majorName = (student.getMajor() != null) ? student.getMajor().getName() : "N/A";
+            String facultyPrefix = (student.getFaculty() != null) ? student.getFaculty().getPrefix() : "N/A";
+            String formattedBirthDate = (student.getBirth() != null) ? student.getBirth().format(dateFormatter) : "N/A";
 
             System.out.printf(
-                    "%-12s %-25s %-30s %-10s %-15s %-15s%n",
+                    "%-12s | %-22s | %-32s | %-10s | %-12s | %-10s%n",
                     student.getId(),
                     student.getName(),
-                    student.getMajor().getName(),
-                    student.getFaculty().getPrefix(),
-                    student.getBirth(),
+                    majorName,
+                    facultyPrefix,
+                    formattedBirthDate,
                     student.getStatus()
             );
         }
 
-        System.out.println("======================================================================================");
+        System.out.println("================================================================================================================");
         System.out.println();
     }
 
