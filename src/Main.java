@@ -17,6 +17,7 @@ public class Main {
         StudentRepository studentRepository = new StudentRepository(students);
         FacultyRepository facultyRepository = new FacultyRepository();
         facultyRepository.load();
+        studentRepository.load(facultyRepository);
 
         // 1. Initialize Views
         MenuView menuView = new MenuView(scanner);

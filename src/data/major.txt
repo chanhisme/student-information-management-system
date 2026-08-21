@@ -1,52 +1,52 @@
 FACULTY|TE|Faculty of Technology & Engineering
-MAJOR|Information Technology
-MAJOR|Software Engineering
-MAJOR|Information Systems
-MAJOR|Artificial Intelligence
-MAJOR|Applied Data Science
-MAJOR|Artificial Intelligence and Data Science
-MAJOR|Cybersecurity and Digital Safety
-MAJOR|Information Security
-MAJOR|Semiconductor IC Design
-MAJOR|Digital Automotive Technology
-MAJOR|Robotics and Artificial Intelligence (UAV and Humanoid Specialization)
+MAJOR|TE1|Information Technology
+MAJOR|TE2|Software Engineering
+MAJOR|TE3|Information Systems
+MAJOR|TE4|Artificial Intelligence
+MAJOR|TE5|Applied Data Science
+MAJOR|TE6|Artificial Intelligence and Data Science
+MAJOR|TE7|Cybersecurity and Digital Safety
+MAJOR|TE8|Information Security
+MAJOR|TE9|Semiconductor IC Design
+MAJOR|TE10|Digital Automotive Technology
+MAJOR|TE11|Robotics and Artificial Intelligence (UAV and Humanoid Specialization)
 
 FACULTY|BA|Faculty of Business Administration
-MAJOR|Business Administration
-MAJOR|International Business
-MAJOR|E-Commerce
-MAJOR|Logistics and Global Supply Chain Management
-MAJOR|Procurement Management
-MAJOR|Customer Experience Management
-MAJOR|Business Analytics
+MAJOR|BA1|Business Administration
+MAJOR|BA2|International Business
+MAJOR|BA3|E-Commerce
+MAJOR|BA4|Logistics and Global Supply Chain Management
+MAJOR|BA5|Procurement Management
+MAJOR|BA6|Customer Experience Management
+MAJOR|BA7|Business Analytics
 
 FACULTY|FB|Faculty of Finance & Banking
-MAJOR|Corporate Finance
-MAJOR|Banking and Finance
-MAJOR|Smart Finance
-MAJOR|Financial Technology (Fintech)
+MAJOR|FB1|Corporate Finance
+MAJOR|FB2|Banking and Finance
+MAJOR|FB3|Smart Finance
+MAJOR|FB4|Financial Technology (Fintech)
 
 FACULTY|MC|Faculty of Media & Communications
-MAJOR|Marketing
-MAJOR|Integrated Marketing Communications
-MAJOR|Brand Communications
-MAJOR|Multimedia Communications
-MAJOR|Public Relations
-MAJOR|Graphic and Digital Art Design
-MAJOR|Entertainment and Event Management
+MAJOR|MC1|Marketing
+MAJOR|MC2|Integrated Marketing Communications
+MAJOR|MC3|Brand Communications
+MAJOR|MC4|Multimedia Communications
+MAJOR|MC5|Public Relations
+MAJOR|MC6|Graphic and Digital Art Design
+MAJOR|MC7|Entertainment and Event Management
 
 FACULTY|FL|Faculty of Foreign Languages
-MAJOR|English Language
-MAJOR|Business English
-MAJOR|Korean Language
-MAJOR|Business Korean
-MAJOR|Chinese Language
-MAJOR|Business Chinese
+MAJOR|FL1|English Language
+MAJOR|FL2|Business English
+MAJOR|FL3|Korean Language
+MAJOR|FL4|Business Korean
+MAJOR|FL5|Chinese Language
+MAJOR|FL6|Business Chinese
 
 FACULTY|HT|Faculty of Hospitality & Tourism
-MAJOR|Hospitality Management
-MAJOR|Tourism and Travel Services Management
+MAJOR|HT1|Hospitality Management
+MAJOR|HT2|Tourism and Travel Services Management
 
 FACULTY|LW|Faculty of Law
-MAJOR|Law
-MAJOR|Economic Law
+MAJOR|LW1|Law
+MAJOR|LW2|Economic Law

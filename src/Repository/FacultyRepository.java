@@ -7,13 +7,15 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class FacultyRepository {
 
-    private ArrayList<Faculty> faculties;
+    private final Map<String, Faculty> facultiesMap;
 
     public FacultyRepository() {
-        faculties = new ArrayList<>();
+        facultiesMap = new LinkedHashMap<>();
     }
 
     public void load() {
@@ -39,13 +41,14 @@ public class FacultyRepository {
                     String name = parts[2];
 
                     currentFaculty = new Faculty(prefix, name);
-                    faculties.add(currentFaculty);
+                    facultiesMap.put(prefix, currentFaculty);
 
-                } else if (parts[0].equals("MAJOR")) {
+                } else if (parts[0].equals("MAJOR") && currentFaculty != null) {
 
-                    String name = parts[1];
+                    String id = parts[1];
+                    String name = parts[2];
 
-                    Major major = new Major(name);
+                    Major major = new Major(id, name);
                     currentFaculty.addMajor(major);
                 }
             }
@@ -56,6 +59,10 @@ public class FacultyRepository {
     }
 
     public ArrayList<Faculty> getAll() {
-        return faculties;
+        return new ArrayList<>(facultiesMap.values());
+    }
+
+    public Faculty getFacultyByPrefix(String prefix) {
+        return facultiesMap.get(prefix);
     }
 }
