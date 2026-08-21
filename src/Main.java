@@ -66,5 +66,6 @@ public class Main {
         //Initialize Main Menu Controller & Run
         MainMenuController mainMenuController = new MainMenuController(menuView, studentController);
         mainMenuController.run();
+        studentRepository.save();
     }
 }
