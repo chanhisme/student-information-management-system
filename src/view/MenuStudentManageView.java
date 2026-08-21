@@ -31,21 +31,24 @@ public class MenuStudentManageView extends BaseMenuView {
 
     public Student inputStudentData() {
         System.out.println("\n--- Enter Student Details ---");
-
-        String id = inputId();
-        String name = inputName();
-
         Faculty faculty = inputFaculty();
-
         if (faculty == null) {
             return null;
         }
 
         Major major = inputMajor(faculty.getMajors());
 
+
         if (major == null) {
             return null;
         }
+
+        String id = inputId(faculty.getPrefix());
+        String name = inputName();
+
+
+
+
 
         LocalDate birth = inputBirthDate();
 
@@ -147,12 +150,16 @@ public class MenuStudentManageView extends BaseMenuView {
         }
     }
 
-    public String inputId() {
+    public String inputId(String preFixId) {
         while (true) {
             System.out.print("Enter Student ID: ");
             String id = scanner.nextLine().trim();
             if (id.isEmpty()) {
                 ConsoleColor.printError("Student ID cannot be empty.");
+                continue;
+            }
+            if (!id.startsWith(preFixId)){
+                ConsoleColor.printError("Student ID must start correct preFix");
                 continue;
             }
             return id;
