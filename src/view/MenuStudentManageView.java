@@ -48,9 +48,6 @@ public class MenuStudentManageView extends BaseMenuView {
         String name = inputName();
 
 
-
-
-
         LocalDate birth = inputBirthDate();
 
         return new Student(name, id, major, birth, faculty);
@@ -159,7 +156,7 @@ public class MenuStudentManageView extends BaseMenuView {
                 ConsoleColor.printError("Student ID cannot be empty.");
                 continue;
             }
-            if (!id.startsWith(preFixId)){
+            if (!id.startsWith(preFixId)) {
                 ConsoleColor.printError("Student ID must start correct preFix");
                 continue;
             }
@@ -195,10 +192,33 @@ public class MenuStudentManageView extends BaseMenuView {
         }
     }
 
-    public void displayAllStudent(Map<String, Student> students){
-        for(Map.Entry<String, Student> entry : students.entrySet()){
-            System.out.println(entry.getKey() + " - " + entry.getValue());
+    public void displayAllStudent(Map<String, Student> students) {
+        System.out.println();
+        System.out.println("==================================== STUDENT LIST ====================================");
+
+        System.out.printf(
+                "%-12s %-25s %-30s %-15s %-15s %-15s%n",
+                "ID", "Name", "Major", "Faculty", "Birth", "Status"
+        );
+
+        System.out.println("--------------------------------------------------------------------------------------");
+
+        for (Map.Entry<String, Student> entry : students.entrySet()) {
+            Student student = entry.getValue();
+
+            System.out.printf(
+                    "%-12s %-25s %-30s %-10s %-15s %-15s%n",
+                    student.getId(),
+                    student.getName(),
+                    student.getMajor().getName(),
+                    student.getFaculty().getPrefix(),
+                    student.getBirth(),
+                    student.getStatus()
+            );
         }
+
+        System.out.println("======================================================================================");
+        System.out.println();
     }
 
 }

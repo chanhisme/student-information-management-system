@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import model.Faculty;
@@ -14,6 +15,7 @@ import model.Student;
 
 public class StudentRepository {
 
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private final Map<String, Student> students;
 
     public StudentRepository(Map<String, Student> students) {
@@ -73,9 +75,13 @@ public class StudentRepository {
                         break;
                     case "Date of Birth":
                         try {
-                            birthDate = LocalDate.parse(value);
+                            birthDate = LocalDate.parse(value, DATE_FORMATTER);
                         } catch (Exception e) {
-                            birthDate = null;
+                            try {
+                                birthDate = LocalDate.parse(value);
+                            } catch (Exception ex) {
+                                birthDate = null;
+                            }
                         }
                         break;
                     case "Status":
@@ -120,8 +126,10 @@ public class StudentRepository {
                 writer.write("Name: " + student.getName());
                 writer.newLine();
 
-                writer.write("Date of Birth: " + student.getBirth());
-                writer.newLine();
+                if (student.getBirth() != null) {
+                    writer.write("Date of Birth: " + student.getBirth().format(DATE_FORMATTER));
+                    writer.newLine();
+                }
 
                 writer.write("Status: " + student.getStatus());
                 writer.newLine();
