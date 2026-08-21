@@ -3,6 +3,8 @@ package service;
 import model.Student;
 import repository.StudentRepository;
 
+import java.util.Map;
+
 public class StudentService {
     private final StudentRepository studentRepository;
 
@@ -11,9 +13,13 @@ public class StudentService {
     }
 
     public void addStudent(Student student) {
-        if(studentRepository.findById(student.getId()) != null){
+        if (studentRepository.findById(student.getId()) != null) {
             throw new IllegalArgumentException("Student ID already exists.");
         }
         studentRepository.add(student);
+    }
+
+    public Map<String, Student> getAllStudents() {
+        return studentRepository.getAll();
     }
 }
