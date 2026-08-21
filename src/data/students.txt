@@ -5,3 +5,143 @@ Status: ACTIVE
 Faculty ID: TE
 Major ID: TE1
 +++++++++++++++++++++++++++++++++++++++++++
+Student ID: TE210519
+Name: Nguyen Minh Anh
+Date of Birth: 12/03/2007
+Status: ACTIVE
+Faculty ID: TE
+Major ID: TE2
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: TE210520
+Name: Tran Hoang Nam
+Date of Birth: 27/07/2007
+Status: ACTIVE
+Faculty ID: TE
+Major ID: TE4
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: TE210521
+Name: Le Quoc Bao
+Date of Birth: 05/11/2006
+Status: ACTIVE
+Faculty ID: TE
+Major ID: TE3
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: TE210522
+Name: Pham Gia Huy
+Date of Birth: 18/02/2007
+Status: ACTIVE
+Faculty ID: TE
+Major ID: TE7
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: TE210523
+Name: Vo Thanh Tung
+Date of Birth: 30/09/2007
+Status: INACTIVE
+Faculty ID: TE
+Major ID: TE1
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: TE210524
+Name: Dang Ngoc Han
+Date of Birth: 22/05/2007
+Status: ACTIVE
+Faculty ID: TE
+Major ID: TE5
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: BA210525
+Name: Nguyen Thu Ha
+Date of Birth: 14/08/2007
+Status: ACTIVE
+Faculty ID: BA
+Major ID: BA1
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: BA210526
+Name: Tran Duc Minh
+Date of Birth: 09/01/2007
+Status: ACTIVE
+Faculty ID: BA
+Major ID: BA3
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: BA210527
+Name: Phan Hoai Thu
+Date of Birth: 25/12/2006
+Status: ACTIVE
+Faculty ID: BA
+Major ID: BA7
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: BA210528
+Name: Bui Thanh Phong
+Date of Birth: 03/06/2007
+Status: INACTIVE
+Faculty ID: BA
+Major ID: BA4
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: FB210529
+Name: Nguyen Hai Yen
+Date of Birth: 16/04/2007
+Status: ACTIVE
+Faculty ID: FB
+Major ID: FB1
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: FB210530
+Name: Hoang Anh Tuan
+Date of Birth: 28/10/2006
+Status: ACTIVE
+Faculty ID: FB
+Major ID: FB4
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: FB210531
+Name: Pham Minh Chau
+Date of Birth: 11/07/2007
+Status: ACTIVE
+Faculty ID: FB
+Major ID: FB3
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: MC210532
+Name: Le Khanh Linh
+Date of Birth: 21/02/2007
+Status: ACTIVE
+Faculty ID: MC
+Major ID: MC1
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: MC210533
+Name: Nguyen Phuong Vy
+Date of Birth: 07/09/2007
+Status: ACTIVE
+Faculty ID: MC
+Major ID: MC4
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: MC210534
+Name: Tran Bao Ngoc
+Date of Birth: 19/06/2007
+Status: INACTIVE
+Faculty ID: MC
+Major ID: MC6
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: FL210535
+Name: Vu Minh Khang
+Date of Birth: 02/12/2006
+Status: ACTIVE
+Faculty ID: FL
+Major ID: FL1
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: FL210536
+Name: Do Thanh Tam
+Date of Birth: 24/03/2007
+Status: ACTIVE
+Faculty ID: FL
+Major ID: FL3
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: HT210537
+Name: Nguyen Bao Tram
+Date of Birth: 13/10/2007
+Status: ACTIVE
+Faculty ID: HT
+Major ID: HT1
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: LW210538
+Name: Tran Gia Khanh
+Date of Birth: 29/01/2007
+Status: ACTIVE
+Faculty ID: LW
+Major ID: LW2
++++++++++++++++++++++++++++++++++++++++++++
