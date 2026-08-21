@@ -1,6 +1,7 @@
 package controller;
 
 import model.Student;
+import repository.StudentRepository;
 import service.StudentService;
 import view.ConsoleColor;
 import view.MenuStudentManageView;
@@ -24,9 +25,13 @@ public class StudentManageController {
                     try {
                         studentService.addStudent(student);
                         ConsoleColor.printSuccess("Student added successfully!");
+                        ConsoleColor.printSuccess("Student saved successfully!");
                     } catch (IllegalArgumentException e) {
                         ConsoleColor.printError(e.getMessage());
                     }
+                    break;
+                case 4:
+                    menuStudentManageView.displayAllStudent(studentService.getAllStudents());
                     break;
                 case 0:
                     return;

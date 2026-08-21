@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MenuStudentManageView extends BaseMenuView {
@@ -182,7 +183,6 @@ public class MenuStudentManageView extends BaseMenuView {
         }
     }
 
-
     public LocalDate inputBirthDate() {
         while (true) {
             try {
@@ -194,4 +194,11 @@ public class MenuStudentManageView extends BaseMenuView {
             }
         }
     }
+
+    public void displayAllStudent(Map<String, Student> students){
+        for(Map.Entry<String, Student> entry : students.entrySet()){
+            System.out.println(entry.getKey() + " - " + entry.getValue());
+        }
+    }
+
 }

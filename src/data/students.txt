@@ -1,0 +1,6 @@
+Student ID: TE210518
+Name: Le Gia Phuc Chanh
+Date of Birth: 2007-01-19
+Status: ACTIVE
+Faculty ID: TE
++++++++++++++++++++++++++++++++++++++++++++

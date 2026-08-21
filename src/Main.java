@@ -31,11 +31,20 @@ public class Main {
         StudentService studentService = new StudentService(studentRepository);
 
         // 3. Initialize Sub-Controllers
-        StudentManageController studentManageController = new StudentManageController(menuStudentManageView, studentService);
-        CourseRegistrationController courseRegistrationController = new CourseRegistrationController(menuCourseRegistrationView);
-        StudentInformationViewController studentInformationViewController = new StudentInformationViewController(menuStudentInformationView);
-        AcademicManagementController academicManagementController = new AcademicManagementController(menuAcademicManagementView);
-        GraduationProgressController graduationProgressController = new GraduationProgressController(menuGraduationProgressView);
+        StudentManageController studentManageController = new
+                StudentManageController(menuStudentManageView, studentService);
+
+        CourseRegistrationController courseRegistrationController =
+                new CourseRegistrationController(menuCourseRegistrationView);
+
+        StudentInformationViewController studentInformationViewController =
+                new StudentInformationViewController(menuStudentInformationView);
+
+        AcademicManagementController academicManagementController =
+                new AcademicManagementController(menuAcademicManagementView);
+
+        GraduationProgressController graduationProgressController =
+                new GraduationProgressController(menuGraduationProgressView);
 
         // 3. Initialize Feature Controllers
         StudentController studentController = new StudentController(

@@ -17,6 +17,7 @@ public class StudentService {
             throw new IllegalArgumentException("Student ID already exists.");
         }
         studentRepository.add(student);
+        studentRepository.save();
     }
 
     public Map<String, Student> getAllStudents() {

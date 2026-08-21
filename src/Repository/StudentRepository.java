@@ -1,7 +1,12 @@
 package repository;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.security.Key;
 import java.util.Map;
 import java.util.TreeMap;
+
 import model.Student;
 
 public class StudentRepository {
@@ -17,7 +22,34 @@ public class StudentRepository {
     }
 
     public void save() {
-        // TreeMap → TXT
+        try (BufferedWriter writer = new BufferedWriter(
+                new FileWriter("src/data/students.txt"))) {
+
+            for (Map.Entry<String, Student> entry : students.entrySet()) {
+                Student student = entry.getValue();
+
+                writer.write("Student ID: " + student.getId());
+                writer.newLine();
+
+                writer.write("Name: " + student.getName());
+                writer.newLine();
+
+                writer.write("Date of Birth: " + student.getBirth());
+                writer.newLine();
+
+                writer.write("Status: " + student.getStatus());
+                writer.newLine();
+
+                writer.write("Faculty ID: " + student.getFaculty().getPrefix());
+                writer.newLine();
+
+                writer.write("+++++++++++++++++++++++++++++++++++++++++++");
+                writer.newLine();
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error saving students: " + e.getMessage());
+        }
     }
 
     public void add(Student student) {
@@ -30,5 +62,9 @@ public class StudentRepository {
 
     public void deleteById(String id) {
         students.remove(id);
+    }
+
+    public Map<String, Student> getAll() {
+        return students;
     }
 }
