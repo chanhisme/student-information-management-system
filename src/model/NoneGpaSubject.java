@@ -1,0 +1,13 @@
+package model;
+
+public class NoneGpaSubject extends Subject {
+    public NoneGpaSubject(String id, String name, int credits) {
+        super(id, name, credits);
+        this.CalculatedGpa = false;
+    }
+
+    @Override
+    public double calculateFinalScore(double score) {
+        return 0;
+    }
+}

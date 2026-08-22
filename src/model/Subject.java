@@ -1,15 +1,18 @@
 package model;
 
-public class Subject {
-    private String id;
-    private String name;
-    private int credits;
+public abstract class Subject {
+    protected String id;
+    protected String name;
+    protected int credits;
+    protected boolean CalculatedGpa;
 
     public Subject(String id, String name, int credits) {
         this.id = id;
         this.name = name;
         this.credits = credits;
+        this.CalculatedGpa = true;
     }
+
     public String getId() {
         return id;
     }
@@ -34,5 +37,17 @@ public class Subject {
         this.credits = credits;
     }
 
+    public boolean CalculatedGpa() {
+        return CalculatedGpa;
+    }
+
+    public void setCalculatedGpa(boolean CalculatedGpa) {
+        this.CalculatedGpa = CalculatedGpa;
+    }
+    public abstract double calculateFinalScore(double score);
+
+    public String toString(double score) {
+        return String.format("%.2f", score);
+    }
 
 }

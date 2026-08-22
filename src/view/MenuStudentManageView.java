@@ -44,7 +44,7 @@ public class MenuStudentManageView extends BaseMenuView {
             return null;
         }
 
-        String id = inputId(faculty.getPrefix());
+        String id = inputId(major.getId());
         String name = inputName();
 
 
