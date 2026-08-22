@@ -3,6 +3,7 @@ package view;
 import model.Faculty;
 import model.Major;
 import model.Student;
+import repository.StudentRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +14,7 @@ import java.util.Scanner;
 
 public class MenuStudentManageView extends BaseMenuView {
     private final ArrayList<Faculty> faculties;
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public MenuStudentManageView(Scanner scanner, ArrayList<Faculty> faculties) {
         super(scanner);
@@ -28,6 +30,33 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println("4. View All Students");
         System.out.println("0. Back");
         System.out.println("========================================");
+    }
+
+    public String inputIdDeleteStudent() {
+        System.out.print("Enter id: ");
+        return scanner.nextLine();
+    }
+
+    public boolean confirmDelete() {
+
+        boolean isConfirm = false;
+        System.out.println("Confirm delete this student?");
+        System.out.println("[1] YES");
+        System.out.println("[2] NO");
+
+        try {
+            int choice = Integer.parseInt(scanner.nextLine().trim());
+
+            if (choice == 1) {
+                isConfirm = true;
+            } else if (choice != 2) {
+                ConsoleColor.printError("Please enter 1 or 2.");
+            }
+
+        } catch (NumberFormatException e) {
+            ConsoleColor.printError("Please enter a valid choice.");
+        }
+        return isConfirm;
     }
 
     public Student inputStudentData() {
@@ -192,13 +221,12 @@ public class MenuStudentManageView extends BaseMenuView {
         }
     }
 
-    public void displayAllStudent(Map<String, Student> students) {
+    public void displayAllStudents(Map<String, Student> students) {
         if (students == null || students.isEmpty()) {
             System.out.println("\nNo students found.");
             return;
         }
 
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         System.out.println();
         System.out.println("================================================= STUDENT LIST =================================================");
@@ -228,4 +256,19 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println();
     }
 
+    public void displayOneStudent(Map<String, Student> students, String id) {
+        Student student = students.get(id);
+        String majorName = student.getMajor().getName();
+        String facultyPrefix = student.getFaculty().getPrefix();
+        String formattedBirthDate = student.getBirth().format(dateFormatter);
+        System.out.printf(
+                "%-12s | %-22s | %-32s | %-10s | %-12s | %-10s%n",
+                student.getId(),
+                student.getName(),
+                majorName,
+                facultyPrefix,
+                formattedBirthDate,
+                student.getStatus()
+        );
+    }
 }
