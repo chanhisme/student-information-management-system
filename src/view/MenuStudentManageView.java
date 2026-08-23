@@ -38,25 +38,27 @@ public class MenuStudentManageView extends BaseMenuView {
     }
 
     public boolean confirmDelete() {
+        int choice = 0;
 
-        boolean isConfirm = false;
-        System.out.println("Confirm delete this student?");
-        System.out.println("[1] YES");
-        System.out.println("[2] NO");
+        while (choice != 1 && choice != 2) {
+            System.out.println("Confirm delete this student?");
+            System.out.println("[1] YES");
+            System.out.println("[2] NO");
+            System.out.print("Enter you choice: ");
 
-        try {
-            int choice = Integer.parseInt(scanner.nextLine().trim());
+            try {
+                choice = Integer.parseInt(scanner.nextLine().trim());
 
-            if (choice == 1) {
-                isConfirm = true;
-            } else if (choice != 2) {
-                ConsoleColor.printError("Please enter 1 or 2.");
+                if (choice != 1 && choice != 2) {
+                    ConsoleColor.printError("Please enter 1 or 2.");
+                }
+
+            } catch (NumberFormatException e) {
+                ConsoleColor.printError("Please enter a valid choice.");
             }
-
-        } catch (NumberFormatException e) {
-            ConsoleColor.printError("Please enter a valid choice.");
         }
-        return isConfirm;
+
+        return choice == 1;
     }
 
     public Student inputStudentData() {

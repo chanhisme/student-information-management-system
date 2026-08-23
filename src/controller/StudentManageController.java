@@ -41,19 +41,18 @@ public class StudentManageController {
                         Student deletedStudent = studentRepository.findById(id);
                         if(deletedStudent == null){
                             throw new RuntimeException("This student not existed");
-                        }
 
+                        }
                     } catch (RuntimeException e) {
                         ConsoleColor.printError(e.getMessage());
+                        continue;
                     }
                     menuStudentManageView.displayOneStudent(students, id);
                     if(menuStudentManageView.confirmDelete()){
                         studentRepository.deleteById(id);
+                        studentRepository.save();
+                        ConsoleColor.printSuccess("Student saved successfully!");
                     }
-                    else{
-                        return;
-                    }
-
                     break;
                 case 4:
                     menuStudentManageView.displayAllStudents(studentService.getAllStudents());
