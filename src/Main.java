@@ -27,6 +27,8 @@ public class Main {
         MenuStudentInformationView menuStudentInformationView = new MenuStudentInformationView(scanner);
         MenuAcademicManagementView menuAcademicManagementView = new MenuAcademicManagementView(scanner);
         MenuGraduationProgressView menuGraduationProgressView = new MenuGraduationProgressView(scanner);
+        MenuFaultyManagementView menuFaultyManagementView = new MenuFaultyManagementView(scanner);
+
 
         // 2. Initialize Repositories & Services
         StudentService studentService = new StudentService(studentRepository);
@@ -57,6 +59,10 @@ public class Main {
                 graduationProgressController
         );
 
+        FaultyManagementController faultyManagementController = new FaultyManagementController(
+                menuFaultyManagementView
+        );
+
 
 
 
@@ -64,7 +70,12 @@ public class Main {
 
 
         //Initialize Main Menu Controller & Run
-        MainMenuController mainMenuController = new MainMenuController(menuView, studentController);
+        MainMenuController mainMenuController = new MainMenuController(
+                menuView,
+                studentController,
+                faultyManagementController);
+
+        
         mainMenuController.run();
         studentRepository.save();
     }
