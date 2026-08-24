@@ -27,6 +27,7 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println("2. Update Student");
         System.out.println("3. Delete Student");
         System.out.println("4. View All Students");
+        System.out.println("5. Find Student by ID");
         System.out.println("0. Back");
         System.out.println("========================================");
     }
@@ -335,8 +336,7 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println();
     }
 
-    public void displayOneStudent(Map<String, Student> students, String id) {
-        Student student = students.get(id);
+    public void displayOneStudent(Student student) {
         if (student == null) {
             System.out.println("\nStudent not found.");
             return;

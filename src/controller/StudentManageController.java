@@ -1,36 +1,33 @@
 package controller;
 
 import model.Student;
-import repository.StudentRepository;
 import service.StudentService;
 import view.ConsoleColor;
 import view.MenuStudentManageView;
 
-import java.util.Map;
-
 public class StudentManageController {
     private final MenuStudentManageView menuStudentManageView;
     private final StudentService studentService;
-    private final StudentRepository studentRepository;
-    private final Map<String, Student> students;
 
-    public StudentManageController(MenuStudentManageView menuStudentManageView, StudentService studentService, StudentRepository studentRepository, Map<String, Student> students) {
+    public StudentManageController(MenuStudentManageView menuStudentManageView, StudentService studentService) {
         this.menuStudentManageView = menuStudentManageView;
         this.studentService = studentService;
-        this.studentRepository = studentRepository;
-        this.students = students;
     }
 
     public void run() {
         while (true) {
             menuStudentManageView.showMenu();
-            int choice = menuStudentManageView.inputChoice(0, 4);
+            int choice = menuStudentManageView.inputChoice(0, 5);
             String id;
             Student student;
             switch (choice) {
 
                 case 1:
                     student = menuStudentManageView.inputStudentData();
+                    if (student == null) {
+                        ConsoleColor.printError("Student creation cancelled.");
+                        break;
+                    }
                     try {
                         studentService.addStudent(student);
                         ConsoleColor.printSuccess("Student added successfully!");
@@ -41,39 +38,47 @@ public class StudentManageController {
                     break;
                 case 2:
                     id = menuStudentManageView.inputIdStudent();
-                    try {
-                        student = studentRepository.findById(id);
-                        if (student == null) {
-                            throw new RuntimeException("This student not existed");
-                        }
-                    } catch (RuntimeException e) {
-                        ConsoleColor.printError(e.getMessage());
-                        continue;
+                    student = studentService.findById(id);
+                    if (student == null) {
+                        ConsoleColor.printError("This student not existed");
+                        break;
                     }
                     menuStudentManageView.updateStudent(student);
-                    studentRepository.save();
-                    ConsoleColor.printSuccess("Student saved successfully!");
+                    try {
+                        studentService.updateStudent(student);
+                        ConsoleColor.printSuccess("Student saved successfully!");
+                    } catch (IllegalArgumentException e) {
+                        ConsoleColor.printError(e.getMessage());
+                    }
                     break;
                 case 3:
                     id = menuStudentManageView.inputIdStudent();
-                    try {
-                        Student deletedStudent = studentRepository.findById(id);
-                        if (deletedStudent == null) {
-                            throw new RuntimeException("This student not existed");
-                        }
-                    } catch (RuntimeException e) {
-                        ConsoleColor.printError(e.getMessage());
-                        continue;
+                    student = studentService.findById(id);
+                    if (student == null) {
+                        ConsoleColor.printError("This student not existed");
+                        break;
                     }
-                    menuStudentManageView.displayOneStudent(students, id);
+                    menuStudentManageView.displayOneStudent(student);
                     if (menuStudentManageView.confirmDelete()) {
-                        studentRepository.deleteById(id);
-                        studentRepository.save();
-                        ConsoleColor.printSuccess("Student saved successfully!");
+                        try {
+                            studentService.deleteStudent(id);
+                            ConsoleColor.printSuccess("Student deleted successfully!");
+                        } catch (IllegalArgumentException e) {
+                            ConsoleColor.printError(e.getMessage());
+                        }
                     }
                     break;
                 case 4:
                     menuStudentManageView.displayAllStudents(studentService.getAllStudents());
+                    break;
+                case 5:
+                    id = menuStudentManageView.inputIdStudent();
+                    student = studentService.findById(id);
+                    if (student == null) {
+                        ConsoleColor.printError("Student not found.");
+                    } else {
+                        menuStudentManageView.displayOneStudent(student);
+                    }
                     break;
                 case 0:
                     return;

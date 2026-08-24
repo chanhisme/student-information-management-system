@@ -33,8 +33,7 @@ public class Main {
 
         // 3. Initialize Sub-Controllers
         StudentManageController studentManageController = new
-                StudentManageController(menuStudentManageView, studentService,
-                studentRepository, students);
+                StudentManageController(menuStudentManageView, studentService);
 
         CourseRegistrationController courseRegistrationController =
                 new CourseRegistrationController(menuCourseRegistrationView);
