@@ -1,4 +1,4 @@
-package model;
+package model.faculty;
 
 public class Major {
 

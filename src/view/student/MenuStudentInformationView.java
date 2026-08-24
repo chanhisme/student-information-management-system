@@ -1,6 +1,7 @@
-package view;
+package view.student;
 
 import java.util.Scanner;
+import view.BaseMenuView;
 
 public class MenuStudentInformationView extends BaseMenuView {
     public MenuStudentInformationView(Scanner scanner) {

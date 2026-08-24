@@ -1,6 +1,6 @@
-package controller;
+package controller.faculty;
 
-import view.MenuFaultyManagementView;
+import view.faculty.MenuFaultyManagementView;
 
 public class FaultyManagementController {
     private final MenuFaultyManagementView menuFaultyManagementView;

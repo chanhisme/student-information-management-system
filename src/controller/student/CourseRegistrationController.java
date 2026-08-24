@@ -1,6 +1,6 @@
-package controller;
+package controller.student;
 
-import view.MenuCourseRegistrationView;
+import view.student.MenuCourseRegistrationView;
 
 public class CourseRegistrationController {
     private final MenuCourseRegistrationView menuCourseRegistrationView;

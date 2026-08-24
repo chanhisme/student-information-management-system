@@ -1,4 +1,4 @@
-package model;
+package model.faculty;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

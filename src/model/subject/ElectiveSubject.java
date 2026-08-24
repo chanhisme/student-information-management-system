@@ -1,4 +1,4 @@
-package model;
+package model.subject;
 
 public class ElectiveSubject extends Subject{
     public ElectiveSubject(String id, String name, int credits) {

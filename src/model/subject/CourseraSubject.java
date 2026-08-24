@@ -1,4 +1,4 @@
-package model;
+package model.subject;
 
 public class CourseraSubject extends Subject {
     public CourseraSubject(String id, String name, int credits) {

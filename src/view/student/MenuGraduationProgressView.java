@@ -1,6 +1,7 @@
-package view;
+package view.student;
 
 import java.util.Scanner;
+import view.BaseMenuView;
 
 public class MenuGraduationProgressView extends BaseMenuView {
     public MenuGraduationProgressView(Scanner scanner) {

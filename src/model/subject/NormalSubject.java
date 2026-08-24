@@ -1,4 +1,4 @@
-package model;
+package model.subject;
 
 public class NormalSubject extends Subject{
     public NormalSubject(String id, String name, int credits) {

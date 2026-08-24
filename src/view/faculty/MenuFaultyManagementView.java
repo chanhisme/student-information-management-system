@@ -1,6 +1,7 @@
-package view;
+package view.faculty;
 
 import java.util.Scanner;
+import view.BaseMenuView;
 
 public class MenuFaultyManagementView extends BaseMenuView {
     public MenuFaultyManagementView(Scanner scanner) {

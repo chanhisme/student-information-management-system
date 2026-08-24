@@ -1,6 +1,6 @@
-package controller;
+package controller.student;
 
-import view.MenuGraduationProgressView;
+import view.student.MenuGraduationProgressView;
 
 public class GraduationProgressController {
     private final MenuGraduationProgressView menuGraduationProgressView;

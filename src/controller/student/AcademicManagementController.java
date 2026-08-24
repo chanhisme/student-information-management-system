@@ -1,6 +1,6 @@
-package controller;
+package controller.student;
 
-import view.MenuAcademicManagementView;
+import view.student.MenuAcademicManagementView;
 
 public class AcademicManagementController {
     private final MenuAcademicManagementView menuAcademicManagementView;

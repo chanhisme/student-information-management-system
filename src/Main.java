@@ -1,9 +1,13 @@
-import controller.*;
-import model.Student;
-import repository.FacultyRepository;
-import repository.StudentRepository;
-import service.StudentService;
-import view.*;
+import controller.MainMenuController;
+import controller.student.*;
+import controller.faculty.*;
+import model.student.Student;
+import repository.faculty.FacultyRepository;
+import repository.student.StudentRepository;
+import service.student.StudentService;
+import view.MenuView;
+import view.student.*;
+import view.faculty.*;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Scanner;
@@ -75,7 +79,7 @@ public class Main {
                 studentController,
                 faultyManagementController);
 
-        
+
         mainMenuController.run();
         studentRepository.save();
     }

@@ -1,6 +1,8 @@
-package model;
+package model.student;
 
 import java.time.LocalDate;
+import model.faculty.Faculty;
+import model.faculty.Major;
 
 public class Student {
     public enum StudentStatus {

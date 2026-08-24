@@ -1,7 +1,7 @@
-package repository;
+package repository.faculty;
 
-import model.Faculty;
-import model.Major;
+import model.faculty.Faculty;
+import model.faculty.Major;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

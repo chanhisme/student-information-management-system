@@ -1,4 +1,4 @@
-package repository;
+package repository.student;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,9 +9,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-import model.Faculty;
-import model.Major;
-import model.Student;
+import model.faculty.Faculty;
+import model.faculty.Major;
+import model.student.Student;
+import repository.faculty.FacultyRepository;
 
 public class StudentRepository {
 

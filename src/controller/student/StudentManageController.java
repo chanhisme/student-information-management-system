@@ -1,9 +1,9 @@
-package controller;
+package controller.student;
 
-import model.Student;
-import service.StudentService;
+import model.student.Student;
+import service.student.StudentService;
 import view.ConsoleColor;
-import view.MenuStudentManageView;
+import view.student.MenuStudentManageView;
 
 public class StudentManageController {
     private final MenuStudentManageView menuStudentManageView;

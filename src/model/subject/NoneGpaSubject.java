@@ -1,4 +1,4 @@
-package model;
+package model.subject;
 
 public class NoneGpaSubject extends Subject {
     public NoneGpaSubject(String id, String name, int credits) {

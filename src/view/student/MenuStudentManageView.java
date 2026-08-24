@@ -1,8 +1,10 @@
-package view;
+package view.student;
 
-import model.Faculty;
-import model.Major;
-import model.Student;
+import model.faculty.Faculty;
+import model.faculty.Major;
+import model.student.Student;
+import view.BaseMenuView;
+import view.ConsoleColor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

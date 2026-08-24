@@ -1,4 +1,4 @@
-package model;
+package model.subject;
 
 public abstract class Subject {
     protected String id;

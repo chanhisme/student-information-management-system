@@ -1,7 +1,7 @@
-package service;
+package service.student;
 
-import model.Student;
-import repository.StudentRepository;
+import model.student.Student;
+import repository.student.StudentRepository;
 
 import java.util.Map;
 

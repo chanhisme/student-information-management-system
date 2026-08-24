@@ -1,6 +1,9 @@
 package controller;
 
-import model.Faculty;
+import controller.student.StudentController;
+import controller.faculty.FaultyManagementController;
+
+import model.faculty.Faculty;
 import view.MenuView;
 public class MainMenuController {
 

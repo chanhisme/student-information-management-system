@@ -1,6 +1,6 @@
-package controller;
+package controller.student;
 
-import view.MenuStudentInformationView;
+import view.student.MenuStudentInformationView;
 
 public class StudentInformationViewController {
     private final MenuStudentInformationView menuStudentInformationView;
