@@ -3,7 +3,6 @@ package view;
 import model.Faculty;
 import model.Major;
 import model.Student;
-import repository.StudentRepository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -32,7 +31,87 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println("========================================");
     }
 
-    public String inputIdDeleteStudent() {
+    public void updateStudent(Student student) {
+        if (student == null) {
+            ConsoleColor.printError("Student not found.");
+            return;
+        }
+
+        while (true) {
+            try {
+                System.out.println("\n============= UPDATE INFORMATION =============");
+                System.out.println("[1]. Name: " + student.getName());
+                System.out.println("[2]. Date of Birth: " + (
+                        student.getBirth() != null ? student.getBirth().format(dateFormatter) : "N/A"));
+
+                System.out.println("[3]. Faculty: " + (student.getFaculty() != null ? student.getFaculty().getName() : "N/A"));
+                System.out.println("[4]. Major: " + (student.getMajor() != null ? student.getMajor().getName() : "N/A"));
+                System.out.println("[5]. Status: " + student.getStatus());
+                System.out.println("[0]. DONE");
+
+                System.out.print("Enter field to change: ");
+                int choice = inputChoice(0, 5);
+
+                switch (choice) {
+                    case 1:
+                        String newName = inputName();
+                        student.setName(newName);
+                        ConsoleColor.printSuccess("Updated name successfully.");
+                        break;
+                    case 2:
+                        LocalDate newBirth = inputBirthDate();
+                        student.setBirth(newBirth);
+                        ConsoleColor.printSuccess("Updated date of birth successfully.");
+                        break;
+                    case 3:
+                        Faculty newFaculty = inputFaculty();
+                        if (newFaculty != null) {
+                            student.setFaculty(newFaculty);
+                            ConsoleColor.printSuccess("Updated faculty successfully.");
+                            Major newMajor = inputMajor(newFaculty.getMajors());
+                            if (newMajor != null) {
+                                student.setMajor(newMajor);
+                                ConsoleColor.printSuccess("Updated major successfully.");
+                            } else {
+                                student.setMajor(null);
+                            }
+                        }
+                        break;
+                    case 4:
+                        if (student.getFaculty() == null) {
+                            ConsoleColor.printError("Student has no faculty assigned. Please select faculty first.");
+                        } else {
+                            Major newMajor = inputMajor(student.getFaculty().getMajors());
+                            if (newMajor != null) {
+                                student.setMajor(newMajor);
+                                ConsoleColor.printSuccess("Updated major successfully.");
+                            }
+                        }
+                        break;
+                    case 5:
+                        System.out.println("\n========== SELECT STATUS ==========");
+                        Student.StudentStatus[] statuses = Student.StudentStatus.values();
+                        for (int i = 0; i < statuses.length; i++) {
+                            System.out.println((i + 1) + ". " + statuses[i]);
+                        }
+                        System.out.println("0. Back");
+                        int statusChoice = inputChoice(0, statuses.length);
+                        if (statusChoice > 0) {
+                            student.setStatus(statuses[statusChoice - 1]);
+                            ConsoleColor.printSuccess("Updated status successfully.");
+                        }
+                        break;
+                    case 0:
+                        return;
+                }
+            } catch (RuntimeException e) {
+                ConsoleColor.printError("Error: " + e.getMessage());
+            }
+        }
+    }
+
+
+    public String inputIdStudent() {
         System.out.print("Enter id: ");
         return scanner.nextLine();
     }
@@ -158,14 +237,12 @@ public class MenuStudentManageView extends BaseMenuView {
             System.out.println("0. Back");
             System.out.print("Enter choice: ");
 
-            int choice = Integer.parseInt(scanner.nextLine());
-
-            if (choice == 0) {
-                return null;
-            }
-
             try {
+                int choice = Integer.parseInt(scanner.nextLine().trim());
 
+                if (choice == 0) {
+                    return null;
+                }
 
                 if (choice >= 1 && choice <= faculties.size()) {
                     return faculties.get(choice - 1);
@@ -260,9 +337,13 @@ public class MenuStudentManageView extends BaseMenuView {
 
     public void displayOneStudent(Map<String, Student> students, String id) {
         Student student = students.get(id);
-        String majorName = student.getMajor().getName();
-        String facultyPrefix = student.getFaculty().getPrefix();
-        String formattedBirthDate = student.getBirth().format(dateFormatter);
+        if (student == null) {
+            System.out.println("\nStudent not found.");
+            return;
+        }
+        String majorName = (student.getMajor() != null) ? student.getMajor().getName() : "N/A";
+        String facultyPrefix = (student.getFaculty() != null) ? student.getFaculty().getPrefix() : "N/A";
+        String formattedBirthDate = (student.getBirth() != null) ? student.getBirth().format(dateFormatter) : "N/A";
         System.out.printf(
                 "%-12s | %-22s | %-32s | %-10s | %-12s | %-10s%n",
                 student.getId(),

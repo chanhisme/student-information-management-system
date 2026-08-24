@@ -120,7 +120,7 @@ Major ID: TE7
 Student ID: TE210523
 Name: Vo Thanh Tung
 Date of Birth: 30/09/2007
-Status: ACTIVE
+Status: SUSPENDED
 Faculty ID: TE
 Major ID: TE1
 +++++++++++++++++++++++++++++++++++++++++++
