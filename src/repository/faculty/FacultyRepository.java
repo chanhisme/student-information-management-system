@@ -4,8 +4,11 @@ import model.faculty.Faculty;
 import model.faculty.Major;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,7 +20,22 @@ public class FacultyRepository {
     public FacultyRepository() {
         facultiesMap = new LinkedHashMap<>();
     }
-
+    public void save() {
+        String filePath = "src/data/major.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Faculty faculty : facultiesMap.values()) {
+                writer.write("FACULTY|" + faculty.getPrefix() + "|" + faculty.getName());
+                writer.newLine();
+                for (Major major : faculty.getMajors()) {
+                    writer.write("MAJOR|" + major.getId() + "|" + major.getName());
+                    writer.newLine();
+                }
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving faculties: " + e.getMessage());
+        }
+    }
     public void load() {
 
         String filePath = "src/data/major.txt";
@@ -62,6 +80,13 @@ public class FacultyRepository {
         return new ArrayList<>(facultiesMap.values());
     }
 
+    public void addFaculty(Faculty faculty){
+        facultiesMap.put(faculty.getPrefix(), faculty);
+    }
+
+    public Faculty findByPreFix(String preFix){
+        return facultiesMap.get(preFix);
+    }
     public Faculty getFacultyByPrefix(String prefix) {
         return facultiesMap.get(prefix);
     }

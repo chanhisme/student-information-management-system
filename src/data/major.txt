@@ -50,3 +50,5 @@ MAJOR|HT2|Tourism and Travel Services Management
 FACULTY|LW|Faculty of Law
 MAJOR|LW1|Law
 MAJOR|LW2|Economic Law
+
+

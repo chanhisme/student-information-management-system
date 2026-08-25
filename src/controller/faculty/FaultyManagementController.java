@@ -1,6 +1,8 @@
 package controller.faculty;
 
+import model.faculty.Faculty;
 import service.faculty.FacultyService;
+import view.ConsoleColor;
 import view.faculty.MenuFaultyManagementView;
 
 public class FaultyManagementController {
@@ -18,6 +20,21 @@ public class FaultyManagementController {
             switch(choice){
                 case 1:
                     menuFaultyManagementView.displayAllFaculties(facultyService.getAllFaculty());
+                    break;
+                case 2:
+                    Faculty faculty = menuFaultyManagementView.inputFaculty();
+                    if(faculty == null){
+                        ConsoleColor.printError("Faculty creation cancelled.");
+                        break;
+                    }
+                    try{
+                        facultyService.addFaculty(faculty);
+                        ConsoleColor.printSuccess("Faculty added successfully!");
+                        ConsoleColor.printSuccess("Faculty saved successfully!");
+
+                    }catch (IllegalArgumentException e) {
+                        ConsoleColor.printError(e.getMessage());
+                    }
                     break;
                 case 0:
                     return;
