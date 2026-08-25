@@ -4,10 +4,12 @@ import controller.faculty.*;
 import model.student.Student;
 import repository.faculty.FacultyRepository;
 import repository.student.StudentRepository;
+import service.faculty.FacultyService;
 import service.student.StudentService;
 import view.MenuView;
 import view.student.*;
 import view.faculty.*;
+
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Scanner;
@@ -23,6 +25,7 @@ public class Main {
         facultyRepository.load();
         studentRepository.load(facultyRepository);
 
+
         // 1. Initialize Views
         MenuView menuView = new MenuView(scanner);
         MenuStudentView menuStudentView = new MenuStudentView(scanner);
@@ -36,6 +39,7 @@ public class Main {
 
         // 2. Initialize Repositories & Services
         StudentService studentService = new StudentService(studentRepository);
+        FacultyService facultyService = new FacultyService(facultyRepository);
 
         // 3. Initialize Sub-Controllers
         StudentManageController studentManageController = new
@@ -64,13 +68,9 @@ public class Main {
         );
 
         FaultyManagementController faultyManagementController = new FaultyManagementController(
-                menuFaultyManagementView
+                menuFaultyManagementView,
+                facultyService
         );
-
-
-
-
-
 
 
         //Initialize Main Menu Controller & Run
