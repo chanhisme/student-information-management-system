@@ -86,7 +86,6 @@ public class StudentManageController {
         boolean updating = true;
         while (updating) {
             int choice = menuStudentManageView.displayUpdateMenuAndGetChoice(student);
-
             switch (choice) {
                 case 1:
                     String newName = menuStudentManageView.inputName();
@@ -101,15 +100,12 @@ public class StudentManageController {
                 case 3:
                     Faculty newFaculty = menuStudentManageView.inputFaculty();
                     if (newFaculty != null) {
-                        Major newMajor = menuStudentManageView.inputMajor(newFaculty.getMajors());
-                        if (newMajor != null) {
                             student.setFaculty(newFaculty);
-                            student.setMajor(newMajor);
-                            ConsoleColor.printSuccess("Updated faculty and major successfully.");
+                            ConsoleColor.printSuccess("Updated faculty successfully.");
                         } else {
-                            ConsoleColor.printError("Major selection cancelled. Faculty was not changed.");
+                            ConsoleColor.printError("Faculty was not changed.");
                         }
-                    }
+
                     break;
                 case 4:
                     if (student.getFaculty() == null) {

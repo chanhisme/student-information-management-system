@@ -39,8 +39,7 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println("[1]. Name: " + student.getName());
         System.out.println("[2]. Date of Birth: " + (
                 student.getBirth() != null ? student.getBirth().format(dateFormatter) : "N/A"));
-        System.out.println("[3]. Faculty & Major: " + (student.getFaculty() != null ? student.getFaculty().getName() : "N/A")
-                + " / " + (student.getMajor() != null ? student.getMajor().getName() : "N/A"));
+        System.out.println("[3]. Faculty " + (student.getFaculty() != null ? student.getFaculty().getName() : "N/A"));
         System.out.println("[4]. Major only: " + (student.getMajor() != null ? student.getMajor().getName() : "N/A"));
         System.out.println("[5]. Status: " + student.getStatus());
         System.out.println("[0]. DONE");
