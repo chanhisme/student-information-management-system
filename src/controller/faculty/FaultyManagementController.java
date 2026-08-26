@@ -38,7 +38,13 @@ public class FaultyManagementController {
                     }
                     break;
                 case 3:
-
+                    String updatePreFix = menuFaultyManagementView.inputPreFix();
+                    Faculty facultyToUpdate = facultyService.findByPreFix(updatePreFix);
+                    if (facultyToUpdate == null) {
+                        ConsoleColor.printError("This faculty not existed");
+                        break;
+                    }
+                    handleUpdateFaculty(facultyToUpdate);
                     break;
                 case 4:
                     String preFix = menuFaultyManagementView.inputPreFix();
@@ -54,6 +60,32 @@ public class FaultyManagementController {
                     break;
                 case 0:
                     return;
+            }
+        }
+    }
+
+    private void handleUpdateFaculty(Faculty faculty) {
+        boolean updating = true;
+        while (updating) {
+            int choice = menuFaultyManagementView.displayUpdateMenuAndGetChoice(faculty);
+            switch (choice) {
+                case 1:
+                    String newName = menuFaultyManagementView.inputFacultyName();
+                    faculty.setName(newName);
+                    ConsoleColor.printSuccess("Updated name successfully.");
+                    break;
+                case 0:
+                    updating = false;
+                    break;
+            }
+
+            if (choice != 0) {
+                try {
+                    facultyService.updateFaculty(faculty);
+                    ConsoleColor.printSuccess("Faculty saved successfully!");
+                } catch (IllegalArgumentException e) {
+                    ConsoleColor.printError(e.getMessage());
+                }
             }
         }
     }

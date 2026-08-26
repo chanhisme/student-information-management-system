@@ -35,4 +35,11 @@ public class FacultyService {
         facultyRepository.save();
 
     }
+
+    public void updateFaculty(Faculty faculty) {
+        if(facultyRepository.findByPreFix(faculty.getPrefix()) == null){
+            throw new IllegalArgumentException("This faculty id is not existed");
+        }
+        facultyRepository.save();
+    }
 }
