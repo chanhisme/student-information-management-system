@@ -18,6 +18,7 @@ public class FaultyManagementController {
         while (true) {
             menuFaultyManagementView.showMenu();
             int choice = menuFaultyManagementView.inputChoice(0, 7);
+            String preFix;
             switch (choice) {
                 case 1:
                     menuFaultyManagementView.displayAllFaculties(facultyService.getAllFaculty());
@@ -47,7 +48,7 @@ public class FaultyManagementController {
                     handleUpdateFaculty(facultyToUpdate);
                     break;
                 case 4:
-                    String preFix = menuFaultyManagementView.inputPreFix();
+                    preFix = menuFaultyManagementView.inputPreFix();
                     boolean isConfirm = menuFaultyManagementView.confirmDelete();
                     if (isConfirm) {
                         try {
@@ -57,6 +58,21 @@ public class FaultyManagementController {
                             ConsoleColor.printError(e.getMessage());
                         }
                     }
+                    break;
+                case 5:
+                    preFix = menuFaultyManagementView.inputPreFix();
+                    try{
+                        Faculty foundFaculty = facultyService.findByPreFix(preFix);
+                        if(foundFaculty == null){
+                            throw new RuntimeException("This id not existed");
+                        }
+                        menuFaultyManagementView.displayOneFaculty(foundFaculty);
+
+                    } catch (RuntimeException e) {
+                        ConsoleColor.printError(e.getMessage());
+                    }
+
+
                     break;
                 case 0:
                     return;

@@ -72,6 +72,10 @@ public class MenuFaultyManagementView extends BaseMenuView {
             System.out.printf("%d. %s - %s\n", (i + 1), faculty.getPrefix(), faculty.getName());
         }
     }
+    public void displayOneFaculty(Faculty faculty){
+        System.out.println("Found faculty");
+        System.out.printf("%s - %s\n", faculty.getPrefix(), faculty.getName());
+    }
 
     public int displayUpdateMenuAndGetChoice(Faculty faculty) {
         System.out.println("\n============= UPDATE FACULTY =============");
