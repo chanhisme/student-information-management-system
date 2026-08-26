@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.faculty.Faculty;
+import model.faculty.Major;
 import view.BaseMenuView;
 import view.ConsoleColor;
 
@@ -82,5 +83,23 @@ public class MenuFaultyManagementView extends BaseMenuView {
         System.out.println("[1]. Name: " + faculty.getName());
         System.out.println("[0]. DONE");
         return inputChoice(0, 1);
+    }
+
+    public void displayDetailFaculty(Faculty faculty){
+        System.out.println("\n========== VIEW FACULTY DETAILS ==========");
+        System.out.println("Enter faculty id: " + faculty.getPrefix());
+        System.out.println("\nFaculty Details");
+        System.out.println("--------------------------------");
+        System.out.println("Faculty ID   : "+faculty.getPrefix());
+        System.out.println("Faculty Name : "+faculty.getName());
+        System.out.println("\nMajors");
+        System.out.println("--------------------------------");
+        ArrayList <Major> majors = faculty.getMajors();
+        for(int i = 0; i < majors.size(); i++){
+            Major major = majors.get(i);
+            System.out.printf("%d. %s - %s\n", (i+1), major.getId(), major.getName());
+        }
+        System.out.println("\nTotal majors: " + majors.size());
+
     }
 }

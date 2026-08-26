@@ -71,8 +71,20 @@ public class FaultyManagementController {
                     } catch (RuntimeException e) {
                         ConsoleColor.printError(e.getMessage());
                     }
+                    break;
 
 
+                case 7:
+                    preFix = menuFaultyManagementView.inputPreFix();
+                    try{
+                        Faculty foundFaculty = facultyService.findByPreFix(preFix);
+                        if(foundFaculty == null){
+                            throw new RuntimeException("This id not existed");
+                        }
+                        menuFaultyManagementView.displayDetailFaculty(foundFaculty);
+                    } catch (RuntimeException e) {
+                        ConsoleColor.printError(e.getMessage());
+                    }
                     break;
                 case 0:
                     return;
