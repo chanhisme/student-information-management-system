@@ -90,4 +90,8 @@ public class FacultyRepository {
     public Faculty getFacultyByPrefix(String prefix) {
         return facultiesMap.get(prefix);
     }
+
+    public void deleteFaculty(String preFix){
+        facultiesMap.remove(preFix);
+    }
 }

@@ -51,4 +51,3 @@ FACULTY|LW|Faculty of Law
 MAJOR|LW1|Law
 MAJOR|LW2|Economic Law
 
-

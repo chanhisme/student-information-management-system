@@ -26,4 +26,13 @@ public class FacultyService {
     public ArrayList<Faculty> getAllFaculty() {
         return facultyRepository.getAll();
     }
+
+    public void deleteFaculty(String preFix){
+        if(facultyRepository.findByPreFix(preFix) == null){
+            throw new IllegalArgumentException("This faculty id is not existed");
+        }
+        facultyRepository.deleteFaculty(preFix);
+        facultyRepository.save();
+
+    }
 }

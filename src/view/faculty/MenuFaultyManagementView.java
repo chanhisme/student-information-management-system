@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import model.faculty.Faculty;
 import view.BaseMenuView;
+import view.ConsoleColor;
 
 public class MenuFaultyManagementView extends BaseMenuView {
 
@@ -24,7 +25,23 @@ public class MenuFaultyManagementView extends BaseMenuView {
         System.out.println("7. View faculty details");
         System.out.println("0. Back");
     }
+    public boolean confirmDelete(){
+        System.out.println("=========CONFIRM DELETE=========");
+        System.out.println("If you remove that all majors of this faculty will be removed");
+        System.out.println("[1]. YES");
+        System.out.println("[2]. NO");
+        int choice = -1;
+        while(choice != 1 && choice != 2 ){
+            try{
+                System.out.print("Enter your choice: ");
+                choice = Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                ConsoleColor.printError("Please enter a valid choice.");
 
+            }
+        }
+        return choice == 1;
+    }
     public Faculty inputFaculty() {
         String facultyName = inputFacultyName();
         String preFix = inputPreFix();
@@ -32,12 +49,15 @@ public class MenuFaultyManagementView extends BaseMenuView {
     }
 
     public String inputPreFix() {
-        String preFix = null;
-        while (preFix == null) {
-            System.out.print("Enter id faculty: ");
-            preFix = scanner.nextLine();
+        while (true) {
+            System.out.print("Enter faculty id: ");
+            String preFix = scanner.nextLine().trim();
+            if(!preFix.isEmpty() && preFix.matches("[A-Za-z]+")){
+                return preFix;
+            }
+            ConsoleColor.printError("Prefix already exists.");
         }
-        return preFix;
+
     }
 
     public String inputFacultyName() {
@@ -47,6 +67,7 @@ public class MenuFaultyManagementView extends BaseMenuView {
             facultyName = scanner.nextLine();
         }
         return facultyName;
+
     }
 
     public void displayAllFaculties(ArrayList<Faculty> faculties) {
