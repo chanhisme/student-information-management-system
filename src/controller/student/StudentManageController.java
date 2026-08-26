@@ -1,5 +1,7 @@
 package controller.student;
 
+import model.faculty.Faculty;
+import model.faculty.Major;
 import model.student.Student;
 import service.student.StudentService;
 import view.ConsoleColor;
@@ -43,13 +45,7 @@ public class StudentManageController {
                         ConsoleColor.printError("This student not existed");
                         break;
                     }
-                    menuStudentManageView.updateStudent(student);
-                    try {
-                        studentService.updateStudent(student);
-                        ConsoleColor.printSuccess("Student saved successfully!");
-                    } catch (IllegalArgumentException e) {
-                        ConsoleColor.printError(e.getMessage());
-                    }
+                    handleUpdateStudent(student);
                     break;
                 case 3:
                     id = menuStudentManageView.inputIdStudent();
@@ -82,6 +78,69 @@ public class StudentManageController {
                     break;
                 case 0:
                     return;
+            }
+        }
+    }
+
+    private void handleUpdateStudent(Student student) {
+        boolean updating = true;
+        while (updating) {
+            int choice = menuStudentManageView.displayUpdateMenuAndGetChoice(student);
+
+            switch (choice) {
+                case 1:
+                    String newName = menuStudentManageView.inputName();
+                    student.setName(newName);
+                    ConsoleColor.printSuccess("Updated name successfully.");
+                    break;
+                case 2:
+                    java.time.LocalDate newBirth = menuStudentManageView.inputBirthDate();
+                    student.setBirth(newBirth);
+                    ConsoleColor.printSuccess("Updated date of birth successfully.");
+                    break;
+                case 3:
+                    Faculty newFaculty = menuStudentManageView.inputFaculty();
+                    if (newFaculty != null) {
+                        Major newMajor = menuStudentManageView.inputMajor(newFaculty.getMajors());
+                        if (newMajor != null) {
+                            student.setFaculty(newFaculty);
+                            student.setMajor(newMajor);
+                            ConsoleColor.printSuccess("Updated faculty and major successfully.");
+                        } else {
+                            ConsoleColor.printError("Major selection cancelled. Faculty was not changed.");
+                        }
+                    }
+                    break;
+                case 4:
+                    if (student.getFaculty() == null) {
+                        ConsoleColor.printError("Student has no faculty assigned. Please select faculty first.");
+                    } else {
+                        Major newMajor = menuStudentManageView.inputMajor(student.getFaculty().getMajors());
+                        if (newMajor != null) {
+                            student.setMajor(newMajor);
+                            ConsoleColor.printSuccess("Updated major successfully.");
+                        }
+                    }
+                    break;
+                case 5:
+                    Student.StudentStatus status = menuStudentManageView.inputStatus();
+                    if (status != null) {
+                        student.setStatus(status);
+                        ConsoleColor.printSuccess("Updated status successfully.");
+                    }
+                    break;
+                case 0:
+                    updating = false;
+                    break;
+            }
+
+            if (choice != 0) {
+                try {
+                    studentService.updateStudent(student);
+                    ConsoleColor.printSuccess("Student saved successfully!");
+                } catch (IllegalArgumentException e) {
+                    ConsoleColor.printError(e.getMessage());
+                }
             }
         }
     }
