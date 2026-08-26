@@ -30,16 +30,7 @@ public class MenuFaultyManagementView extends BaseMenuView {
         System.out.println("If you remove that all majors of this faculty will be removed");
         System.out.println("[1]. YES");
         System.out.println("[2]. NO");
-        int choice = -1;
-        while(choice != 1 && choice != 2 ){
-            try{
-                System.out.print("Enter your choice: ");
-                choice = Integer.parseInt(scanner.nextLine().trim());
-            } catch (NumberFormatException e) {
-                ConsoleColor.printError("Please enter a valid choice.");
-
-            }
-        }
+        int choice = inputChoice(1,2);
         return choice == 1;
     }
     public Faculty inputFaculty() {
@@ -51,7 +42,7 @@ public class MenuFaultyManagementView extends BaseMenuView {
     public String inputPreFix() {
         while (true) {
             System.out.print("Enter faculty id: ");
-            String preFix = scanner.nextLine().trim();
+            String preFix = scanner.nextLine().trim().toUpperCase();
             if(!preFix.isEmpty() && preFix.matches("[A-Za-z]+")){
                 return preFix;
             }

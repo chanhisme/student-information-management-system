@@ -37,6 +37,9 @@ public class FaultyManagementController {
                         ConsoleColor.printError(e.getMessage());
                     }
                     break;
+                case 3:
+
+                    break;
                 case 4:
                     String preFix = menuFaultyManagementView.inputPreFix();
                     boolean isConfirm = menuFaultyManagementView.confirmDelete();
