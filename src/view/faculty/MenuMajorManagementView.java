@@ -24,25 +24,17 @@ public class MenuMajorManagementView extends BaseMenuView {
         System.out.println("0. Back");
     }
 
-    public Major inputAddMajor(String preFix, int numberOfMajors) {
-        String id = generativeId(preFix, numberOfMajors);
-        String name = inputName();
-        return new Major(id, name);
-    }
-
-    public String generativeId(String preFix, int numberOfMajors) {
-        return preFix + (numberOfMajors + 1);
-    }
-    public String inputName(){
-        while(true){
+    public String inputAddMajor() {
+        while (true) {
             System.out.print("Enter new name: ");
             String name = scanner.nextLine().trim();
-            if(!name.isEmpty() && name.matches("^[\\p{L} ]+$")){
+            if (!name.isEmpty() && name.matches("^[\\p{L} ]+$")) {
                 return name;
             }
             ConsoleColor.printError("This name already existed");
         }
     }
+
 
     public void displayAllMajors(ArrayList<Major> majors) {
         System.out.println("Majors");

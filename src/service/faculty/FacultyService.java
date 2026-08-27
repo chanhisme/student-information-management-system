@@ -57,4 +57,12 @@ public class FacultyService {
         facultyRepository.addMajor(major, preFix);
         facultyRepository.save();
     }
+
+    public String generateMajorId(Faculty faculty){
+        int id = 1;
+        while(faculty.getMajorById( faculty.getPrefix() + id) != null){
+            ++id;
+        }
+        return faculty.getPrefix() + id;
+    }
 }

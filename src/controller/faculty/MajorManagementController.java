@@ -27,12 +27,9 @@ public class MajorManagementController {
                     menuMajorManagementView.displayAllMajors(faculty.getMajors());
                     break;
                 case 2:
-                    Major major = menuMajorManagementView.inputAddMajor(
-                            faculty.getPrefix(), faculty.getMajors().size());
-                    if(major == null){
-                        ConsoleColor.printError("Major creation cancelled");
-                        break;
-                    }
+                    Major major = new Major(
+                            facultyService.generateMajorId(faculty),
+                            menuMajorManagementView.inputAddMajor());
                     try{
                         facultyService.addMajor(major, faculty.getPrefix());
                         ConsoleColor.printSuccess("Add new major successfully");
