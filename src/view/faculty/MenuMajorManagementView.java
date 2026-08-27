@@ -59,7 +59,7 @@ public class MenuMajorManagementView extends BaseMenuView {
         return inputChoice(0, 1);
     }
 
-    public void updateName(Major major){
-
+    public void displayOneMajor(Major major){
+        System.out.printf("%s %s\n\n", major.getId(), major.getName());
     }
 }

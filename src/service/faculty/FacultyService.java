@@ -43,6 +43,12 @@ public class FacultyService {
         }
         facultyRepository.save();
     }
+    public void updateMajor(Major major, String preFix){
+        if(facultyRepository.findMajorById(major.getId(), preFix) == null){
+            throw new IllegalArgumentException("This major id is not existed");
+        }
+        facultyRepository.save();
+    }
 
     public Major findMajorById(String id, String preFix){
         return facultyRepository.findMajorById(id, preFix);
