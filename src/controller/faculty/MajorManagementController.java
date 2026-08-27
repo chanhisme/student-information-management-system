@@ -1,7 +1,9 @@
 package controller.faculty;
 
 import model.faculty.Faculty;
+import model.faculty.Major;
 import service.faculty.FacultyService;
+import view.ConsoleColor;
 import view.faculty.MenuMajorManagementView;
 
 public class MajorManagementController {
@@ -24,7 +26,22 @@ public class MajorManagementController {
                 case 1:
                     menuMajorManagementView.displayAllMajors(faculty.getMajors());
                     break;
+                case 2:
+                    Major major = menuMajorManagementView.inputAddMajor(
+                            faculty.getPrefix(), faculty.getMajors().size());
+                    if(major == null){
+                        ConsoleColor.printError("Major creation cancelled");
+                        break;
+                    }
+                    try{
+                        facultyService.addMajor(major, faculty.getPrefix());
+                        ConsoleColor.printSuccess("Add new major successfully");
+                        ConsoleColor.printSuccess("Save new major successfully");
 
+                    } catch (RuntimeException e) {
+                        ConsoleColor.printError(e.getMessage());
+                    }
+                    break;
                 case 0:
                     return;
             }

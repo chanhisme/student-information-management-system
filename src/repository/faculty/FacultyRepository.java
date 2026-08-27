@@ -94,4 +94,11 @@ public class FacultyRepository {
     public void deleteFaculty(String preFix){
         facultiesMap.remove(preFix);
     }
+
+    public void addMajor(Major major, String preFix){
+        facultiesMap.get(preFix).addMajor(major);
+    }
+    public Major findMajorById(String id, String preFix){
+        return facultiesMap.get(preFix).getMajorById(id);
+    }
 }

@@ -1,6 +1,7 @@
 package service.faculty;
 
 import model.faculty.Faculty;
+import model.faculty.Major;
 import repository.faculty.FacultyRepository;
 
 import java.util.ArrayList;
@@ -40,6 +41,20 @@ public class FacultyService {
         if(facultyRepository.findByPreFix(faculty.getPrefix()) == null){
             throw new IllegalArgumentException("This faculty id is not existed");
         }
+        facultyRepository.save();
+    }
+
+    public Major findMajorById(String id, String preFix){
+        return facultyRepository.findMajorById(id, preFix);
+    }
+    public void addMajor(Major major, String preFix){
+        if(findByPreFix(preFix) == null){
+            throw new RuntimeException("This faculty is not existed");
+        }
+        if(findMajorById(major.getId(), preFix) != null ){
+            throw new RuntimeException("This major is existed");
+        }
+        facultyRepository.addMajor(major, preFix);
         facultyRepository.save();
     }
 }

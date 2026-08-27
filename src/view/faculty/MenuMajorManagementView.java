@@ -2,6 +2,7 @@ package view.faculty;
 
 import model.faculty.Major;
 import view.BaseMenuView;
+import view.ConsoleColor;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,13 +24,32 @@ public class MenuMajorManagementView extends BaseMenuView {
         System.out.println("0. Back");
     }
 
+    public Major inputAddMajor(String preFix, int numberOfMajors) {
+        String id = generativeId(preFix, numberOfMajors);
+        String name = inputName();
+        return new Major(id, name);
+    }
 
-    public void displayAllMajors(ArrayList <Major> majors){
+    public String generativeId(String preFix, int numberOfMajors) {
+        return preFix + (numberOfMajors + 1);
+    }
+    public String inputName(){
+        while(true){
+            System.out.print("Enter new name: ");
+            String name = scanner.nextLine().trim();
+            if(!name.isEmpty() && name.matches("^[\\p{L} ]+$")){
+                return name;
+            }
+            ConsoleColor.printError("This name already existed");
+        }
+    }
+
+    public void displayAllMajors(ArrayList<Major> majors) {
         System.out.println("Majors");
         System.out.println("--------------------------------");
-        for(int i = 0; i < majors.size(); i++){
+        for (int i = 0; i < majors.size(); i++) {
             Major major = majors.get(i);
-            System.out.printf("%d. %s - %s\n", (i+1), major.getId(), major.getName());
+            System.out.printf("%d. %s - %s\n", (i + 1), major.getId(), major.getName());
         }
     }
 }
