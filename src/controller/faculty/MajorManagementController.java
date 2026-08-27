@@ -1,5 +1,6 @@
 package controller.faculty;
 
+import com.sun.xml.internal.ws.wsdl.writer.document.StartWithExtensionsType;
 import model.faculty.Faculty;
 import model.faculty.Major;
 import service.faculty.FacultyService;
@@ -17,20 +18,21 @@ public class MajorManagementController {
         this.facultyService = facultyService;
     }
 
-    public void run(Faculty faculty){
-        while(true){
+    public void run(Faculty faculty) {
+        while (true) {
             menuMajorManagementView.showMenu();
             int choice = menuMajorManagementView.inputChoice(0, 5);
-            switch (choice){
+            Major major;
+            switch (choice) {
 
                 case 1:
                     menuMajorManagementView.displayAllMajors(faculty.getMajors());
                     break;
                 case 2:
-                    Major major = new Major(
+                    major = new Major(
                             facultyService.generateMajorId(faculty),
-                            menuMajorManagementView.inputAddMajor());
-                    try{
+                            menuMajorManagementView.inputName());
+                    try {
                         facultyService.addMajor(major, faculty.getPrefix());
                         ConsoleColor.printSuccess("Add new major successfully");
                         ConsoleColor.printSuccess("Save new major successfully");
@@ -39,9 +41,17 @@ public class MajorManagementController {
                         ConsoleColor.printError(e.getMessage());
                     }
                     break;
+                case 3:
+                    major = facultyService.findMajorById(menuMajorManagementView.inputId(), faculty.getPrefix());
+                    if(major == null){
+                        System.out.println("This major is not existed");
+                        break;
+                    }
+                    handleUpdate(major);
+                    break;
                 case 4:
                     String id = menuMajorManagementView.inputId();
-                    try{
+                    try {
                         facultyService.deleteMajor(id, faculty.getPrefix());
                         ConsoleColor.printSuccess("Delete successfully");
                         ConsoleColor.printSuccess("Save successfully");
@@ -51,6 +61,23 @@ public class MajorManagementController {
                     break;
                 case 0:
                     return;
+            }
+        }
+    }
+
+
+    private void handleUpdate(Major major) {
+        boolean updating = true;
+        while (updating) {
+            int choice = menuMajorManagementView.inputUpdate(major);
+            switch (choice) {
+                case 1:
+                    String newName = menuMajorManagementView.inputName();
+                    major.setName(newName);
+                    break;
+                case 0:
+                    updating = false;
+                    break;
             }
         }
     }

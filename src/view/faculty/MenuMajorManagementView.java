@@ -25,14 +25,14 @@ public class MenuMajorManagementView extends BaseMenuView {
         System.out.println("0. Back");
     }
 
-    public String inputAddMajor() {
+    public String inputName() {
         while (true) {
             System.out.print("Enter new name: ");
             String name = scanner.nextLine().trim();
             if (!name.isEmpty() && name.matches("^[\\p{L} ]+$")) {
                 return name;
             }
-            ConsoleColor.printError("This name already existed");
+            ConsoleColor.printError("This name wrong format");
         }
     }
 
@@ -49,5 +49,17 @@ public class MenuMajorManagementView extends BaseMenuView {
             Major major = majors.get(i);
             System.out.printf("%d. %s - %s\n", (i + 1), major.getId(), major.getName());
         }
+    }
+
+
+    public int inputUpdate(Major major){
+        System.out.println("============UPDATE MAJOR============");
+        System.out.println("[1]. Name: " + major.getName());
+        System.out.println("[0]. DONE");
+        return inputChoice(0, 1);
+    }
+
+    public void updateName(Major major){
+
     }
 }

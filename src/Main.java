@@ -87,5 +87,6 @@ public class Main {
 
         mainMenuController.run();
         studentRepository.save();
+        facultyRepository.save();
     }
 }
