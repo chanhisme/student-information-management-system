@@ -101,4 +101,8 @@ public class FacultyRepository {
     public Major findMajorById(String id, String preFix){
         return facultiesMap.get(preFix).getMajorById(id);
     }
+
+    public void deleteMajor(String id, String preFix){
+        facultiesMap.get(preFix).removeMajor(id);
+    }
 }

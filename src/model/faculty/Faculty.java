@@ -43,4 +43,7 @@ public class Faculty {
     public void addMajor(Major major) {
         majors.put(major.getId(), major);
     }
+    public void removeMajor(String id){
+        majors.remove(id);
+    }
 }

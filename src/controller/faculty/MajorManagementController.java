@@ -39,6 +39,16 @@ public class MajorManagementController {
                         ConsoleColor.printError(e.getMessage());
                     }
                     break;
+                case 4:
+                    String id = menuMajorManagementView.inputId();
+                    try{
+                        facultyService.deleteMajor(id, faculty.getPrefix());
+                        ConsoleColor.printSuccess("Delete successfully");
+                        ConsoleColor.printSuccess("Save successfully");
+                    } catch (RuntimeException e) {
+                        ConsoleColor.printError(e.getMessage());
+                    }
+                    break;
                 case 0:
                     return;
             }

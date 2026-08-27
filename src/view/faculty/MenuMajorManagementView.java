@@ -5,6 +5,7 @@ import view.BaseMenuView;
 import view.ConsoleColor;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class MenuMajorManagementView extends BaseMenuView {
@@ -33,6 +34,11 @@ public class MenuMajorManagementView extends BaseMenuView {
             }
             ConsoleColor.printError("This name already existed");
         }
+    }
+
+    public String inputId(){
+        System.out.print("Enter id: ");
+        return scanner.nextLine().trim().toUpperCase();
     }
 
 

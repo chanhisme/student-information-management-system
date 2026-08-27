@@ -65,4 +65,12 @@ public class FacultyService {
         }
         return faculty.getPrefix() + id;
     }
+
+    public void deleteMajor(String id, String preFix){
+        if(findMajorById(id, preFix) == null ){
+            throw new RuntimeException("This major is not existed");
+        }
+        facultyRepository.deleteMajor(id, preFix);
+        facultyRepository.save();
+    }
 }
