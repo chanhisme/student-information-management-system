@@ -8,10 +8,12 @@ import view.faculty.MenuFaultyManagementView;
 public class FaultyManagementController {
     private final MenuFaultyManagementView menuFaultyManagementView;
     private final FacultyService facultyService;
+    private final MajorManagementController majorManagementController;
 
-    public FaultyManagementController(MenuFaultyManagementView menuFaultyManagementView, FacultyService facultyService) {
+    public FaultyManagementController(MenuFaultyManagementView menuFaultyManagementView, FacultyService facultyService, MajorManagementController majorManagementController) {
         this.menuFaultyManagementView = menuFaultyManagementView;
         this.facultyService = facultyService;
+        this.majorManagementController = majorManagementController;
     }
 
     public void run() {
@@ -73,7 +75,23 @@ public class FaultyManagementController {
                     }
                     break;
 
+                case 6:
+                    preFix = menuFaultyManagementView.inputPreFix();
+                    try{
+                        Faculty foundFaculty = facultyService.findByPreFix(preFix);
+                        if(foundFaculty == null){
+                            throw new RuntimeException("This id not existed");
+                        }
+                        menuFaultyManagementView.displayOneFaculty(foundFaculty);
+                        majorManagementController.run(foundFaculty);
 
+
+                    } catch (RuntimeException e) {
+                        ConsoleColor.printError(e.getMessage());
+                    }
+
+
+                    break;
                 case 7:
                     preFix = menuFaultyManagementView.inputPreFix();
                     try{

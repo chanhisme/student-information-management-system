@@ -10,6 +10,7 @@ import view.MenuView;
 import view.student.*;
 import view.faculty.*;
 
+import java.lang.management.ManagementPermission;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Scanner;
@@ -35,7 +36,7 @@ public class Main {
         MenuAcademicManagementView menuAcademicManagementView = new MenuAcademicManagementView(scanner);
         MenuGraduationProgressView menuGraduationProgressView = new MenuGraduationProgressView(scanner);
         MenuFaultyManagementView menuFaultyManagementView = new MenuFaultyManagementView(scanner);
-
+        MenuMajorManagementView menuMajorManagementView = new MenuMajorManagementView(scanner);
 
         // 2. Initialize Repositories & Services
         StudentService studentService = new StudentService(studentRepository);
@@ -57,6 +58,9 @@ public class Main {
         GraduationProgressController graduationProgressController =
                 new GraduationProgressController(menuGraduationProgressView);
 
+        MajorManagementController majorManagementController =
+                new MajorManagementController(menuMajorManagementView, facultyService);
+
         // 3. Initialize Feature Controllers
         StudentController studentController = new StudentController(
                 menuStudentView,
@@ -69,7 +73,8 @@ public class Main {
 
         FaultyManagementController faultyManagementController = new FaultyManagementController(
                 menuFaultyManagementView,
-                facultyService
+                facultyService,
+                majorManagementController
         );
 
 
