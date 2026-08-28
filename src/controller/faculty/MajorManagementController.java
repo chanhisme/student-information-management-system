@@ -1,6 +1,5 @@
 package controller.faculty;
 
-import com.sun.xml.internal.ws.wsdl.writer.document.StartWithExtensionsType;
 import model.faculty.Faculty;
 import model.faculty.Major;
 import service.faculty.FacultyService;
@@ -69,7 +68,6 @@ public class MajorManagementController {
                     }
                     menuMajorManagementView.displayOneMajor(major);
                     break;
-
                 case 0:
                     return;
             }

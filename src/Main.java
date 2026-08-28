@@ -1,14 +1,18 @@
 import controller.MainMenuController;
 import controller.student.*;
 import controller.faculty.*;
+import controller.subject.SubjectManageController;
 import model.student.Student;
 import repository.faculty.FacultyRepository;
 import repository.student.StudentRepository;
+import repository.subject.SubjectRepository;
 import service.faculty.FacultyService;
 import service.student.StudentService;
+import service.subject.SubjectService;
 import view.MenuView;
 import view.student.*;
 import view.faculty.*;
+import view.subject.MenuSubjectManageView;
 
 import java.lang.management.ManagementPermission;
 import java.util.Map;
@@ -37,10 +41,15 @@ public class Main {
         MenuGraduationProgressView menuGraduationProgressView = new MenuGraduationProgressView(scanner);
         MenuFaultyManagementView menuFaultyManagementView = new MenuFaultyManagementView(scanner);
         MenuMajorManagementView menuMajorManagementView = new MenuMajorManagementView(scanner);
+        MenuSubjectManageView menuSubjectManageView = new MenuSubjectManageView(scanner);
 
         // 2. Initialize Repositories & Services
         StudentService studentService = new StudentService(studentRepository);
         FacultyService facultyService = new FacultyService(facultyRepository);
+
+        SubjectRepository subjectRepository = new SubjectRepository();
+        subjectRepository.load();
+        SubjectService subjectService = new SubjectService(subjectRepository);
 
         // 3. Initialize Sub-Controllers
         StudentManageController studentManageController = new
@@ -60,6 +69,9 @@ public class Main {
 
         MajorManagementController majorManagementController =
                 new MajorManagementController(menuMajorManagementView, facultyService);
+
+        SubjectManageController subjectManageController =
+                new SubjectManageController(menuSubjectManageView, subjectService);
 
         // 3. Initialize Feature Controllers
         StudentController studentController = new StudentController(
@@ -82,11 +94,13 @@ public class Main {
         MainMenuController mainMenuController = new MainMenuController(
                 menuView,
                 studentController,
+                subjectManageController,
                 faultyManagementController);
 
 
         mainMenuController.run();
         studentRepository.save();
         facultyRepository.save();
+        subjectRepository.save();
     }
 }

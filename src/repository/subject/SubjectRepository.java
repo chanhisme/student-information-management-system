@@ -1,0 +1,106 @@
+package repository.subject;
+
+import model.subject.*;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class SubjectRepository {
+
+    private final Map<String, Subject> subjectsMap;
+
+    public SubjectRepository() {
+        subjectsMap = new LinkedHashMap<>();
+    }
+
+    public void load() {
+        String filePath = "src/data/subjects.txt";
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+                String[] parts = line.split("\\|");
+                if (parts[0].equals("SUBJECT") && parts.length == 5) {
+                    String id = parts[1];
+                    String name = parts[2];
+                    int credits = Integer.parseInt(parts[3]);
+                    String type = parts[4];
+                    Subject subject = createSubject(id, name, credits, type);
+                    if (subject != null) {
+                        subjectsMap.put(id, subject);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading subjects: " + e.getMessage());
+        }
+    }
+
+    public void save() {
+        String filePath = "src/data/subjects.txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Subject subject : subjectsMap.values()) {
+                String type = getSubjectType(subject);
+                writer.write("SUBJECT|" + subject.getId() + "|" + subject.getName()
+                        + "|" + subject.getCredits() + "|" + type);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving subjects: " + e.getMessage());
+        }
+    }
+
+    public ArrayList<Subject> getAll() {
+        return new ArrayList<>(subjectsMap.values());
+    }
+
+    public Subject findById(String id) {
+        return subjectsMap.get(id);
+    }
+
+    public void add(Subject subject) {
+        subjectsMap.put(subject.getId(), subject);
+    }
+
+    public void deleteById(String id) {
+        subjectsMap.remove(id);
+    }
+
+    private Subject createSubject(String id, String name, int credits, String type) {
+        switch (type) {
+            case "NORMAL":
+                return new NormalSubject(id, name, credits);
+            case "ELECTIVE":
+                return new ElectiveSubject(id, name, credits);
+            case "COURSERA":
+                return new CourseraSubject(id, name, credits);
+            case "NONE_GPA":
+                return new NoneGpaSubject(id, name, credits);
+            default:
+                return null;
+        }
+    }
+
+    private String getSubjectType(Subject subject) {
+        if (subject instanceof NormalSubject) {
+            return "NORMAL";
+        } else if (subject instanceof ElectiveSubject) {
+            return "ELECTIVE";
+        } else if (subject instanceof CourseraSubject) {
+            return "COURSERA";
+        } else if (subject instanceof NoneGpaSubject) {
+            return "NONE_GPA";
+        }
+        return "NORMAL";
+    }
+}
