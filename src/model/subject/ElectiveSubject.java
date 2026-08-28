@@ -9,4 +9,9 @@ public class ElectiveSubject extends Subject{
     public double calculateFinalScore(double score) {
         return Double.parseDouble(toString(score));
     }
+
+    @Override
+    public String getType() {
+        return "ELECTIVE";
+    }
 }

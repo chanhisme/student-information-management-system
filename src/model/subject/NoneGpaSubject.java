@@ -10,4 +10,9 @@ public class NoneGpaSubject extends Subject {
     public double calculateFinalScore(double score) {
         return 0;
     }
+
+    @Override
+    public String getType() {
+        return "NONE_GPA";
+    }
 }

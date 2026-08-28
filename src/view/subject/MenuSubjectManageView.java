@@ -15,22 +15,21 @@ public class MenuSubjectManageView extends BaseMenuView {
 
     @Override
     public void showMenu() {
-        System.out.println("\n========== SUBJECT MANAGEMENT ==========");
+        System.out.println("\n==========SUBJECT MANAGEMENT==========");
         System.out.println("1. View all subjects");
         System.out.println("2. Add subject");
         System.out.println("3. Update subject");
         System.out.println("4. Delete subject");
         System.out.println("5. Search subject");
         System.out.println("0. Back");
-        System.out.println("========================================");
     }
 
     public Subject inputSubjectData(String id) {
-        System.out.println("\n--- Enter Subject Details ---");
+        System.out.println("\n==========Enter Subject Details==========");
         String name = inputName();
         int credits = inputCredits();
-        SubjectType type = inputSubjectType();
-        return createSubject(id, name, credits, type);
+        String type = inputSubjectType();
+        return Subject.create(type, id, name, credits);
     }
 
     public String inputId() {
@@ -77,9 +76,9 @@ public class MenuSubjectManageView extends BaseMenuView {
         }
     }
 
-    public SubjectType inputSubjectType() {
-        System.out.println("\n========== SUBJECT TYPE ==========");
-        SubjectType[] types = SubjectType.values();
+    public String inputSubjectType() {
+        System.out.println("\n==========SUBJECT TYPE==========");
+        String[] types = Subject.getRegisteredTypes().toArray(new String[0]);
         for (int i = 0; i < types.length; i++) {
             System.out.println((i + 1) + ". " + types[i]);
         }
@@ -106,7 +105,7 @@ public class MenuSubjectManageView extends BaseMenuView {
     }
 
     public int displayUpdateMenuAndGetChoice(Subject subject) {
-        System.out.println("\n============= UPDATE SUBJECT =============");
+        System.out.println("\n=============UPDATE SUBJECT=============");
         System.out.println("[1]. Name: " + subject.getName());
         System.out.println("[2]. Credits: " + subject.getCredits());
         System.out.println("[3]. Type: " + getSubjectTypeName(subject));
@@ -152,37 +151,6 @@ public class MenuSubjectManageView extends BaseMenuView {
     }
 
     private String getSubjectTypeName(Subject subject) {
-        if (subject instanceof NormalSubject) {
-            return "NORMAL";
-        } else if (subject instanceof ElectiveSubject) {
-            return "ELECTIVE";
-        } else if (subject instanceof CourseraSubject) {
-            return "COURSERA";
-        } else if (subject instanceof NoneGpaSubject) {
-            return "NONE_GPA";
-        }
-        return "UNKNOWN";
-    }
-
-    private Subject createSubject(String id, String name, int credits, SubjectType type) {
-        switch (type) {
-            case NORMAL:
-                return new NormalSubject(id, name, credits);
-            case ELECTIVE:
-                return new ElectiveSubject(id, name, credits);
-            case COURSERA:
-                return new CourseraSubject(id, name, credits);
-            case NONE_GPA:
-                return new NoneGpaSubject(id, name, credits);
-            default:
-                return new NormalSubject(id, name, credits);
-        }
-    }
-
-    public enum SubjectType {
-        NORMAL,
-        ELECTIVE,
-        COURSERA,
-        NONE_GPA
+        return subject.getType();
     }
 }

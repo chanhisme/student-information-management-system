@@ -10,4 +10,9 @@ public class CourseraSubject extends Subject {
         double finalScore = Double.parseDouble(toString(score + 1.0));
         return Math.min(10, finalScore);
     }
+
+    @Override
+    public String getType() {
+        return "COURSERA";
+    }
 }

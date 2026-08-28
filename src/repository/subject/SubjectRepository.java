@@ -77,30 +77,10 @@ public class SubjectRepository {
     }
 
     private Subject createSubject(String id, String name, int credits, String type) {
-        switch (type) {
-            case "NORMAL":
-                return new NormalSubject(id, name, credits);
-            case "ELECTIVE":
-                return new ElectiveSubject(id, name, credits);
-            case "COURSERA":
-                return new CourseraSubject(id, name, credits);
-            case "NONE_GPA":
-                return new NoneGpaSubject(id, name, credits);
-            default:
-                return null;
-        }
+        return Subject.create(type, id, name, credits);
     }
 
     private String getSubjectType(Subject subject) {
-        if (subject instanceof NormalSubject) {
-            return "NORMAL";
-        } else if (subject instanceof ElectiveSubject) {
-            return "ELECTIVE";
-        } else if (subject instanceof CourseraSubject) {
-            return "COURSERA";
-        } else if (subject instanceof NoneGpaSubject) {
-            return "NONE_GPA";
-        }
-        return "NORMAL";
+        return subject.getType();
     }
 }

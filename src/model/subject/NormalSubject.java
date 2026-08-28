@@ -10,4 +10,9 @@ public class NormalSubject extends Subject{
         return Double.parseDouble(toString(score));
     }
 
+    @Override
+    public String getType() {
+        return "NORMAL";
+    }
+
 }
