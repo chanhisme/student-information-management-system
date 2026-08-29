@@ -1,9 +1,29 @@
 package DataStructure;
 
-public class MyLinkedList<T> {
+import java.util.Iterator;
+
+public class MyLinkedList<T> implements Iterable <T>{
     private Node<T> head;
     private Node<T> tail;
     private int size = 0;
+
+    @Override
+    public Iterator <T> iterator() {
+        return new Iterator<T>() {
+            private Node <T> current = head;
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public T next() {
+                T value = current.value;
+                current = current.next;
+                return value;
+            }
+        };
+    }
 
     private static class Node<T> {
         T value;
@@ -12,6 +32,14 @@ public class MyLinkedList<T> {
         Node(T value) {
             this.value = value;
         }
+    }
+
+    public Node<T> getHead() {
+        return head;
+    }
+
+    public Node<T> getTail() {
+        return tail;
     }
 
     public void addLast(T newValue) {

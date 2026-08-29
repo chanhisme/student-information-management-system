@@ -1,5 +1,6 @@
 package controller.student;
 
+import DataStructure.MyLinkedList;
 import model.student.Student;
 import model.subject.Subject;
 import service.student.AcademicService;
@@ -52,7 +53,7 @@ public class StudentInformationViewController {
 
                 case 2:
                     System.out.println("\n--- Academic Transcript ---");
-                    java.util.List<Subject> subjects = student.getRegisteredSubjects();
+                    MyLinkedList<Subject> subjects = student.getRegisteredSubjects();
                     if (subjects.isEmpty()) {
                         System.out.println("No subjects registered.");
                     } else {

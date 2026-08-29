@@ -1,9 +1,9 @@
 package service.student;
 
+import DataStructure.MyStack;
 import model.student.Student;
 import model.subject.Subject;
 
-import java.util.Stack;
 
 public class CourseRegistrationService {
     public enum ActionType {REGISTER, DROP}
@@ -32,14 +32,14 @@ public class CourseRegistrationService {
         }
     }
 
-    private final Stack<RegistrationAction> undoStack = new Stack<>();
-    private final Stack<RegistrationAction> redoStack = new Stack<>();
+    private final MyStack<RegistrationAction> undoStack = new MyStack<>();
+    private final MyStack<RegistrationAction> redoStack = new MyStack<>();
 
     public void registerCourse(Student student, Subject subject) {
         if (student.getRegisteredSubjects().contains(subject)) {
             throw new IllegalArgumentException("Student has already registered for this subject.");
         }
-        student.getRegisteredSubjects().add(subject);
+        student.getRegisteredSubjects().addLast(subject);
         undoStack.push(new RegistrationAction(student, subject, ActionType.REGISTER));
         redoStack.clear();
     }
@@ -64,7 +64,7 @@ public class CourseRegistrationService {
         if (action.getType() == ActionType.REGISTER) {
             student.getRegisteredSubjects().remove(subject);
         } else {
-            student.getRegisteredSubjects().add(subject);
+            student.getRegisteredSubjects().addLast(subject);
         }
         redoStack.push(action);
         return true;
@@ -79,7 +79,7 @@ public class CourseRegistrationService {
         Subject subject = action.getSubject();
 
         if (action.getType() == ActionType.REGISTER) {
-            student.getRegisteredSubjects().add(subject);
+            student.getRegisteredSubjects().addLast(subject);
         } else {
             student.getRegisteredSubjects().remove(subject);
         }

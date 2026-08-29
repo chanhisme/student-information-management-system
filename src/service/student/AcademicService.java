@@ -16,7 +16,6 @@ public class AcademicService {
     public void calculateGpa(Student student) {
         double totalWeightedScore = 0;
         int totalCredits = 0;
-
         for (Subject subject : student.getRegisteredSubjects()) {
             Double score = student.getSubjectGrades().get(subject.getId());
             if (score != null && subject.isCalculatedGpa()) {

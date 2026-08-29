@@ -16,7 +16,6 @@ import view.student.*;
 import view.faculty.*;
 import view.subject.MenuSubjectManageView;
 
-import java.lang.management.ManagementPermission;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Scanner;
@@ -60,7 +59,11 @@ public class Main {
                 StudentManageController(menuStudentManageView, studentService);
 
         CourseRegistrationController courseRegistrationController =
-                new CourseRegistrationController(menuCourseRegistrationView, courseRegistrationService, studentService, subjectService);
+                new CourseRegistrationController(menuCourseRegistrationView,
+                        courseRegistrationService,
+                        studentService,
+                        subjectService,
+                        menuStudentManageView);
 
         StudentInformationViewController studentInformationViewController =
                 new StudentInformationViewController(menuStudentInformationView, studentService, academicService);

@@ -26,7 +26,7 @@ public class MyStack<T> {
             return null;
         }
 
-        T element = (T)elements[size - 1];
+        T element = (T) elements[size - 1];
         elements[size - 1] = null;
         size--;
 
@@ -57,6 +57,7 @@ public class MyStack<T> {
 
         elements = newElements;
     }
+
     public void clear() {
         for (int i = 0; i < size; i++) {
             elements[i] = null;

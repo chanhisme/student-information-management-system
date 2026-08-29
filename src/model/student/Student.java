@@ -1,8 +1,11 @@
 package model.student;
 
 import java.time.LocalDate;
+
+import DataStructure.MyLinkedList;
 import model.faculty.Faculty;
 import model.faculty.Major;
+import model.subject.Subject;
 
 public class Student {
     public enum StudentStatus {
@@ -19,7 +22,7 @@ public class Student {
     private StudentStatus status;
     private Faculty faculty;
     private double gpa;
-    private java.util.List<model.subject.Subject> registeredSubjects = new java.util.ArrayList<>();
+    private MyLinkedList<Subject> registeredSubjects = new MyLinkedList<>();
     private java.util.Map<String, Double> subjectGrades = new java.util.HashMap<>();
 
     public Student(String name, String id, Major major, LocalDate birth, Faculty faculty) {
@@ -88,11 +91,11 @@ public class Student {
         this.gpa = gpa;
     }
 
-    public java.util.List<model.subject.Subject> getRegisteredSubjects() {
+    public MyLinkedList<Subject> getRegisteredSubjects() {
         return registeredSubjects;
     }
 
-    public void setRegisteredSubjects(java.util.List<model.subject.Subject> registeredSubjects) {
+    public void setRegisteredSubjects(MyLinkedList<Subject> registeredSubjects) {
         this.registeredSubjects = registeredSubjects;
     }
 

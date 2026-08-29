@@ -1,6 +1,8 @@
 package view.student;
 
 import java.util.Scanner;
+
+import model.subject.Subject;
 import view.BaseMenuView;
 
 public class MenuCourseRegistrationView extends BaseMenuView {
@@ -19,5 +21,9 @@ public class MenuCourseRegistrationView extends BaseMenuView {
         System.out.println("5. Redo Last Operation");
         System.out.println("0. Back");
         System.out.println("==========================================");
+    }
+    public String inputIdSubject(){
+        System.out.print("Enter id subject: ");
+        return normalizeInput(scanner.nextLine().toUpperCase());
     }
 }

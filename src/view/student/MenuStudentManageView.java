@@ -72,7 +72,7 @@ public class MenuStudentManageView extends BaseMenuView {
 
 
     public String inputIdStudent() {
-        System.out.print("Enter id: ");
+        System.out.print("Enter student id: ");
         return normalizeInput(scanner.nextLine()).toUpperCase();
     }
 
