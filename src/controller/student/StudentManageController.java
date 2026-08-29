@@ -68,22 +68,28 @@ public class StudentManageController {
                     menuStudentManageView.displayAllStudents(studentService.getAllStudents());
                     break;
                 case 5:
-                    System.out.print("Enter search query (ID or Name): ");
-                    String query = new java.util.Scanner(System.in).nextLine();
-                    java.util.List<Student> searchResults = studentService.searchStudents(query);
-                    if (searchResults.isEmpty()) {
-                        ConsoleColor.printError("No students found.");
-                    } else {
-                        menuStudentManageView.displayAllStudentsSorted(searchResults);
+                    int searchingChoice = menuStudentManageView.inputSearchingChoice();
+                    if(searchingChoice == 1){
+                        id = menuStudentManageView.inputIdStudent();
+                        student = studentService.findById(id);
+                        menuStudentManageView.displayOneStudent(student);
+                    }
+                    else{
+                        String name = menuStudentManageView.inputName();
+
                     }
                     break;
                 case 6:
                     int sortChoice = menuStudentManageView.displaySortMenuAndGetChoice();
                     if (sortChoice == 1) {
-                        java.util.List<Student> sorted = studentService.getStudentsSorted((s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
+                        java.util.List<Student> sorted = studentService.getStudentsSorted(
+                                (s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
+
                         menuStudentManageView.displayAllStudentsSorted(sorted);
                     } else if (sortChoice == 2) {
-                        java.util.List<Student> sorted = studentService.getStudentsSorted((s1, s2) -> Double.compare(s2.getGpa(), s1.getGpa()));
+                        java.util.List<Student> sorted = studentService.getStudentsSorted(
+                                (s1, s2) -> Double.compare(s2.getGpa(), s1.getGpa()));
+
                         menuStudentManageView.displayAllStudentsSorted(sorted);
                     }
                     break;

@@ -3,7 +3,7 @@ package service.student;
 import model.student.Student;
 import repository.student.StudentRepository;
 
-import java.util.Map;
+import java.util.*;
 
 public class StudentService {
     private final StudentRepository studentRepository;
@@ -28,15 +28,15 @@ public class StudentService {
         return studentRepository.getAll();
     }
 
-    public java.util.List<Student> getStudentsSorted(java.util.Comparator<Student> comparator) {
-        java.util.List<Student> sortedList = new java.util.ArrayList<>(studentRepository.getAll().values());
+    public List<Student> getStudentsSorted(java.util.Comparator<Student> comparator) {
+        List<Student> sortedList = new ArrayList<>(studentRepository.getAll().values());
         if (!sortedList.isEmpty()) {
             mergeSort(sortedList, 0, sortedList.size() - 1, comparator);
         }
         return sortedList;
     }
 
-    private void mergeSort(java.util.List<Student> list, int left, int right, java.util.Comparator<Student> comparator) {
+    private void mergeSort(List<Student> list, int left, int right, Comparator<Student> comparator) {
         if (left < right) {
             int mid = left + (right - left) / 2;
             mergeSort(list, left, mid, comparator);
@@ -45,7 +45,7 @@ public class StudentService {
         }
     }
 
-    private void merge(java.util.List<Student> list, int left, int mid, int right, java.util.Comparator<Student> comparator) {
+    private void merge(List<Student> list, int left, int mid, int right, Comparator<Student> comparator) {
         java.util.List<Student> temp = new java.util.ArrayList<>();
         int i = left;
         int j = mid + 1;
@@ -90,17 +90,34 @@ public class StudentService {
         studentRepository.save();
     }
 
-    public java.util.List<Student> searchStudents(String query) {
-        java.util.List<Student> result = new java.util.ArrayList<>();
-        if (query == null || query.trim().isEmpty()) {
-            return result;
-        }
-        String lowerQuery = query.trim().toLowerCase();
+    public List<Student> findStudentByName(String name) {
+        String[] targetName = name.trim().split("\\s+");
+        List<Student> result = new ArrayList<>();
+
         for (Student student : studentRepository.getAll().values()) {
-            if (student.getId().toLowerCase().contains(lowerQuery) || student.getName().toLowerCase().contains(lowerQuery)) {
+            String[] currentName = student.getName().trim().split("\\s+");
+
+            if (targetName.length > currentName.length) {
+                continue;
+            }
+
+            boolean isFound = true;
+
+            for (int i = 1; i <= targetName.length; i++) {
+                String target = targetName[targetName.length - i];
+                String current = currentName[currentName.length - i];
+
+                if (!target.equalsIgnoreCase(current)) {
+                    isFound = false;
+                    break;
+                }
+            }
+
+            if (isFound) {
                 result.add(student);
             }
         }
+
         return result;
     }
 }

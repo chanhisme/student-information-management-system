@@ -38,6 +38,9 @@ public abstract class BaseMenuView {
             }
         }
     }
+    protected String normalizeInput(String input) {
+        return input.replaceAll("\\s+", "");
+    }
 
     public void showInvalidChoice() {
         ConsoleColor.printError("Invalid choice. Please try again.");

@@ -1,2 +1,2 @@
 SUBJECT|SUB1|Data Structures|3|NORMAL
-SUBJECT|SUB2|Software Engineering|4|ELECTIVE
+SUBJECT|SUB3|Math for engineering|3|NORMAL

@@ -82,6 +82,13 @@ Status: ACTIVE
 Faculty ID: MC
 Major ID: MC6
 +++++++++++++++++++++++++++++++++++++++++++
+Student ID: TE1210518
+Name: Chanh
+Date of Birth: 19/01/2007
+Status: ACTIVE
+Faculty ID: TE
+Major ID: TE1
++++++++++++++++++++++++++++++++++++++++++++
 Student ID: TE210518
 Name: Le Gia Phuc Chanh
 Date of Birth: 19/01/2007

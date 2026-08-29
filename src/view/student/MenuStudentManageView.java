@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class MenuStudentManageView extends BaseMenuView {
     private final ArrayList<Faculty> faculties;
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public MenuStudentManageView(Scanner scanner, ArrayList<Faculty> faculties) {
         super(scanner);
@@ -72,7 +72,7 @@ public class MenuStudentManageView extends BaseMenuView {
 
     public String inputIdStudent() {
         System.out.print("Enter id: ");
-        return scanner.nextLine();
+        return normalizeInput(scanner.nextLine()).toUpperCase();
     }
 
     public boolean confirmDelete() {
@@ -86,6 +86,13 @@ public class MenuStudentManageView extends BaseMenuView {
         return choice == 1;
     }
 
+
+    public int inputSearchingChoice(){
+        System.out.println("\n====SEARCHING====");
+        System.out.println("[1]. Id");
+        System.out.println("[2]. Name");
+        return inputChoice(1,2);
+    }
     public Student inputStudentData() {
         System.out.println("\n--- Enter Student Details ---");
         Faculty faculty = inputFaculty();
