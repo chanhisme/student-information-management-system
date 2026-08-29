@@ -7,6 +7,8 @@ import service.student.StudentService;
 import view.ConsoleColor;
 import view.student.MenuStudentManageView;
 
+import java.util.ArrayList;
+
 public class StudentManageController {
     private final MenuStudentManageView menuStudentManageView;
     private final StudentService studentService;
@@ -65,7 +67,9 @@ public class StudentManageController {
                     }
                     break;
                 case 4:
-                    menuStudentManageView.displayAllStudents(studentService.getAllStudents());
+                    menuStudentManageView.displayAllStudents(
+                            new ArrayList<>(studentService.getAllStudents().values())
+                    );
                     break;
                 case 5:
                     int searchingChoice = menuStudentManageView.inputSearchingChoice();
@@ -76,7 +80,8 @@ public class StudentManageController {
                     }
                     else{
                         String name = menuStudentManageView.inputName();
-
+                        ArrayList <Student> students = new ArrayList<>(studentService.findStudentByName(name));
+                        menuStudentManageView.displayAllStudents(students);
                     }
                     break;
                 case 6:

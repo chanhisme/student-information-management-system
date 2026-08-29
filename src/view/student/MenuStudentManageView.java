@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println("2. Update Student");
         System.out.println("3. Delete Student");
         System.out.println("4. View All Students");
-        System.out.println("5. Find Student by ID");
+        System.out.println("5. Find Student");
         System.out.println("6. Sort Students");
         System.out.println("0. Back");
         System.out.println("========================================");
@@ -253,7 +254,7 @@ public class MenuStudentManageView extends BaseMenuView {
         }
     }
 
-    public void displayAllStudents(Map<String, Student> students) {
+    public void displayAllStudents(List<Student> students) {
         if (students == null || students.isEmpty()) {
             System.out.println("\nNo students found.");
             return;
@@ -268,7 +269,7 @@ public class MenuStudentManageView extends BaseMenuView {
         );
         System.out.println("----------------------------------------------------------------------------------------------------------------");
 
-        for (Student student : students.values()) {
+        for (Student student : students) {
             String majorName = (student.getMajor() != null) ? student.getMajor().getName() : "N/A";
             String facultyPrefix = (student.getFaculty() != null) ? student.getFaculty().getPrefix() : "N/A";
             String formattedBirthDate = (student.getBirth() != null) ? student.getBirth().format(dateFormatter) : "N/A";
