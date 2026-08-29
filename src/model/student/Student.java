@@ -20,6 +20,7 @@ public class Student {
     private Faculty faculty;
     private double gpa;
     private java.util.List<model.subject.Subject> registeredSubjects = new java.util.ArrayList<>();
+    private java.util.Map<String, Double> subjectGrades = new java.util.HashMap<>();
 
     public Student(String name, String id, Major major, LocalDate birth, Faculty faculty) {
         this.name = name;
@@ -93,5 +94,13 @@ public class Student {
 
     public void setRegisteredSubjects(java.util.List<model.subject.Subject> registeredSubjects) {
         this.registeredSubjects = registeredSubjects;
+    }
+
+    public java.util.Map<String, Double> getSubjectGrades() {
+        return subjectGrades;
+    }
+
+    public void setSubjectGrades(java.util.Map<String, Double> subjectGrades) {
+        this.subjectGrades = subjectGrades;
     }
 }
