@@ -124,3 +124,7 @@ public class CourseRegistrationController {
                 case 0:
                     return;
 
+            }
+        }
+    }
+}
