@@ -89,4 +89,18 @@ public class StudentService {
         studentRepository.deleteById(id);
         studentRepository.save();
     }
+
+    public java.util.List<Student> searchStudents(String query) {
+        java.util.List<Student> result = new java.util.ArrayList<>();
+        if (query == null || query.trim().isEmpty()) {
+            return result;
+        }
+        String lowerQuery = query.trim().toLowerCase();
+        for (Student student : studentRepository.getAll().values()) {
+            if (student.getId().toLowerCase().contains(lowerQuery) || student.getName().toLowerCase().contains(lowerQuery)) {
+                result.add(student);
+            }
+        }
+        return result;
+    }
 }

@@ -68,12 +68,13 @@ public class StudentManageController {
                     menuStudentManageView.displayAllStudents(studentService.getAllStudents());
                     break;
                 case 5:
-                    id = menuStudentManageView.inputIdStudent();
-                    student = studentService.findById(id);
-                    if (student == null) {
-                        ConsoleColor.printError("Student not found.");
+                    System.out.print("Enter search query (ID or Name): ");
+                    String query = new java.util.Scanner(System.in).nextLine();
+                    java.util.List<Student> searchResults = studentService.searchStudents(query);
+                    if (searchResults.isEmpty()) {
+                        ConsoleColor.printError("No students found.");
                     } else {
-                        menuStudentManageView.displayOneStudent(student);
+                        menuStudentManageView.displayAllStudentsSorted(searchResults);
                     }
                     break;
                 case 6:

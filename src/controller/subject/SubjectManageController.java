@@ -1,3 +1,4 @@
+
 package controller.subject;
 
 import model.subject.Subject;
@@ -72,12 +73,13 @@ public class SubjectManageController {
                     break;
 
                 case 5:
-                    id = menuSubjectManageView.inputId();
-                    subject = subjectService.findById(id);
-                    if (subject == null) {
-                        ConsoleColor.printError("Subject not found.");
+                    System.out.print("Enter search query (ID or Name): ");
+                    String query = new java.util.Scanner(System.in).nextLine();
+                    java.util.List<Subject> searchResults = subjectService.searchSubjects(query);
+                    if (searchResults.isEmpty()) {
+                        ConsoleColor.printError("No subjects found.");
                     } else {
-                        menuSubjectManageView.displayOneSubject(subject);
+                        menuSubjectManageView.displayAllSubjects(new java.util.ArrayList<>(searchResults));
                     }
                     break;
 
