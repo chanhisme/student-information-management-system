@@ -51,4 +51,19 @@ public class SubjectService {
         }
         return "SUB" + id;
     }
+
+    public java.util.List<Subject> searchSubjects(String query) {
+        java.util.List<Subject> result = new java.util.ArrayList<>();
+        if (query == null || query.trim().isEmpty()) {
+            return result;
+        }
+        String lowerQuery = query.trim().toLowerCase();
+        for (Subject subject : subjectRepository.getAll()) {
+            if (subject.getId().toLowerCase().contains(lowerQuery) || subject.getName().toLowerCase().contains(lowerQuery)) {
+                result.add(subject);
+            }
+        }
+        return result;
+    }
 }
+

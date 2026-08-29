@@ -8,6 +8,7 @@ import repository.student.StudentRepository;
 import repository.subject.SubjectRepository;
 import service.faculty.FacultyService;
 import service.student.StudentService;
+import service.student.CourseRegistrationService;
 import service.subject.SubjectService;
 import view.MenuView;
 import view.student.*;
@@ -50,16 +51,17 @@ public class Main {
         SubjectRepository subjectRepository = new SubjectRepository();
         subjectRepository.load();
         SubjectService subjectService = new SubjectService(subjectRepository);
+        CourseRegistrationService courseRegistrationService = new CourseRegistrationService();
 
         // 3. Initialize Sub-Controllers
         StudentManageController studentManageController = new
                 StudentManageController(menuStudentManageView, studentService);
 
         CourseRegistrationController courseRegistrationController =
-                new CourseRegistrationController(menuCourseRegistrationView);
+                new CourseRegistrationController(menuCourseRegistrationView, courseRegistrationService, studentService, subjectService);
 
         StudentInformationViewController studentInformationViewController =
-                new StudentInformationViewController(menuStudentInformationView);
+                new StudentInformationViewController(menuStudentInformationView, studentService);
 
         AcademicManagementController academicManagementController =
                 new AcademicManagementController(menuAcademicManagementView);

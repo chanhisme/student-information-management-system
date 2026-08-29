@@ -18,7 +18,7 @@ public abstract class Subject {
         register("ELECTIVE", ElectiveSubject::new);
         register("COURSERA", CourseraSubject::new);
         register("NONE_GPA", NoneGpaSubject::new);
-    }   
+    }
 
     public static void register(String type, Creator creator) {
         registry.put(type.toUpperCase(), creator);

@@ -19,6 +19,7 @@ public class Student {
     private StudentStatus status;
     private Faculty faculty;
     private double gpa;
+    private java.util.List<model.subject.Subject> registeredSubjects = new java.util.ArrayList<>();
 
     public Student(String name, String id, Major major, LocalDate birth, Faculty faculty) {
         this.name = name;
@@ -84,5 +85,13 @@ public class Student {
 
     public void setGpa(double gpa) {
         this.gpa = gpa;
+    }
+
+    public java.util.List<model.subject.Subject> getRegisteredSubjects() {
+        return registeredSubjects;
+    }
+
+    public void setRegisteredSubjects(java.util.List<model.subject.Subject> registeredSubjects) {
+        this.registeredSubjects = registeredSubjects;
     }
 }
