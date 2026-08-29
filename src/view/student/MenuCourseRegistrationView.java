@@ -2,6 +2,8 @@ package view.student;
 
 import java.util.Scanner;
 
+import DataStructure.MyLinkedList;
+import model.student.Student;
 import model.subject.Subject;
 import view.BaseMenuView;
 
@@ -22,8 +24,33 @@ public class MenuCourseRegistrationView extends BaseMenuView {
         System.out.println("0. Back");
         System.out.println("==========================================");
     }
-    public String inputIdSubject(){
+
+    public String inputIdSubject() {
         System.out.print("Enter id subject: ");
         return normalizeInput(scanner.nextLine().toUpperCase());
+    }
+
+    public void displayAllRegisteredCoursesOneStudent(MyLinkedList<Subject> registeredSubject) {
+        System.out.println("\n=============================================");
+        System.out.println("          REGISTERED COURSES");
+        System.out.println("=============================================");
+
+        if (registeredSubject.isEmpty()) {
+            System.out.println("No registered courses.");
+        } else {
+            System.out.printf("%-12s %-30s %-10s%n", "Subject ID", "Subject Name", "Credits");
+            System.out.println("---------------------------------------------");
+
+            for (Subject subject : registeredSubject) {
+                System.out.printf(
+                        "%-12s %-30s %-10d%n",
+                        subject.getId(),
+                        subject.getName(),
+                        subject.getCredits()
+                );
+            }
+        }
+
+        System.out.println("=============================================\n");
     }
 }

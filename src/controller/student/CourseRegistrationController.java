@@ -15,6 +15,7 @@ public class CourseRegistrationController {
     private final StudentService studentService;
     private final SubjectService subjectService;
     private final MenuStudentManageView menuStudentManageView;
+
     public CourseRegistrationController(MenuCourseRegistrationView menuCourseRegistrationView,
                                         CourseRegistrationService courseRegistrationService,
                                         StudentService studentService,
@@ -80,12 +81,30 @@ public class CourseRegistrationController {
                     break;
 
                 case 3:
+                    studentId = menuStudentManageView.inputIdStudent();
+                    student = studentService.findById(studentId);
+                    if (student == null) {
+                        ConsoleColor.printError("Student not found.");
+                        break;
+                    }
+                    menuCourseRegistrationView.displayAllRegisteredCoursesOneStudent(student.getRegisteredSubjects());
+                    break;
 
                 case 4:
-
+                    if (courseRegistrationService.undo()) {
+                        ConsoleColor.printSuccess("undo successful.");
+                    } else {
+                        ConsoleColor.printError("Nothing to redo.");
+                    }
+                    break;
 
                 case 5:
-
+                    if (courseRegistrationService.redo()) {
+                        ConsoleColor.printSuccess("Redo successful.");
+                    } else {
+                        ConsoleColor.printError("Nothing to redo.");
+                    }
+                    break;
 
                 case 0:
                     return;
