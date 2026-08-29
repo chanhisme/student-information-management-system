@@ -18,6 +18,7 @@ public class Student {
     private LocalDate birth;
     private StudentStatus status;
     private Faculty faculty;
+    private double gpa;
 
     public Student(String name, String id, Major major, LocalDate birth, Faculty faculty) {
         this.name = name;
@@ -26,6 +27,7 @@ public class Student {
         this.birth = birth;
         this.status = StudentStatus.ACTIVE;
         this.faculty = faculty;
+        this.gpa = 0.0;
     }
 
     public String getName() {
@@ -74,5 +76,13 @@ public class Student {
 
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
     }
 }

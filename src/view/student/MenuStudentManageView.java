@@ -30,8 +30,17 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println("3. Delete Student");
         System.out.println("4. View All Students");
         System.out.println("5. Find Student by ID");
+        System.out.println("6. Sort Students");
         System.out.println("0. Back");
         System.out.println("========================================");
+    }
+
+    public int displaySortMenuAndGetChoice() {
+        System.out.println("\n========== SORT STUDENTS ==========");
+        System.out.println("1. Sort by Name (A-Z)");
+        System.out.println("2. Sort by GPA (Descending)");
+        System.out.println("0. Back");
+        return inputChoice(0, 2);
     }
 
     public int displayUpdateMenuAndGetChoice(Student student) {
@@ -269,6 +278,41 @@ public class MenuStudentManageView extends BaseMenuView {
         }
 
         System.out.println("================================================================================================================");
+        System.out.println();
+    }
+
+    public void displayAllStudentsSorted(java.util.List<Student> students) {
+        if (students == null || students.isEmpty()) {
+            System.out.println("\nNo students found.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("================================================= SORTED STUDENT LIST =================================================");
+        System.out.printf(
+                "%-12s | %-22s | %-32s | %-10s | %-12s | %-10s | %-5s%n",
+                "ID", "Name", "Major", "Faculty", "Birth Date", "Status", "GPA"
+        );
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------");
+
+        for (Student student : students) {
+            String majorName = (student.getMajor() != null) ? student.getMajor().getName() : "N/A";
+            String facultyPrefix = (student.getFaculty() != null) ? student.getFaculty().getPrefix() : "N/A";
+            String formattedBirthDate = (student.getBirth() != null) ? student.getBirth().format(dateFormatter) : "N/A";
+
+            System.out.printf(
+                    "%-12s | %-22s | %-32s | %-10s | %-12s | %-10s | %-5.2f%n",
+                    student.getId(),
+                    student.getName(),
+                    majorName,
+                    facultyPrefix,
+                    formattedBirthDate,
+                    student.getStatus(),
+                    student.getGpa()
+            );
+        }
+
+        System.out.println("=========================================================================================================================");
         System.out.println();
     }
 

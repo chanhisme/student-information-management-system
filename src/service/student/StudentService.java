@@ -28,6 +28,53 @@ public class StudentService {
         return studentRepository.getAll();
     }
 
+    public java.util.List<Student> getStudentsSorted(java.util.Comparator<Student> comparator) {
+        java.util.List<Student> sortedList = new java.util.ArrayList<>(studentRepository.getAll().values());
+        if (!sortedList.isEmpty()) {
+            mergeSort(sortedList, 0, sortedList.size() - 1, comparator);
+        }
+        return sortedList;
+    }
+
+    private void mergeSort(java.util.List<Student> list, int left, int right, java.util.Comparator<Student> comparator) {
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+            mergeSort(list, left, mid, comparator);
+            mergeSort(list, mid + 1, right, comparator);
+            merge(list, left, mid, right, comparator);
+        }
+    }
+
+    private void merge(java.util.List<Student> list, int left, int mid, int right, java.util.Comparator<Student> comparator) {
+        java.util.List<Student> temp = new java.util.ArrayList<>();
+        int i = left;
+        int j = mid + 1;
+
+        while (i <= mid && j <= right) {
+            if (comparator.compare(list.get(i), list.get(j)) <= 0) {
+                temp.add(list.get(i));
+                i++;
+            } else {
+                temp.add(list.get(j));
+                j++;
+            }
+        }
+
+        while (i <= mid) {
+            temp.add(list.get(i));
+            i++;
+        }
+
+        while (j <= right) {
+            temp.add(list.get(j));
+            j++;
+        }
+
+        for (int k = 0; k < temp.size(); k++) {
+            list.set(left + k, temp.get(k));
+        }
+    }
+
     public void updateStudent(Student student) {
         if (studentRepository.findById(student.getId()) == null) {
             throw new IllegalArgumentException("Student not found.");

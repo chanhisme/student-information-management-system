@@ -19,7 +19,7 @@ public class StudentManageController {
     public void run() {
         while (true) {
             menuStudentManageView.showMenu();
-            int choice = menuStudentManageView.inputChoice(0, 5);
+            int choice = menuStudentManageView.inputChoice(0, 6);
             String id;
             Student student;
             switch (choice) {
@@ -74,6 +74,16 @@ public class StudentManageController {
                         ConsoleColor.printError("Student not found.");
                     } else {
                         menuStudentManageView.displayOneStudent(student);
+                    }
+                    break;
+                case 6:
+                    int sortChoice = menuStudentManageView.displaySortMenuAndGetChoice();
+                    if (sortChoice == 1) {
+                        java.util.List<Student> sorted = studentService.getStudentsSorted((s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
+                        menuStudentManageView.displayAllStudentsSorted(sorted);
+                    } else if (sortChoice == 2) {
+                        java.util.List<Student> sorted = studentService.getStudentsSorted((s1, s2) -> Double.compare(s2.getGpa(), s1.getGpa()));
+                        menuStudentManageView.displayAllStudentsSorted(sorted);
                     }
                     break;
                 case 0:
