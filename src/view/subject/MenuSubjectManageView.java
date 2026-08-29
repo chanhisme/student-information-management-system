@@ -147,7 +147,7 @@ public class MenuSubjectManageView extends BaseMenuView {
         System.out.println("Name  : " + subject.getName());
         System.out.println("Credits: " + subject.getCredits());
         System.out.println("Type  : " + getSubjectTypeName(subject));
-        System.out.println("GPA   : " + (subject.CalculatedGpa() ? "Yes" : "No"));
+        System.out.println("GPA   : " + (subject.isCalculatedGpa() ? "Yes" : "No"));
     }
 
     private String getSubjectTypeName(Subject subject) {

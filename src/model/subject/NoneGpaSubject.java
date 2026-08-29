@@ -2,8 +2,7 @@ package model.subject;
 
 public class NoneGpaSubject extends Subject {
     public NoneGpaSubject(String id, String name, int credits) {
-        super(id, name, credits);
-        this.CalculatedGpa = false;
+        super(id, name, credits, false);
     }
 
     @Override

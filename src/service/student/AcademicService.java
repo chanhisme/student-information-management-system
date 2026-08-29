@@ -19,7 +19,7 @@ public class AcademicService {
 
         for (Subject subject : student.getRegisteredSubjects()) {
             Double score = student.getSubjectGrades().get(subject.getId());
-            if (score != null && subject.CalculatedGpa()) {
+            if (score != null && subject.isCalculatedGpa()) {
                 double finalScore = subject.calculateFinalScore(score);
                 totalWeightedScore += finalScore * subject.getCredits();
                 totalCredits += subject.getCredits();

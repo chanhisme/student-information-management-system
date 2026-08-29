@@ -1,13 +1,13 @@
 package model.subject;
 
-public class ElectiveSubject extends Subject{
+public class ElectiveSubject extends Subject {
     public ElectiveSubject(String id, String name, int credits) {
         super(id, name, credits);
     }
 
     @Override
     public double calculateFinalScore(double score) {
-        return Double.parseDouble(toString(score));
+        return round(score);
     }
 
     @Override

@@ -7,8 +7,7 @@ public class CourseraSubject extends Subject {
 
     @Override
     public double calculateFinalScore(double score) {
-        double finalScore = Double.parseDouble(toString(score + 1.0));
-        return Math.min(10, finalScore);
+        return Math.min(10, round(score + 1.0));
     }
 
     @Override
