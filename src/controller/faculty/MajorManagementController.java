@@ -11,7 +11,7 @@ public class MajorManagementController {
     private final FacultyService facultyService;
 
     public MajorManagementController(MenuMajorManagementView menuMajorManagementView,
-                                     FacultyService facultyService) {
+            FacultyService facultyService) {
 
         this.menuMajorManagementView = menuMajorManagementView;
         this.facultyService = facultyService;
@@ -21,52 +21,21 @@ public class MajorManagementController {
         while (true) {
             menuMajorManagementView.showMenu();
             int choice = menuMajorManagementView.inputChoice(0, 5);
-            Major major;
-            String Majorid;
             switch (choice) {
-
                 case 1:
-                    menuMajorManagementView.displayAllMajors(faculty.getMajors());
+                    viewAllMajors(faculty);
                     break;
                 case 2:
-                    major = new Major(
-                            facultyService.generateMajorId(faculty),
-                            menuMajorManagementView.inputName());
-                    try {
-                        facultyService.addMajor(major, faculty.getPrefix());
-                        ConsoleColor.printSuccess("Add new major successfully");
-                        ConsoleColor.printSuccess("Save new major successfully");
-
-                    } catch (RuntimeException e) {
-                        ConsoleColor.printError(e.getMessage());
-                    }
+                    addMajor(faculty);
                     break;
                 case 3:
-                    major = facultyService.findMajorById(menuMajorManagementView.inputId(), faculty.getPrefix());
-                    if (major == null) {
-                        ConsoleColor.printError("This major is not existed");
-                        break;
-                    }
-                    handleUpdate(major, faculty.getPrefix());
+                    updateMajorById(faculty);
                     break;
                 case 4:
-                    Majorid = menuMajorManagementView.inputId();
-                    try {
-                        facultyService.deleteMajor(Majorid, faculty.getPrefix());
-                        ConsoleColor.printSuccess("Delete successfully");
-                        ConsoleColor.printSuccess("Save successfully");
-                    } catch (RuntimeException e) {
-                        ConsoleColor.printError(e.getMessage());
-                    }
+                    deleteMajorById(faculty);
                     break;
                 case 5:
-                    Majorid = menuMajorManagementView.inputId();
-                    major = facultyService.findMajorById(Majorid, faculty.getPrefix());
-                    if (major == null) {
-                        ConsoleColor.printError("This major is not existed");
-                        break;
-                    }
-                    menuMajorManagementView.displayOneMajor(major);
+                    viewMajorById(faculty);
                     break;
                 case 0:
                     return;
@@ -74,6 +43,59 @@ public class MajorManagementController {
         }
     }
 
+    private void viewAllMajors(Faculty faculty) {
+        menuMajorManagementView.displayAllMajors(faculty.getMajors());
+    }
+
+    private void addMajor(Faculty faculty) {
+        Major major = new Major(
+                facultyService.generateMajorId(faculty),
+                menuMajorManagementView.inputName());
+        try {
+            facultyService.addMajor(major, faculty.getPrefix());
+            ConsoleColor.printSuccess("Add new major successfully");
+            ConsoleColor.printSuccess("Save new major successfully");
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void updateMajorById(Faculty faculty) {
+        try {
+            Major major = findMajorOrThrow(menuMajorManagementView.inputId(), faculty.getPrefix());
+            handleUpdate(major, faculty.getPrefix());
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void deleteMajorById(Faculty faculty) {
+        String majorId = menuMajorManagementView.inputId();
+        try {
+            facultyService.deleteMajor(majorId, faculty.getPrefix());
+            ConsoleColor.printSuccess("Delete successfully");
+            ConsoleColor.printSuccess("Save successfully");
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void viewMajorById(Faculty faculty) {
+        try {
+            Major major = findMajorOrThrow(menuMajorManagementView.inputId(), faculty.getPrefix());
+            menuMajorManagementView.displayOneMajor(major);
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private Major findMajorOrThrow(String majorId, String preFix) {
+        Major major = facultyService.findMajorById(majorId, preFix);
+        if (major == null) {
+            throw new RuntimeException("This major is not existed");
+        }
+        return major;
+    }
 
     private void handleUpdate(Major major, String preFix) {
         boolean updating = true;
@@ -100,4 +122,3 @@ public class MajorManagementController {
         }
     }
 }
-

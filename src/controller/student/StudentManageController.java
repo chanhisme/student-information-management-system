@@ -22,86 +22,107 @@ public class StudentManageController {
         while (true) {
             menuStudentManageView.showMenu();
             int choice = menuStudentManageView.inputChoice(0, 6);
-            String id;
-            Student student;
             switch (choice) {
-
-                case 1:
-                    student = menuStudentManageView.inputStudentData();
-                    if (student == null) {
-                        ConsoleColor.printError("Student creation cancelled.");
-                        break;
-                    }
-                    try {
-                        studentService.addStudent(student);
-                        ConsoleColor.printSuccess("Student added successfully!");
-                        ConsoleColor.printSuccess("Student saved successfully!");
-                    } catch (IllegalArgumentException e) {
-                        ConsoleColor.printError(e.getMessage());
-                    }
-                    break;
-                case 2:
-                    id = menuStudentManageView.inputIdStudent();
-                    student = studentService.findById(id);
-                    if (student == null) {
-                        ConsoleColor.printError("This student not existed");
-                        break;
-                    }
-                    handleUpdateStudent(student);
-                    break;
-                case 3:
-                    id = menuStudentManageView.inputIdStudent();
-                    student = studentService.findById(id);
-                    if (student == null) {
-                        ConsoleColor.printError("This student not existed");
-                        break;
-                    }
-                    menuStudentManageView.displayOneStudent(student);
-                    if (menuStudentManageView.confirmDelete()) {
-                        try {
-                            studentService.deleteStudent(id);
-                            ConsoleColor.printSuccess("Student deleted successfully!");
-                        } catch (IllegalArgumentException e) {
-                            ConsoleColor.printError(e.getMessage());
-                        }
-                    }
-                    break;
-                case 4:
-                    menuStudentManageView.displayAllStudents(
-                            new ArrayList<>(studentService.getAllStudents().values())
-                    );
-                    break;
-                case 5:
-                    int searchingChoice = menuStudentManageView.inputSearchingChoice();
-                    if(searchingChoice == 1){
-                        id = menuStudentManageView.inputIdStudent();
-                        student = studentService.findById(id);
-                        menuStudentManageView.displayOneStudent(student);
-                    }
-                    else{
-                        String name = menuStudentManageView.inputName();
-                        ArrayList <Student> students = new ArrayList<>(studentService.findStudentByName(name));
-                        menuStudentManageView.displayAllStudents(students);
-                    }
-                    break;
-                case 6:
-                    int sortChoice = menuStudentManageView.displaySortMenuAndGetChoice();
-                    if (sortChoice == 1) {
-                        java.util.List<Student> sorted = studentService.getStudentsSorted(
-                                (s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
-
-                        menuStudentManageView.displayAllStudentsSorted(sorted);
-                    } else if (sortChoice == 2) {
-                        java.util.List<Student> sorted = studentService.getStudentsSorted(
-                                (s1, s2) -> Double.compare(s2.getGpa(), s1.getGpa()));
-
-                        menuStudentManageView.displayAllStudentsSorted(sorted);
-                    }
-                    break;
-                case 0:
-                    return;
+                case 1: addStudent(); break;
+                case 2: updateStudentById(); break;
+                case 3: deleteStudentById(); break;
+                case 4: viewAllStudents(); break;
+                case 5: searchStudents(); break;
+                case 6: sortStudents(); break;
+                case 0: return;
             }
         }
+    }
+
+    private void addStudent() {
+        Student student = menuStudentManageView.inputStudentData();
+        if (student == null) {
+            ConsoleColor.printError("Student creation cancelled.");
+            return;
+        }
+        try {
+            studentService.addStudent(student);
+            ConsoleColor.printSuccess("Student added successfully!");
+            ConsoleColor.printSuccess("Student saved successfully!");
+        } catch (IllegalArgumentException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void updateStudentById() {
+        try {
+            Student student = findStudentOrThrow(menuStudentManageView.inputIdStudent());
+            handleUpdateStudent(student);
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void deleteStudentById() {
+        String id = menuStudentManageView.inputIdStudent();
+        try {
+            Student student = findStudentOrThrow(id);
+            menuStudentManageView.displayOneStudent(student);
+            if (!menuStudentManageView.confirmDelete()) {
+                return;
+            }
+            try {
+                studentService.deleteStudent(id);
+                ConsoleColor.printSuccess("Student deleted successfully!");
+            } catch (IllegalArgumentException e) {
+                ConsoleColor.printError(e.getMessage());
+            }
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void viewAllStudents() {
+        menuStudentManageView.displayAllStudents(
+                new ArrayList<>(studentService.getAllStudents().values())
+        );
+    }
+
+    private void searchStudents() {
+        int searchingChoice = menuStudentManageView.inputSearchingChoice();
+        if (searchingChoice == 1) {
+            searchStudentById();
+        } else {
+            searchStudentsByName();
+        }
+    }
+
+    private void searchStudentById() {
+        String id = menuStudentManageView.inputIdStudent();
+        Student student = studentService.findById(id);
+        menuStudentManageView.displayOneStudent(student);
+    }
+
+    private void searchStudentsByName() {
+        String name = menuStudentManageView.inputName();
+        ArrayList<Student> students = new ArrayList<>(studentService.findStudentByName(name));
+        menuStudentManageView.displayAllStudents(students);
+    }
+
+    private void sortStudents() {
+        int sortChoice = menuStudentManageView.displaySortMenuAndGetChoice();
+        if (sortChoice == 1) {
+            java.util.List<Student> sorted = studentService.getStudentsSorted(
+                    (s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
+            menuStudentManageView.displayAllStudentsSorted(sorted);
+        } else if (sortChoice == 2) {
+            java.util.List<Student> sorted = studentService.getStudentsSorted(
+                    (s1, s2) -> Double.compare(s2.getGpa(), s1.getGpa()));
+            menuStudentManageView.displayAllStudentsSorted(sorted);
+        }
+    }
+
+    private Student findStudentOrThrow(String id) {
+        Student student = studentService.findById(id);
+        if (student == null) {
+            throw new RuntimeException("This student not existed");
+        }
+        return student;
     }
 
     private void handleUpdateStudent(Student student) {

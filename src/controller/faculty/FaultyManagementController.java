@@ -10,7 +10,8 @@ public class FaultyManagementController {
     private final FacultyService facultyService;
     private final MajorManagementController majorManagementController;
 
-    public FaultyManagementController(MenuFaultyManagementView menuFaultyManagementView, FacultyService facultyService, MajorManagementController majorManagementController) {
+    public FaultyManagementController(MenuFaultyManagementView menuFaultyManagementView, FacultyService facultyService,
+            MajorManagementController majorManagementController) {
         this.menuFaultyManagementView = menuFaultyManagementView;
         this.facultyService = facultyService;
         this.majorManagementController = majorManagementController;
@@ -20,94 +21,111 @@ public class FaultyManagementController {
         while (true) {
             menuFaultyManagementView.showMenu();
             int choice = menuFaultyManagementView.inputChoice(0, 7);
-            String preFix;
             switch (choice) {
                 case 1:
-                    menuFaultyManagementView.displayAllFaculties(facultyService.getAllFaculty());
+                    viewAllFaculties();
                     break;
                 case 2:
-                    Faculty faculty = menuFaultyManagementView.inputFaculty();
-                    if (faculty == null) {
-                        ConsoleColor.printError("Faculty creation cancelled.");
-                        break;
-                    }
-                    try {
-                        facultyService.addFaculty(faculty);
-                        ConsoleColor.printSuccess("Faculty added successfully!");
-                        ConsoleColor.printSuccess("Faculty saved successfully!");
-
-                    } catch (IllegalArgumentException e) {
-                        ConsoleColor.printError(e.getMessage());
-                    }
+                    addFaculty();
                     break;
                 case 3:
-                    String updatePreFix = menuFaultyManagementView.inputPreFix();
-                    Faculty facultyToUpdate = facultyService.findByPreFix(updatePreFix);
-                    if (facultyToUpdate == null) {
-                        ConsoleColor.printError("This faculty not existed");
-                        break;
-                    }
-                    handleUpdateFaculty(facultyToUpdate);
+                    updateFacultyByPreFix();
                     break;
                 case 4:
-                    preFix = menuFaultyManagementView.inputPreFix();
-                    boolean isConfirm = menuFaultyManagementView.confirmDelete();
-                    if (isConfirm) {
-                        try {
-                            facultyService.deleteFaculty(preFix);
-                            ConsoleColor.printSuccess("Delete successfully!");
-                        } catch (IllegalArgumentException e) {
-                            ConsoleColor.printError(e.getMessage());
-                        }
-                    }
+                    deleteFacultyByPreFix();
                     break;
                 case 5:
-                    preFix = menuFaultyManagementView.inputPreFix();
-                    try{
-                        Faculty foundFaculty = facultyService.findByPreFix(preFix);
-                        if(foundFaculty == null){
-                            throw new RuntimeException("This id not existed");
-                        }
-                        menuFaultyManagementView.displayOneFaculty(foundFaculty);
-
-                    } catch (RuntimeException e) {
-                        ConsoleColor.printError(e.getMessage());
-                    }
+                    viewFacultyByPreFix();
                     break;
-
                 case 6:
-                    preFix = menuFaultyManagementView.inputPreFix();
-                    try{
-                        Faculty foundFaculty = facultyService.findByPreFix(preFix);
-                        if(foundFaculty == null){
-                            throw new RuntimeException("This id not existed");
-                        }
-                        menuFaultyManagementView.displayOneFaculty(foundFaculty);
-                        majorManagementController.run(foundFaculty);
-
-
-                    } catch (RuntimeException e) {
-                        ConsoleColor.printError(e.getMessage());
-                    }
-
-
+                    enterMajorManagement();
                     break;
                 case 7:
-                    preFix = menuFaultyManagementView.inputPreFix();
-                    try{
-                        Faculty foundFaculty = facultyService.findByPreFix(preFix);
-                        if(foundFaculty == null){
-                            throw new RuntimeException("This id not existed");
-                        }
-                        menuFaultyManagementView.displayDetailFaculty(foundFaculty);
-                    } catch (RuntimeException e) {
-                        ConsoleColor.printError(e.getMessage());
-                    }
+                    viewFacultyDetailByPreFix();
                     break;
                 case 0:
                     return;
             }
         }
+    }
+
+    private void viewAllFaculties() {
+        menuFaultyManagementView.displayAllFaculties(facultyService.getAllFaculty());
+    }
+
+    private void addFaculty() {
+        Faculty faculty = menuFaultyManagementView.inputFaculty();
+        if (faculty == null) {
+            ConsoleColor.printError("Faculty creation cancelled.");
+            return;
+        }
+        try {
+            facultyService.addFaculty(faculty);
+            ConsoleColor.printSuccess("Faculty added successfully!");
+            ConsoleColor.printSuccess("Faculty saved successfully!");
+        } catch (IllegalArgumentException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void updateFacultyByPreFix() {
+        String updatePreFix = menuFaultyManagementView.inputPreFix();
+        Faculty facultyToUpdate = facultyService.findByPreFix(updatePreFix);
+        if (facultyToUpdate == null) {
+            ConsoleColor.printError("This faculty not existed");
+            return;
+        }
+        handleUpdateFaculty(facultyToUpdate);
+    }
+
+    private void deleteFacultyByPreFix() {
+        String preFix = menuFaultyManagementView.inputPreFix();
+        boolean isConfirm = menuFaultyManagementView.confirmDelete();
+        if (!isConfirm) {
+            return;
+        }
+        try {
+            facultyService.deleteFaculty(preFix);
+            ConsoleColor.printSuccess("Delete successfully!");
+        } catch (IllegalArgumentException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void viewFacultyByPreFix() {
+        try {
+            Faculty foundFaculty = findFacultyOrThrow(menuFaultyManagementView.inputPreFix());
+            menuFaultyManagementView.displayOneFaculty(foundFaculty);
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void enterMajorManagement() {
+        try {
+            Faculty foundFaculty = findFacultyOrThrow(menuFaultyManagementView.inputPreFix());
+            menuFaultyManagementView.displayOneFaculty(foundFaculty);
+            majorManagementController.run(foundFaculty);
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void viewFacultyDetailByPreFix() {
+        try {
+            Faculty foundFaculty = findFacultyOrThrow(menuFaultyManagementView.inputPreFix());
+            menuFaultyManagementView.displayDetailFaculty(foundFaculty);
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private Faculty findFacultyOrThrow(String preFix) {
+        Faculty foundFaculty = facultyService.findByPreFix(preFix);
+        if (foundFaculty == null) {
+            throw new RuntimeException("This id not existed");
+        }
+        return foundFaculty;
     }
 
     private void handleUpdateFaculty(Faculty faculty) {
