@@ -1,4 +1,3 @@
-
 package controller.subject;
 
 import model.subject.Subject;
@@ -12,7 +11,7 @@ public class SubjectManageController {
     private final SubjectService subjectService;
 
     public SubjectManageController(MenuSubjectManageView menuSubjectManageView,
-                                   SubjectService subjectService) {
+            SubjectService subjectService) {
         this.menuSubjectManageView = menuSubjectManageView;
         this.subjectService = subjectService;
     }
@@ -21,72 +20,92 @@ public class SubjectManageController {
         while (true) {
             menuSubjectManageView.showMenu();
             int choice = menuSubjectManageView.inputChoice(0, 5);
-            String id;
-            Subject subject;
-
             switch (choice) {
                 case 1:
-                    menuSubjectManageView.displayAllSubjects(subjectService.getAllSubjects());
+                    viewAllSubjects();
                     break;
-
                 case 2:
-                    String newId = subjectService.generateSubjectId();
-                    Subject newSubject = menuSubjectManageView.inputSubjectData(newId);
-                    if (newSubject == null) {
-                        ConsoleColor.printError("Subject creation cancelled.");
-                        break;
-                    }
-                    try {
-                        subjectService.addSubject(newSubject);
-                        ConsoleColor.printSuccess("Subject added successfully!");
-                    } catch (IllegalArgumentException e) {
-                        ConsoleColor.printError(e.getMessage());
-                    }
+                    addSubject();
                     break;
-
                 case 3:
-                    id = menuSubjectManageView.inputId();
-                    subject = subjectService.findById(id);
-                    if (subject == null) {
-                        ConsoleColor.printError("This subject not existed.");
-                        break;
-                    }
-                    handleUpdateSubject(subject);
+                    updateSubjectById();
                     break;
-
                 case 4:
-                    id = menuSubjectManageView.inputId();
-                    subject = subjectService.findById(id);
-                    if (subject == null) {
-                        ConsoleColor.printError("This subject not existed.");
-                        break;
-                    }
-                    menuSubjectManageView.displayOneSubject(subject);
-                    if (menuSubjectManageView.confirmDelete()) {
-                        try {
-                            subjectService.deleteSubject(id);
-                            ConsoleColor.printSuccess("Subject deleted successfully!");
-                        } catch (IllegalArgumentException e) {
-                            ConsoleColor.printError(e.getMessage());
-                        }
-                    }
+                    deleteSubjectById();
                     break;
-
                 case 5:
-                    System.out.print("Enter search query (ID or Name): ");
-                    String query = new java.util.Scanner(System.in).nextLine();
-                    java.util.List<Subject> searchResults = subjectService.searchSubjects(query);
-                    if (searchResults.isEmpty()) {
-                        ConsoleColor.printError("No subjects found.");
-                    } else {
-                        menuSubjectManageView.displayAllSubjects(new java.util.ArrayList<>(searchResults));
-                    }
+                    searchSubjects();
                     break;
-
                 case 0:
                     return;
             }
         }
+    }
+
+    private void viewAllSubjects() {
+        menuSubjectManageView.displayAllSubjects(subjectService.getAllSubjects());
+    }
+
+    private void addSubject() {
+        String newId = subjectService.generateSubjectId();
+        Subject newSubject = menuSubjectManageView.inputSubjectData(newId);
+        if (newSubject == null) {
+            ConsoleColor.printError("Subject creation cancelled.");
+            return;
+        }
+        try {
+            subjectService.addSubject(newSubject);
+            ConsoleColor.printSuccess("Subject added successfully!");
+        } catch (IllegalArgumentException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void updateSubjectById() {
+        try {
+            Subject subject = findSubjectOrThrow(menuSubjectManageView.inputId());
+            handleUpdateSubject(subject);
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void deleteSubjectById() {
+        String id = menuSubjectManageView.inputId();
+        try {
+            Subject subject = findSubjectOrThrow(id);
+            menuSubjectManageView.displayOneSubject(subject);
+            if (!menuSubjectManageView.confirmDelete()) {
+                return;
+            }
+            try {
+                subjectService.deleteSubject(id);
+                ConsoleColor.printSuccess("Subject deleted successfully!");
+            } catch (IllegalArgumentException e) {
+                ConsoleColor.printError(e.getMessage());
+            }
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
+    }
+
+    private void searchSubjects() {
+        System.out.print("Enter search query (ID or Name): ");
+        String query = new java.util.Scanner(System.in).nextLine();
+        java.util.List<Subject> searchResults = subjectService.searchSubjects(query);
+        if (searchResults.isEmpty()) {
+            ConsoleColor.printError("No subjects found.");
+        } else {
+            menuSubjectManageView.displayAllSubjects(new java.util.ArrayList<>(searchResults));
+        }
+    }
+
+    private Subject findSubjectOrThrow(String id) {
+        Subject subject = subjectService.findById(id);
+        if (subject == null) {
+            throw new RuntimeException("This subject not existed.");
+        }
+        return subject;
     }
 
     private void handleUpdateSubject(Subject subject) {
