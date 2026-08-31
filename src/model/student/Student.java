@@ -1,6 +1,8 @@
 package model.student;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import DataStructure.MyLinkedList;
 import model.faculty.Faculty;
@@ -23,7 +25,7 @@ public class Student {
     private Faculty faculty;
     private double gpa;
     private MyLinkedList<Subject> registeredSubjects = new MyLinkedList<>();
-    private java.util.Map<String, Double> subjectGrades = new java.util.HashMap<>();
+    private Map<String, Double> subjectGrades = new HashMap<>();
 
     public Student(String name, String id, Major major, LocalDate birth, Faculty faculty) {
         this.name = name;

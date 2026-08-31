@@ -43,6 +43,7 @@ public class Main {
         MenuFaultyManagementView menuFaultyManagementView = new MenuFaultyManagementView(scanner);
         MenuMajorManagementView menuMajorManagementView = new MenuMajorManagementView(scanner);
         MenuSubjectManageView menuSubjectManageView = new MenuSubjectManageView(scanner);
+        MenuGradeManageView menuGradeManageView = new MenuGradeManageView(scanner);
 
         // 2. Initialize Repositories & Services
         StudentService studentService = new StudentService(studentRepository);
@@ -68,8 +69,17 @@ public class Main {
         StudentInformationViewController studentInformationViewController =
                 new StudentInformationViewController(menuStudentInformationView, studentService, academicService);
 
+        GradeManageController gradeManageController = new GradeManageController(
+                menuGradeManageView,
+                menuStudentManageView,
+                menuSubjectManageView,
+                subjectService,
+                studentService,
+                academicService
+        );
+
         AcademicManagementController academicManagementController =
-                new AcademicManagementController(menuAcademicManagementView);
+                new AcademicManagementController(menuAcademicManagementView, gradeManageController);
 
         GraduationProgressController graduationProgressController =
                 new GraduationProgressController(menuGraduationProgressView);
