@@ -26,15 +26,18 @@ public class MenuGradeManageView extends BaseMenuView {
             try{
                 System.out.print("Enter score: ");
                 double score = Double.parseDouble(scanner.nextLine());
-                if(score >= 0){
+                if(score >= 0 && score <= 10.0){
                     return Double.parseDouble(String.format("%.2f", score));
                 }
+                ConsoleColor.printError("Grade must be between 0.0 and 10.0.");
             } catch (NumberFormatException e) {
-                ConsoleColor.printError(e.getMessage());
+                ConsoleColor.printError("Please enter a valid number.");
             }
-
-
         }
-
     }
+
+    public void displayCurrentGrade(double score) {
+        System.out.println("Current Grade: " + score);
+    }
+
 }
