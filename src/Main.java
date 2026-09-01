@@ -79,7 +79,12 @@ public class Main {
         );
 
         AcademicManagementController academicManagementController =
-                new AcademicManagementController(menuAcademicManagementView, gradeManageController);
+                new AcademicManagementController(menuAcademicManagementView,
+                        gradeManageController,
+                        menuStudentManageView,
+                        studentService,
+                        academicService,
+                        subjectService);
 
         GraduationProgressController graduationProgressController =
                 new GraduationProgressController(menuGraduationProgressView);

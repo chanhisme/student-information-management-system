@@ -20,4 +20,6 @@ public class MenuAcademicManagementView extends BaseMenuView {
         System.out.println("0. Back");
         System.out.println("=========================================");
     }
+
+
 }
