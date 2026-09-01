@@ -2,7 +2,6 @@ package controller.student;
 
 import model.student.Student;
 import model.subject.Subject;
-import repository.student.StudentRepository;
 import service.student.AcademicService;
 import service.student.StudentService;
 import service.subject.SubjectService;
@@ -10,6 +9,8 @@ import view.ConsoleColor;
 import view.student.MenuAcademicManagementView;
 import view.student.MenuStudentManageView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class AcademicManagementController {
@@ -42,6 +43,12 @@ public class AcademicManagementController {
                     break;
                 case 3:
                     generateAcademicTransciprt();
+                    break;
+                case 4:
+                    viewSemesterStatistics();
+                    break;
+                case 5:
+                    viewSemesterStatistics();
                     break;
                 case 0:
                     return;
@@ -131,4 +138,16 @@ public class AcademicManagementController {
             ConsoleColor.printError(e.getMessage());
         }
     }
+
+
+    private void viewSemesterStatistics (){
+        List<Student> students = studentService.getStudents();
+        System.out.println("========== SEMESTER STATISTICS ==========");
+        System.out.println("Total Students : " + studentService.getNumberOfStudents());
+        System.out.println("Average GPA    : " + academicService.calculateAverageGpa(students)[0]);
+        System.out.println("Highest GPA    : " + academicService.calculateAverageGpa(students)[1]);
+        System.out.println("Lowest GPA     : " + academicService.calculateAverageGpa(students)[2]);
+        System.out.println("==========================================");
+    }
+
 }

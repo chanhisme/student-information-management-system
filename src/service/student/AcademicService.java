@@ -3,6 +3,9 @@ package service.student;
 import model.student.Student;
 import model.subject.Subject;
 
+import java.util.List;
+
+
 public class AcademicService {
 
     public void addGrade(Student student, Subject subject, double score) {
@@ -51,4 +54,33 @@ public class AcademicService {
             student.setGpa(0.0);
         }
     }
+    public double roundGpa(double gpa) {
+        return Double.parseDouble(String.format("%.2f", gpa));
+    }
+
+    public double[] calculateAverageGpa(List<Student> students) {
+        double sum = 0;
+        double maxGpa = Double.NEGATIVE_INFINITY;
+        double minGpa = Double.POSITIVE_INFINITY;
+        int count = 0;
+
+        for (Student student : students) {
+            double gpa = student.getGpa();
+
+            if (gpa != 0.0) {
+                count++;
+                sum += gpa;
+                maxGpa = Math.max(maxGpa, gpa);
+                minGpa = Math.min(minGpa, gpa);
+            }
+        }
+
+        if (count == 0) {
+            return new double[]{0.0, 0.0, 0.0};
+        }
+
+        return new double[]{roundGpa(sum / count), roundGpa(maxGpa), roundGpa(minGpa)};
+    }
+
+
 }

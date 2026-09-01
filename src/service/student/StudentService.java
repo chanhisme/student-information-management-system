@@ -120,4 +120,11 @@ public class StudentService {
 
         return result;
     }
+
+    public int getNumberOfStudents(){
+        return studentRepository.getNumberOfStudents();
+    }
+    public List<Student> getStudents(){
+        return studentRepository.getStudents();
+    }
 }
