@@ -48,7 +48,6 @@ public class AcademicManagementController {
                     viewSemesterStatistics();
                     break;
                 case 5:
-                    viewSemesterStatistics();
                     break;
                 case 0:
                     return;
