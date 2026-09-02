@@ -3,7 +3,7 @@ package controller.student;
 import model.student.Student;
 import model.subject.Subject;
 import service.student.StudentService;
-import service.student.AcademicService;
+import service.academic.GradeService;
 import service.subject.SubjectService;
 import view.student.MenuGradeManageView;
 import view.student.MenuStudentManageView;
@@ -16,9 +16,9 @@ public class GradeManageController {
     private final MenuSubjectManageView menuSubjectManageView;
     private final SubjectService subjectService;
     private final StudentService studentService;
-    private final AcademicService academicService;
+    private final GradeService academicService;
 
-    public GradeManageController(MenuGradeManageView menuGradeManageView, MenuStudentManageView menuStudentManageView, MenuSubjectManageView menuSubjectManageView, SubjectService subjectService, StudentService studentService, AcademicService academicService) {
+    public GradeManageController(MenuGradeManageView menuGradeManageView, MenuStudentManageView menuStudentManageView, MenuSubjectManageView menuSubjectManageView, SubjectService subjectService, StudentService studentService, GradeService academicService) {
         this.menuGradeManageView = menuGradeManageView;
         this.menuStudentManageView = menuStudentManageView;
         this.menuSubjectManageView = menuSubjectManageView;

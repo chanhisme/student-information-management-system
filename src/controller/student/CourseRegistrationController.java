@@ -2,7 +2,7 @@ package controller.student;
 
 import model.student.Student;
 import model.subject.Subject;
-import service.student.CourseRegistrationService;
+import service.academic.CourseRegistrationService;
 import service.student.StudentService;
 import service.subject.SubjectService;
 import view.ConsoleColor;

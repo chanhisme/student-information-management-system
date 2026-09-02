@@ -2,14 +2,13 @@ package controller.student;
 
 import model.student.Student;
 import model.subject.Subject;
-import service.student.AcademicService;
+import service.academic.GradeService;
 import service.student.StudentService;
 import service.subject.SubjectService;
 import view.ConsoleColor;
 import view.student.MenuAcademicManagementView;
 import view.student.MenuStudentManageView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +17,10 @@ public class AcademicManagementController {
     private final GradeManageController gradeManageController;
     private final MenuStudentManageView menuStudentManageView;
     private final StudentService studentService;
-    private final AcademicService academicService;
+    private final GradeService academicService;
     private final SubjectService subjectService;
 
-    public AcademicManagementController(MenuAcademicManagementView menuAcademicManagementView, GradeManageController gradeManageController, MenuStudentManageView menuStudentManageView, StudentService studentService, AcademicService academicService, SubjectService subjectService) {
+    public AcademicManagementController(MenuAcademicManagementView menuAcademicManagementView, GradeManageController gradeManageController, MenuStudentManageView menuStudentManageView, StudentService studentService, GradeService academicService, SubjectService subjectService) {
         this.menuAcademicManagementView = menuAcademicManagementView;
         this.gradeManageController = gradeManageController;
         this.menuStudentManageView = menuStudentManageView;

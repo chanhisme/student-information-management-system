@@ -1,4 +1,4 @@
-package service.student;
+package service.academic;
 
 import model.student.Student;
 import model.subject.Subject;
@@ -6,7 +6,7 @@ import model.subject.Subject;
 import java.util.List;
 
 
-public class AcademicService {
+public class GradeService {
 
     public void addGrade(Student student, Subject subject, double score) {
         if (!student.getRegisteredSubjects().contains(subject)) {

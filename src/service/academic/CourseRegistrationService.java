@@ -1,4 +1,4 @@
-package service.student;
+package service.academic;
 
 import DataStructure.MyStack;
 import model.student.Student;

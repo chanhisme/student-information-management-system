@@ -3,7 +3,7 @@ package controller.student;
 import DataStructure.MyLinkedList;
 import model.student.Student;
 import model.subject.Subject;
-import service.student.AcademicService;
+import service.academic.GradeService;
 import service.student.StudentService;
 import view.ConsoleColor;
 import view.student.MenuStudentInformationView;
@@ -13,12 +13,12 @@ import java.util.Scanner;
 public class StudentInformationViewController {
     private final MenuStudentInformationView menuStudentInformationView;
     private final StudentService studentService;
-    private final AcademicService academicService;
+    private final GradeService academicService;
     private final Scanner scanner = new Scanner(System.in);
 
     public StudentInformationViewController(MenuStudentInformationView menuStudentInformationView,
             StudentService studentService,
-            AcademicService academicService) {
+            GradeService academicService) {
         this.menuStudentInformationView = menuStudentInformationView;
         this.studentService = studentService;
         this.academicService = academicService;
