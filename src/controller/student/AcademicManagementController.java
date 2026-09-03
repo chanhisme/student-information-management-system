@@ -55,14 +55,14 @@ public class AcademicManagementController {
     }
 
     private Student findStudent() {
-        String studentId = menuStudentManageView.inputIdStudent();
+
         while (true) {
+            String studentId = menuStudentManageView.inputIdStudent();
             Student student = studentService.findById(studentId);
             if (student != null) {
                 return student;
             }
             ConsoleColor.printError("This student does not exist");
-
         }
     }
 

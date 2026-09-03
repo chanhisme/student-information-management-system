@@ -66,7 +66,9 @@ public class Main {
         SubjectService subjectService = new SubjectService(subjectRepository);
         RegistrationService courseRegistrationService = new RegistrationService(registrationRepository);
         GradeService gradeService = new GradeService(gradeRepository, studentRepository);
-
+        for (Student student : students.values()) {
+            gradeService.calculateGpa(student);
+        }
         // 3. Initialize Sub-Controllers
         StudentManageController studentManageController = new
                 StudentManageController(menuStudentManageView, studentService);

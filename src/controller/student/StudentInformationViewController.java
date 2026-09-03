@@ -104,7 +104,7 @@ public class StudentInformationViewController {
 
     private void showGraduationProgress(Student student) {
         int currentCredits = sumCredits(student);
-        int requiredCredits = 120;
+        int requiredCredits = 145;
         double progress = ((double) currentCredits / requiredCredits) * 100;
         System.out.println("\n--- Graduation Progress ---");
         System.out.println("Completed Credits: " + currentCredits + " / " + requiredCredits);
