@@ -70,14 +70,14 @@ public class StudentRepository {
                 String key = keyAndValue[0].trim();
                 String value = keyAndValue[1].trim();
 
-                switch (key) {
-                    case "Student ID":
-                        studentId = value;
+                switch (key.toLowerCase()) {
+                    case "student id":
+                        studentId = value.toUpperCase();
                         break;
-                    case "Name":
+                    case "name":
                         studentName = value;
                         break;
-                    case "Date of Birth":
+                    case "date of birth":
                         try {
                             birthDate = LocalDate.parse(value, DATE_FORMATTER);
                         } catch (Exception e) {
@@ -88,19 +88,19 @@ public class StudentRepository {
                             }
                         }
                         break;
-                    case "Status":
+                    case "status":
                         try {
-                            studentStatus = Student.StudentStatus.valueOf(value);
+                            studentStatus = Student.StudentStatus.valueOf(value.trim().toUpperCase());
                         } catch (Exception e) {
                             studentStatus = Student.StudentStatus.ACTIVE;
                         }
                         break;
-                    case "Faculty ID":
-                        studentFaculty = facultyRepository.getFacultyByPrefix(value);
+                    case "faculty id":
+                        studentFaculty = facultyRepository.getFacultyByPrefix(value.trim().toUpperCase());
                         break;
-                    case "Major ID":
+                    case "major id":
                         if (studentFaculty != null) {
-                            studentMajor = studentFaculty.getMajorById(value);
+                            studentMajor = studentFaculty.getMajorById(value.trim().toUpperCase());
                         }
                         break;
                 }
@@ -160,11 +160,13 @@ public class StudentRepository {
     }
 
     public Student findById(String id) {
-        return students.get(id);
+        return id == null ? null : students.get(id.toUpperCase());
     }
 
     public void deleteById(String id) {
-        students.remove(id);
+        if (id != null) {
+            students.remove(id.toUpperCase());
+        }
     }
 
     public Map<String, Student> getAll() {

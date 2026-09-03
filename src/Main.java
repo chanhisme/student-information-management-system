@@ -34,9 +34,9 @@ public class Main {
         StudentRepository studentRepository = new StudentRepository(students);
         FacultyRepository facultyRepository = new FacultyRepository(facultyMap);
         SubjectRepository subjectRepository = new SubjectRepository(subjectMap);
-        GradeRepository gradeRepository = new GradeRepository((ArrayList<Student>) studentRepository.getStudents());
+        GradeRepository gradeRepository = new GradeRepository(students);
         RegistrationRepository registrationRepository = new RegistrationRepository(
-                (ArrayList<Student>) studentRepository.getStudents(),
+                students,
                 subjectMap);
 
         facultyRepository.load();
@@ -136,5 +136,7 @@ public class Main {
         studentRepository.save();
         facultyRepository.save();
         subjectRepository.save();
+        gradeRepository.save();
+        registrationRepository.save();
     }
 }

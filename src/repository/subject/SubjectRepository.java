@@ -48,10 +48,10 @@ public class SubjectRepository {
                     continue;
                 }
                 String[] parts = line.split("\\|");
-                if (parts.length == 5 && parts[1].equals("ID")) {
+                if (parts.length == 5 && parts[1].equalsIgnoreCase("ID")) {
                     continue;
                 }
-                if (parts[0].equals("SUBJECT") && parts.length == 5) {
+                if (parts[0].equalsIgnoreCase("SUBJECT") && parts.length == 5) {
                     String id = parts[1];
                     String name = parts[2];
                     int credits = Integer.parseInt(parts[3]);
@@ -95,7 +95,7 @@ public class SubjectRepository {
     }
 
     public Subject findById(String id) {
-        return subjectsMap.get(id);
+        return id == null ? null : subjectsMap.get(id.toUpperCase());
     }
 
     public void add(Subject subject) {
@@ -103,7 +103,9 @@ public class SubjectRepository {
     }
 
     public void deleteById(String id) {
-        subjectsMap.remove(id);
+        if (id != null) {
+            subjectsMap.remove(id.toUpperCase());
+        }
     }
 
     private Subject createSubject(String id, String name, int credits, String type) {

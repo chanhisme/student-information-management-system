@@ -10,9 +10,9 @@ import java.util.Map;
 public class RegistrationRepository {
 
     private final String FILE_PATH = "src/data/registered.txt";
-    private final ArrayList<Student> students;
+    private final Map<String, Student> students;
     private final Map<String , Subject> subjectMap;
-    public RegistrationRepository(ArrayList<Student> students, Map<String, Subject> subjectMap) {
+    public RegistrationRepository(Map<String, Student> students, Map<String, Subject> subjectMap) {
         this.students = students;
         this.subjectMap = subjectMap;
     }
@@ -26,7 +26,7 @@ public class RegistrationRepository {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 writer.write("StudentID|SubjectID|");
                 writer.newLine();
-                for (Student student : students) {
+                for (Student student : students.values()) {
                     for (Subject subject : student.getRegisteredSubjects()) {
                         writer.write(student.getId() + "|" + subject.getId());
                         writer.newLine();
@@ -65,11 +65,10 @@ public class RegistrationRepository {
 
                 String studentId = parts[0];
                 String subjectId = parts[1];
-                for (Student student : students) {
-                    if (student.getId().equals(studentId)) {
-                        student.getRegisteredSubjects().addLast(subjectMap.get(subjectId));
-                        break;
-                    }
+                Student student = students.get(studentId);
+                Subject subject = subjectMap.get(subjectId);
+                if (student != null && subject != null) {
+                    student.getRegisteredSubjects().addLast(subject);
                 }
 
             }

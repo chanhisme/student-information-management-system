@@ -37,13 +37,15 @@ public class Faculty {
     }
 
     public Major getMajorById(String id) {
-        return majors.get(id);
+        return id == null ? null : majors.get(id.toUpperCase());
     }
 
     public void addMajor(Major major) {
-        majors.put(major.getId(), major);
+        majors.put(major.getId().toUpperCase(), major);
     }
     public void removeMajor(String id){
-        majors.remove(id);
+        if (id != null) {
+            majors.remove(id.toUpperCase());
+        }
     }
 }

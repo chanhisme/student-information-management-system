@@ -81,7 +81,7 @@ public class FacultyRepository {
 
                 String[] parts = line.split("\\|");
 
-                if (parts[0].equals("FACULTY")) {
+                if (parts[0].equalsIgnoreCase("FACULTY")) {
 
                     String prefix = parts[1];
                     String name = parts[2];
@@ -89,7 +89,7 @@ public class FacultyRepository {
                     currentFaculty = new Faculty(prefix, name);
                     facultiesMap.put(prefix, currentFaculty);
 
-                } else if (parts[0].equals("MAJOR") && currentFaculty != null) {
+                } else if (parts[0].equalsIgnoreCase("MAJOR") && currentFaculty != null) {
 
                     String id = parts[1];
                     String name = parts[2];
@@ -113,24 +113,36 @@ public class FacultyRepository {
     }
 
     public Faculty findByPreFix(String preFix){
-        return facultiesMap.get(preFix);
+        return preFix == null ? null : facultiesMap.get(preFix.toUpperCase());
     }
     public Faculty getFacultyByPrefix(String prefix) {
-        return facultiesMap.get(prefix);
+        return prefix == null ? null : facultiesMap.get(prefix.toUpperCase());
     }
 
     public void deleteFaculty(String preFix){
-        facultiesMap.remove(preFix);
+        if (preFix != null) {
+            facultiesMap.remove(preFix.toUpperCase());
+        }
     }
 
     public void addMajor(Major major, String preFix){
-        facultiesMap.get(preFix).addMajor(major);
+        facultiesMap.get(preFix.toUpperCase()).addMajor(major);
     }
     public Major findMajorById(String id, String preFix){
-        return facultiesMap.get(preFix).getMajorById(id);
+        if (id == null || preFix == null) {
+            return null;
+        }
+        Faculty faculty = facultiesMap.get(preFix.toUpperCase());
+        return faculty == null ? null : faculty.getMajorById(id.toUpperCase());
     }
 
     public void deleteMajor(String id, String preFix){
-        facultiesMap.get(preFix).removeMajor(id);
+        if (id == null || preFix == null) {
+            return;
+        }
+        Faculty faculty = facultiesMap.get(preFix.toUpperCase());
+        if (faculty != null) {
+            faculty.removeMajor(id.toUpperCase());
+        }
     }
 }

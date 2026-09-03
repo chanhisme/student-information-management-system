@@ -35,7 +35,7 @@ public class MenuSubjectManageView extends BaseMenuView {
     public String inputId() {
         while (true) {
             System.out.print("Enter Subject ID: ");
-            String id = scanner.nextLine().trim();
+            String id = scanner.nextLine().trim().toUpperCase();
             if (id.isEmpty()) {
                 ConsoleColor.printError("Subject ID cannot be empty.");
                 continue;

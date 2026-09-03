@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class GradeRepository {
     private final String FILE_PATH = "src/data/grade.txt";
-    private final ArrayList<Student> students;
+    private final Map<String, Student> students;
 
-    public GradeRepository(ArrayList<Student> students) {
+    public GradeRepository(Map<String, Student> students) {
         this.students = students;
     }
 
@@ -25,7 +25,7 @@ public class GradeRepository {
                 writer.write("StudentID|SubjectID|Score");
                 writer.newLine();
 
-                for (Student student : students) {
+                for (Student student : students.values()) {
                     for (Map.Entry<String, Double> entry : student.getSubjectGrades().entrySet()) {
                         writer.write(student.getId() + "|" + entry.getKey() + "|" + entry.getValue());
                         writer.newLine();
@@ -64,11 +64,9 @@ public class GradeRepository {
                 String subjectId = parts[1];
                 double score = Double.parseDouble(parts[2]);
 
-                for (Student student : students) {
-                    if (student.getId().equals(studentId)) {
-                        student.getSubjectGrades().put(subjectId, score);
-                        break;
-                    }
+                Student student = students.get(studentId);
+                if (student != null) {
+                    student.getSubjectGrades().put(subjectId, score);
                 }
             }
         } catch (IOException e) {

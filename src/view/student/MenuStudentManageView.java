@@ -160,7 +160,7 @@ public class MenuStudentManageView extends BaseMenuView {
                 continue;
             }
 
-            if (choice.equals("0")) {
+            if (choice.equalsIgnoreCase("0")) {
                 return null;
             }
 
@@ -217,11 +217,11 @@ public class MenuStudentManageView extends BaseMenuView {
                 ConsoleColor.printError("Student ID cannot be empty.");
                 continue;
             }
-            if (!id.startsWith(preFixId)) {
+            if (!id.toUpperCase().startsWith(preFixId.toUpperCase())) {
                 ConsoleColor.printError("Student ID must start correct preFix");
                 continue;
             }
-            return id;
+            return id.toUpperCase();
         }
     }
 
