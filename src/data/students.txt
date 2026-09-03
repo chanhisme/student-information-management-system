@@ -1,16 +1,16 @@
-Student ID: BA7210527
-Name: Phan Hoai Thu
-Date of Birth: 25/12/2006
-Status: ACTIVE
-Faculty ID: BA
-Major ID: BA7
-+++++++++++++++++++++++++++++++++++++++++++
 Student ID: BA4210528
 Name: Bui Thanh Phong
 Date of Birth: 03/06/2007
 Status: ACTIVE
 Faculty ID: BA
 Major ID: BA4
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: BA7210527
+Name: Phan Hoai Thu
+Date of Birth: 25/12/2006
+Status: ACTIVE
+Faculty ID: BA
+Major ID: BA7
 +++++++++++++++++++++++++++++++++++++++++++
 Student ID: FB1210529
 Name: Nguyen Hai Yen
@@ -19,19 +19,19 @@ Status: ACTIVE
 Faculty ID: FB
 Major ID: FB1
 +++++++++++++++++++++++++++++++++++++++++++
-Student ID: FB4210530
-Name: Hoang Anh Tuan
-Date of Birth: 28/10/2006
-Status: ACTIVE
-Faculty ID: FB
-Major ID: FB4
-+++++++++++++++++++++++++++++++++++++++++++
 Student ID: FB3210531
 Name: Pham Minh Chau
 Date of Birth: 11/07/2007
 Status: ACTIVE
 Faculty ID: FB
 Major ID: FB3
++++++++++++++++++++++++++++++++++++++++++++
+Student ID: FB4210530
+Name: Hoang Anh Tuan
+Date of Birth: 28/10/2006
+Status: ACTIVE
+Faculty ID: FB
+Major ID: FB4
 +++++++++++++++++++++++++++++++++++++++++++
 Student ID: FL1210535
 Name: Vu Minh Khang
@@ -96,19 +96,19 @@ Status: ACTIVE
 Faculty ID: TE
 Major ID: TE1
 +++++++++++++++++++++++++++++++++++++++++++
+Student ID: TE1210523
+Name: Vo Thanh Tung
+Date of Birth: 30/09/2007
+Status: ACTIVE
+Faculty ID: TE
+Major ID: TE1
++++++++++++++++++++++++++++++++++++++++++++
 Student ID: TE2210519
 Name: Nguyen Minh Anh
 Date of Birth: 12/03/2007
 Status: ACTIVE
 Faculty ID: TE
 Major ID: TE2
-+++++++++++++++++++++++++++++++++++++++++++
-Student ID: TE4210520
-Name: Tran Hoang Nam
-Date of Birth: 27/07/2007
-Status: ACTIVE
-Faculty ID: TE
-Major ID: TE4
 +++++++++++++++++++++++++++++++++++++++++++
 Student ID: TE3210521
 Name: Le Quoc Bao
@@ -117,6 +117,13 @@ Status: ACTIVE
 Faculty ID: TE
 Major ID: TE3
 +++++++++++++++++++++++++++++++++++++++++++
+Student ID: TE4210520
+Name: Tran Hoang Nam
+Date of Birth: 27/07/2007
+Status: ACTIVE
+Faculty ID: TE
+Major ID: TE4
++++++++++++++++++++++++++++++++++++++++++++
 Student ID: TE7210522
 Name: Pham Gia Huy
 Date of Birth: 18/02/2007
@@ -124,9 +131,3 @@ Status: ACTIVE
 Faculty ID: TE
 Major ID: TE7
 +++++++++++++++++++++++++++++++++++++++++++
-Student ID: TE1210523
-Name: Vo Thanh Tung
-Date of Birth: 30/09/2007
-Status: ACTIVE
-Faculty ID: TE
-Major ID: TE1

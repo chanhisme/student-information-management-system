@@ -26,6 +26,9 @@ public class MainMenuController {
         while(true){
             menuView.showMenu();
             int choice = menuView.inputChoice(0,3);
+            if(choice == -1){
+                return;
+            }
             switch (choice){
                 case 1:
                     studentController.run();
