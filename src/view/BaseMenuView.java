@@ -14,9 +14,18 @@ public abstract class BaseMenuView {
 
     public int inputChoice() {
         while (true) {
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your choice (-1 to quit): ");
+
             try {
-                return Integer.parseInt(scanner.nextLine());
+                int choice = Integer.parseInt(scanner.nextLine());
+
+                if (choice < -1) {
+                    showInvalidChoice();
+                    continue;
+                }
+
+                return choice;
+
             } catch (NumberFormatException e) {
                 showInvalidChoice();
             }
@@ -25,10 +34,10 @@ public abstract class BaseMenuView {
 
     public int inputChoice(int min, int max) {
         while (true) {
-            System.out.print("Enter your choice: ");
+            System.out.print("Enter your choice (-1 to quit): ");
             try {
                 int choice = Integer.parseInt(scanner.nextLine());
-                if (choice < min || choice > max) {
+                if (choice != -1 && (choice < min || choice > max)) {
                     showInvalidChoice();
                     continue;
                 }
@@ -38,6 +47,26 @@ public abstract class BaseMenuView {
             }
         }
     }
+
+    protected boolean isQuit(String input) {
+        boolean flag = false;
+        if (input != null) {
+            if (input.trim().equalsIgnoreCase("Q")) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    protected String readLineOrNull() {
+        String line = scanner.nextLine();
+        String result = line;
+        if (isQuit(line)) {
+            result = null;
+        }
+        return result;
+    }
+
     protected String normalizeInput(String input) {
         return input.replaceAll("\\s+", "");
     }
