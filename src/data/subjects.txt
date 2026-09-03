@@ -1,3 +1,13 @@
 SUBJECT|ID|NAME|CREDITS|TYPE
 SUBJECT|SUB1|Data Structures|3|NORMAL
+SUBJECT|SUB2|Database Systems|3|NORMAL
 SUBJECT|SUB3|Math for engineering|3|NORMAL
+SUBJECT|SUB4|English for Academic Purposes|2|NONE_GPA
+SUBJECT|SUB5|Web Programming|3|ELECTIVE
+SUBJECT|SUB6|Mobile Programming|3|ELECTIVE
+SUBJECT|SUB7|Machine Learning|3|ELECTIVE
+SUBJECT|SUB8|Python for Everybody|2|COURSERA
+SUBJECT|SUB9|Operating Systems|3|NORMAL
+SUBJECT|SUB10|Computer Networks|3|NORMAL
+SUBJECT|SUB11|Software Engineering|3|NORMAL
+SUBJECT|SUB12|Internship|4|NONE_GPA

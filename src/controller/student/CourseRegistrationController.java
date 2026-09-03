@@ -74,7 +74,7 @@ public class CourseRegistrationController {
                     }
                     try {
                         courseRegistrationService.dropCourse(student, subject);
-                        ConsoleColor.printSuccess("Course registered successfully!");
+                        ConsoleColor.printSuccess("Course dropped successfully!");
                     } catch (IllegalArgumentException e) {
                         ConsoleColor.printError(e.getMessage());
                     }
