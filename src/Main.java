@@ -42,8 +42,8 @@ public class Main {
         facultyRepository.load();
         studentRepository.load(facultyRepository);
         subjectRepository.load();
-        gradeRepository.load();
         registrationRepository.load();
+        gradeRepository.load();
 
 
         // 1. Initialize Views
