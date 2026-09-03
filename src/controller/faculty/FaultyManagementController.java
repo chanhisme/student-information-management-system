@@ -54,12 +54,14 @@ public class FaultyManagementController {
     }
 
     private void addFaculty() {
-        Faculty faculty = menuFaultyManagementView.inputFaculty();
-        if (faculty == null) {
-            ConsoleColor.printError("Faculty creation cancelled.");
-            return;
-        }
+
+
         try {
+            Faculty faculty = menuFaultyManagementView.inputFaculty();
+            if (faculty == null) {
+                ConsoleColor.printError("Faculty creation cancelled.");
+                return;
+            }
             facultyService.addFaculty(faculty);
             ConsoleColor.printSuccess("Faculty added successfully!");
             ConsoleColor.printSuccess("Faculty saved successfully!");

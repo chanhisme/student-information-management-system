@@ -10,4 +10,4 @@ SUBJECT|SUB8|Python for Everybody|2|COURSERA
 SUBJECT|SUB9|Operating Systems|3|NORMAL
 SUBJECT|SUB10|Computer Networks|3|NORMAL
 SUBJECT|SUB11|Software Engineering|3|NORMAL
-SUBJECT|SUB12|Internship|4|NONE_GPA
+SUBJECT|SUB12|Internship|10|NONE_GPA

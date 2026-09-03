@@ -57,6 +57,9 @@ public class MenuFaultyManagementView extends BaseMenuView {
         while (facultyName == null) {
             System.out.print("Enter name of faculty: ");
             facultyName = scanner.nextLine();
+            if (facultyName.matches(".*\\d.*")) {
+                throw new IllegalArgumentException("Faculty name must not contain numbers.");
+            }
         }
         return facultyName;
 
