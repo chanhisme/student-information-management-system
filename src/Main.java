@@ -58,7 +58,7 @@ public class Main {
 
         SubjectService subjectService = new SubjectService(subjectRepository);
         CourseRegistrationService courseRegistrationService = new CourseRegistrationService();
-        GradeService academicService = new GradeService();
+        GradeService gradeService = new GradeService(gradeRepository, studentRepository);
 
         // 3. Initialize Sub-Controllers
         StudentManageController studentManageController = new
@@ -72,7 +72,7 @@ public class Main {
                         menuStudentManageView);
 
         StudentInformationViewController studentInformationViewController =
-                new StudentInformationViewController(menuStudentInformationView, studentService, academicService);
+                new StudentInformationViewController(menuStudentInformationView, studentService, gradeService);
 
         GradeManageController gradeManageController = new GradeManageController(
                 menuGradeManageView,
@@ -80,7 +80,7 @@ public class Main {
                 menuSubjectManageView,
                 subjectService,
                 studentService,
-                academicService
+                gradeService
         );
 
         AcademicManagementController academicManagementController =
@@ -88,7 +88,7 @@ public class Main {
                         gradeManageController,
                         menuStudentManageView,
                         studentService,
-                        academicService,
+                        gradeService,
                         subjectService);
 
         GraduationProgressController graduationProgressController =
