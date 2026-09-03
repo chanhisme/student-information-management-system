@@ -15,9 +15,10 @@ public class SubjectRepository {
 
     private final Map<String, Subject> subjectsMap;
 
-    public SubjectRepository() {
-        subjectsMap = new LinkedHashMap<>();
+    public SubjectRepository(Map<String, Subject> subjectsMap) {
+        this.subjectsMap = subjectsMap;
     }
+
 
     public void load() {
         String filePath = "src/data/subjects.txt";

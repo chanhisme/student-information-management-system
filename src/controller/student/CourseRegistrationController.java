@@ -2,7 +2,7 @@ package controller.student;
 
 import model.student.Student;
 import model.subject.Subject;
-import service.academic.CourseRegistrationService;
+import service.academic.RegistrationService;
 import service.student.StudentService;
 import service.subject.SubjectService;
 import view.ConsoleColor;
@@ -11,13 +11,13 @@ import view.student.MenuStudentManageView;
 
 public class CourseRegistrationController {
     private final MenuCourseRegistrationView menuCourseRegistrationView;
-    private final CourseRegistrationService courseRegistrationService;
+    private final RegistrationService courseRegistrationService;
     private final StudentService studentService;
     private final SubjectService subjectService;
     private final MenuStudentManageView menuStudentManageView;
 
     public CourseRegistrationController(MenuCourseRegistrationView menuCourseRegistrationView,
-                                        CourseRegistrationService courseRegistrationService,
+                                        RegistrationService courseRegistrationService,
                                         StudentService studentService,
                                         SubjectService subjectService,
                                         MenuStudentManageView menuStudentManageView) {

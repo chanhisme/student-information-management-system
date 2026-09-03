@@ -34,7 +34,7 @@ public class GradeService {
         }
         gradeRepository.add(student, subject, score);
         calculateGpa(student);
-        gradeRepository.save((ArrayList<Student>) studentRepository.getStudents());
+        gradeRepository.save();
 
     }
 
@@ -44,7 +44,7 @@ public class GradeService {
         }
         gradeRepository.delete(student, subject);
         calculateGpa(student);
-        gradeRepository.save((ArrayList<Student>) studentRepository.getStudents());
+        gradeRepository.save();
     }
 
     public void calculateGpa(Student student) {

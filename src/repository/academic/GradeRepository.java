@@ -8,9 +8,14 @@ import java.util.Map;
 
 public class GradeRepository {
     private final String FILE_PATH = "src/data/grade.txt";
+    private final ArrayList<Student> students;
+
+    public GradeRepository(ArrayList<Student> students) {
+        this.students = students;
+    }
 
 
-    public void save(ArrayList<Student> students) {
+    public void save() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             writer.write("StudentID|SubjectID|Score");
             writer.newLine();
@@ -26,11 +31,11 @@ public class GradeRepository {
         }
     }
 
-    public void load(ArrayList<Student> students) {
+    public void load() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String line = reader.readLine();
-
-            while ((line = reader.readLine()) != null) {
+            reader.readLine();
+            String line;
+            while ( (line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
 
                 String studentId = parts[0];

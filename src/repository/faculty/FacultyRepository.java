@@ -17,9 +17,11 @@ public class FacultyRepository {
 
     private final Map<String, Faculty> facultiesMap;
 
-    public FacultyRepository() {
-        facultiesMap = new LinkedHashMap<>();
+    public FacultyRepository(Map<String, Faculty> facultiesMap) {
+        this.facultiesMap = facultiesMap;
     }
+
+
     public void save() {
         String filePath = "src/data/major.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {

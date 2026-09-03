@@ -3,10 +3,19 @@ package service.academic;
 import DataStructure.MyStack;
 import model.student.Student;
 import model.subject.Subject;
+import repository.academic.GradeRepository;
+import repository.academic.RegistrationRepository;
 
 
-public class CourseRegistrationService {
+public class RegistrationService {
+
+
     public enum ActionType {REGISTER, DROP}
+    private final RegistrationRepository registrationRepository;
+
+    public RegistrationService(RegistrationRepository registrationRepository) {
+        this.registrationRepository = registrationRepository;
+    }
 
     public static class RegistrationAction {
         private final Student student;
@@ -41,7 +50,10 @@ public class CourseRegistrationService {
         }
         student.getRegisteredSubjects().addLast(subject);
         undoStack.push(new RegistrationAction(student, subject, ActionType.REGISTER));
+        registrationRepository.add(student, subject);
         redoStack.clear();
+
+        registrationRepository.save();
     }
 
     public void dropCourse(Student student, Subject subject) {
@@ -50,7 +62,9 @@ public class CourseRegistrationService {
         }
         student.getRegisteredSubjects().remove(subject);
         undoStack.push(new RegistrationAction(student, subject, ActionType.DROP));
+        registrationRepository.delete(student, subject);
         redoStack.clear();
+        registrationRepository.save();
     }
 
     public boolean undo() {

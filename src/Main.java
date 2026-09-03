@@ -2,14 +2,17 @@ import controller.MainMenuController;
 import controller.student.*;
 import controller.faculty.*;
 import controller.subject.SubjectManageController;
+import model.faculty.Faculty;
 import model.student.Student;
+import model.subject.Subject;
 import repository.academic.GradeRepository;
+import repository.academic.RegistrationRepository;
 import repository.faculty.FacultyRepository;
 import repository.student.StudentRepository;
 import repository.subject.SubjectRepository;
 import service.faculty.FacultyService;
 import service.student.StudentService;
-import service.academic.CourseRegistrationService;
+import service.academic.RegistrationService;
 import service.academic.GradeService;
 import service.subject.SubjectService;
 import view.MenuView;
@@ -17,10 +20,7 @@ import view.student.*;
 import view.faculty.*;
 import view.subject.MenuSubjectManageView;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -28,15 +28,21 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Map<String, Student> students = new TreeMap<>();
+        Map<String, Faculty> facultyMap = new LinkedHashMap<>();
+        Map<String, Subject> subjectMap = new LinkedHashMap<>();
+
         StudentRepository studentRepository = new StudentRepository(students);
-        FacultyRepository facultyRepository = new FacultyRepository();
-        SubjectRepository subjectRepository = new SubjectRepository();
-        GradeRepository gradeRepository = new GradeRepository();
+        FacultyRepository facultyRepository = new FacultyRepository(facultyMap);
+        SubjectRepository subjectRepository = new SubjectRepository(subjectMap);
+        GradeRepository gradeRepository = new GradeRepository((ArrayList<Student>) studentRepository.getStudents());
+        RegistrationRepository registrationRepository = new RegistrationRepository(
+                (ArrayList<Student>) studentRepository.getStudents(),
+                subjectMap);
 
         facultyRepository.load();
         studentRepository.load(facultyRepository);
         subjectRepository.load();
-        gradeRepository.load((ArrayList<Student>) studentRepository.getStudents());
+        gradeRepository.load();
 
 
         // 1. Initialize Views
@@ -57,7 +63,7 @@ public class Main {
         FacultyService facultyService = new FacultyService(facultyRepository);
 
         SubjectService subjectService = new SubjectService(subjectRepository);
-        CourseRegistrationService courseRegistrationService = new CourseRegistrationService();
+        RegistrationService courseRegistrationService = new RegistrationService(registrationRepository);
         GradeService gradeService = new GradeService(gradeRepository, studentRepository);
 
         // 3. Initialize Sub-Controllers
