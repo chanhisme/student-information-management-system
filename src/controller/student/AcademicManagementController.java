@@ -61,7 +61,7 @@ public class AcademicManagementController {
             if (student != null) {
                 return student;
             }
-            ConsoleColor.printError("this student not exsited");
+            ConsoleColor.printError("This student does not exist");
 
         }
     }

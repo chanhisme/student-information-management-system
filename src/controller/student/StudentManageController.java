@@ -120,7 +120,7 @@ public class StudentManageController {
     private Student findStudentOrThrow(String id) {
         Student student = studentService.findById(id);
         if (student == null) {
-            throw new RuntimeException("This student not existed");
+            throw new RuntimeException("This student does not exist");
         }
         return student;
     }
@@ -143,11 +143,11 @@ public class StudentManageController {
                 case 3:
                     Faculty newFaculty = menuStudentManageView.inputFaculty();
                     if (newFaculty != null) {
-                            student.setFaculty(newFaculty);
-                            ConsoleColor.printSuccess("Updated faculty successfully.");
-                        } else {
-                            ConsoleColor.printError("Faculty was not changed.");
-                        }
+                        student.setFaculty(newFaculty);
+                        ConsoleColor.printSuccess("Updated faculty successfully.");
+                    } else {
+                        ConsoleColor.printError("Faculty was not changed.");
+                    }
 
                     break;
                 case 4:

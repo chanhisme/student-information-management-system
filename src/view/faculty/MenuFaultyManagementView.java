@@ -47,7 +47,7 @@ public class MenuFaultyManagementView extends BaseMenuView {
             if(!preFix.isEmpty() && preFix.matches("[A-Za-z]+")){
                 return preFix;
             }
-            ConsoleColor.printError("Prefix already exists.");
+            ConsoleColor.printError("Invalid prefix. Use letters only.");
         }
 
     }
@@ -67,7 +67,7 @@ public class MenuFaultyManagementView extends BaseMenuView {
             System.out.println("\nNo faculty found");
             return;
         }
-        System.out.println("=========FACILITIES=========");
+        System.out.println("=========FACULTIES=========");
         for (int i = 0; i < faculties.size(); i++) {
             Faculty faculty = faculties.get(i);
             System.out.printf("%d. %s - %s\n", (i + 1), faculty.getPrefix(), faculty.getName());

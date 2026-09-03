@@ -77,10 +77,10 @@ public class MenuStudentManageView extends BaseMenuView {
 
     public boolean confirmDelete() {
 
-        System.out.println("Confirm delete this student?");
+        System.out.println("Confirm deletion of this student?");
         System.out.println("[1] YES");
         System.out.println("[2] NO");
-        System.out.print("Enter you choice: ");
+        System.out.print("Enter your choice: ");
 
         int choice = inputChoice(1, 2);
         return choice == 1;
@@ -218,7 +218,7 @@ public class MenuStudentManageView extends BaseMenuView {
                 continue;
             }
             if (!id.toUpperCase().startsWith(preFixId.toUpperCase())) {
-                ConsoleColor.printError("Student ID must start correct preFix");
+                ConsoleColor.printError("Student ID must start with the correct prefix");
                 continue;
             }
             return id.toUpperCase();

@@ -30,7 +30,7 @@ public class FacultyService {
 
     public void deleteFaculty(String preFix){
         if(facultyRepository.findByPreFix(preFix) == null){
-            throw new IllegalArgumentException("This faculty id is not existed");
+            throw new IllegalArgumentException("This faculty ID does not exist");
         }
         facultyRepository.deleteFaculty(preFix);
         facultyRepository.save();
@@ -39,13 +39,13 @@ public class FacultyService {
 
     public void updateFaculty(Faculty faculty) {
         if(facultyRepository.findByPreFix(faculty.getPrefix()) == null){
-            throw new IllegalArgumentException("This faculty id is not existed");
+            throw new IllegalArgumentException("This faculty ID does not exist");
         }
         facultyRepository.save();
     }
     public void updateMajor(Major major, String preFix){
         if(facultyRepository.findMajorById(major.getId(), preFix) == null){
-            throw new IllegalArgumentException("This major id is not existed");
+            throw new IllegalArgumentException("This major ID does not exist");
         }
         facultyRepository.save();
     }
@@ -55,7 +55,7 @@ public class FacultyService {
     }
     public void addMajor(Major major, String preFix){
         if(findByPreFix(preFix) == null){
-            throw new RuntimeException("This faculty is not existed");
+            throw new RuntimeException("This faculty does not exist");
         }
         if(findMajorById(major.getId(), preFix) != null ){
             throw new RuntimeException("This major is existed");
@@ -74,7 +74,7 @@ public class FacultyService {
 
     public void deleteMajor(String id, String preFix){
         if(findMajorById(id, preFix) == null ){
-            throw new RuntimeException("This major is not existed");
+            throw new RuntimeException("This major does not exist");
         }
         facultyRepository.deleteMajor(id, preFix);
         facultyRepository.save();

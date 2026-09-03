@@ -92,9 +92,9 @@ public class CourseRegistrationController {
 
                 case 4:
                     if (courseRegistrationService.undo()) {
-                        ConsoleColor.printSuccess("undo successful.");
+                        ConsoleColor.printSuccess("Undo successful.");
                     } else {
-                        ConsoleColor.printError("Nothing to redo.");
+                        ConsoleColor.printError("Nothing to undo.");
                     }
                     break;
 

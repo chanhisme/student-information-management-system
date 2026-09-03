@@ -11,7 +11,7 @@ public class FaultyManagementController {
     private final MajorManagementController majorManagementController;
 
     public FaultyManagementController(MenuFaultyManagementView menuFaultyManagementView, FacultyService facultyService,
-            MajorManagementController majorManagementController) {
+                                      MajorManagementController majorManagementController) {
         this.menuFaultyManagementView = menuFaultyManagementView;
         this.facultyService = facultyService;
         this.majorManagementController = majorManagementController;
@@ -72,7 +72,7 @@ public class FaultyManagementController {
         String updatePreFix = menuFaultyManagementView.inputPreFix();
         Faculty facultyToUpdate = facultyService.findByPreFix(updatePreFix);
         if (facultyToUpdate == null) {
-            ConsoleColor.printError("This faculty not existed");
+            ConsoleColor.printError("This faculty does not exist");
             return;
         }
         handleUpdateFaculty(facultyToUpdate);
@@ -123,7 +123,7 @@ public class FaultyManagementController {
     private Faculty findFacultyOrThrow(String preFix) {
         Faculty foundFaculty = facultyService.findByPreFix(preFix);
         if (foundFaculty == null) {
-            throw new RuntimeException("This id not existed");
+            throw new RuntimeException("This ID does not exist");
         }
         return foundFaculty;
     }

@@ -97,7 +97,7 @@ public class MenuSubjectManageView extends BaseMenuView {
     }
 
     public boolean confirmDelete() {
-        System.out.println("Confirm delete this subject?");
+        System.out.println("Confirm deletion of this subject?");
         System.out.println("[1] YES");
         System.out.println("[2] NO");
         int choice = inputChoice(1, 2);

@@ -11,7 +11,7 @@ public class SubjectManageController {
     private final SubjectService subjectService;
 
     public SubjectManageController(MenuSubjectManageView menuSubjectManageView,
-            SubjectService subjectService) {
+                                   SubjectService subjectService) {
         this.menuSubjectManageView = menuSubjectManageView;
         this.subjectService = subjectService;
     }
@@ -103,7 +103,7 @@ public class SubjectManageController {
     private Subject findSubjectOrThrow(String id) {
         Subject subject = subjectService.findById(id);
         if (subject == null) {
-            throw new RuntimeException("This subject not existed.");
+            throw new RuntimeException("This subject does not exist.");
         }
         return subject;
     }

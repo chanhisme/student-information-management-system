@@ -11,7 +11,7 @@ public class MajorManagementController {
     private final FacultyService facultyService;
 
     public MajorManagementController(MenuMajorManagementView menuMajorManagementView,
-            FacultyService facultyService) {
+                                     FacultyService facultyService) {
 
         this.menuMajorManagementView = menuMajorManagementView;
         this.facultyService = facultyService;
@@ -92,7 +92,7 @@ public class MajorManagementController {
     private Major findMajorOrThrow(String majorId, String preFix) {
         Major major = facultyService.findMajorById(majorId, preFix);
         if (major == null) {
-            throw new RuntimeException("This major is not existed");
+            throw new RuntimeException("This major does not exist");
         }
         return major;
     }
