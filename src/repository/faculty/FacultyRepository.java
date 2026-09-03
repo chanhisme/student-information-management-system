@@ -5,6 +5,7 @@ import model.faculty.Major;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,15 +25,23 @@ public class FacultyRepository {
 
     public void save() {
         String filePath = "src/data/major.txt";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            for (Faculty faculty : facultiesMap.values()) {
-                writer.write("FACULTY|" + faculty.getPrefix() + "|" + faculty.getName());
+        try {
+            File file = new File(filePath);
+            if (file.getParentFile() != null) {
+                file.getParentFile().mkdirs();
+            }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write("TYPE|ID|NAME");
                 writer.newLine();
-                for (Major major : faculty.getMajors()) {
-                    writer.write("MAJOR|" + major.getId() + "|" + major.getName());
+                for (Faculty faculty : facultiesMap.values()) {
+                    writer.write("FACULTY|" + faculty.getPrefix() + "|" + faculty.getName());
+                    writer.newLine();
+                    for (Major major : faculty.getMajors()) {
+                        writer.write("MAJOR|" + major.getId() + "|" + major.getName());
+                        writer.newLine();
+                    }
                     writer.newLine();
                 }
-                writer.newLine();
             }
         } catch (IOException e) {
             System.out.println("Error saving faculties: " + e.getMessage());
@@ -43,13 +52,30 @@ public class FacultyRepository {
         String filePath = "src/data/major.txt";
         Faculty currentFaculty = null;
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                if (file.getParentFile() != null) {
+                    file.getParentFile().mkdirs();
+                }
+                file.createNewFile();
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                    writer.write("TYPE|ID|NAME");
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to create faculty file.", e);
+            }
+            return;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
             String line;
 
             while ((line = reader.readLine()) != null) {
 
-                if (line.trim().isEmpty()) {
+                if (line.trim().isEmpty() || line.startsWith("TYPE|")) {
                     continue;
                 }
 

@@ -16,14 +16,20 @@ public class GradeRepository {
 
 
     public void save() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            writer.write("StudentID|SubjectID|Score");
-            writer.newLine();
+        try {
+            File file = new File(FILE_PATH);
+            if (file.getParentFile() != null) {
+                file.getParentFile().mkdirs();
+            }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write("StudentID|SubjectID|Score");
+                writer.newLine();
 
-            for (Student student : students) {
-                for (Map.Entry<String, Double> entry : student.getSubjectGrades().entrySet()) {
-                    writer.write(student.getId() + "|" + entry.getKey() + "|" + entry.getValue());
-                    writer.newLine();
+                for (Student student : students) {
+                    for (Map.Entry<String, Double> entry : student.getSubjectGrades().entrySet()) {
+                        writer.write(student.getId() + "|" + entry.getKey() + "|" + entry.getValue());
+                        writer.newLine();
+                    }
                 }
             }
         } catch (IOException e) {
@@ -32,7 +38,23 @@ public class GradeRepository {
     }
 
     public void load() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            try {
+                if (file.getParentFile() != null) {
+                    file.getParentFile().mkdirs();
+                }
+                file.createNewFile();
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                    writer.write("StudentID|SubjectID|Score");
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to create grade file.", e);
+            }
+            return;
+        }
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             reader.readLine();
             String line;
             while ( (line = reader.readLine()) != null) {

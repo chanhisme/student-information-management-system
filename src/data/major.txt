@@ -1,3 +1,4 @@
+TYPE|ID|NAME
 FACULTY|TE|Faculty of Technology & Engineering
 MAJOR|TE1|Information Technology
 MAJOR|TE2|Software Engineering

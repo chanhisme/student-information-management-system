@@ -1,9 +1,7 @@
 package repository.academic;
 
-import DataStructure.MyLinkedList;
 import model.student.Student;
 import model.subject.Subject;
-import view.ConsoleColor;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,7 +9,7 @@ import java.util.Map;
 
 public class RegistrationRepository {
 
-    private final String FILE_PATH = "src/data/registered";
+    private final String FILE_PATH = "src/data/registered.txt";
     private final ArrayList<Student> students;
     private final Map<String , Subject> subjectMap;
     public RegistrationRepository(ArrayList<Student> students, Map<String, Subject> subjectMap) {
@@ -20,13 +18,19 @@ public class RegistrationRepository {
     }
 
     public void save() {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))){
-            writer.write("StudentID|SubjectID|");
-            writer.newLine();
-            for(Student student : students){
-                for(Subject subject : student.getRegisteredSubjects()){
-                    writer.write(student.getId() + "|" + subject.getId());
-                    writer.newLine();
+        try {
+            File file = new File(FILE_PATH);
+            if (file.getParentFile() != null) {
+                file.getParentFile().mkdirs();
+            }
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write("StudentID|SubjectID|");
+                writer.newLine();
+                for (Student student : students) {
+                    for (Subject subject : student.getRegisteredSubjects()) {
+                        writer.write(student.getId() + "|" + subject.getId());
+                        writer.newLine();
+                    }
                 }
             }
         } catch (IOException e) {
@@ -36,7 +40,23 @@ public class RegistrationRepository {
     }
 
     public void load() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            try {
+                if (file.getParentFile() != null) {
+                    file.getParentFile().mkdirs();
+                }
+                file.createNewFile();
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                    writer.write("StudentID|SubjectID|");
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to create registration file.", e);
+            }
+            return;
+        }
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             reader.readLine();
 
             String line;
@@ -54,7 +74,7 @@ public class RegistrationRepository {
 
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load grades.", e);
+            throw new RuntimeException("Failed to load registrations.", e);
         }
     }
 
