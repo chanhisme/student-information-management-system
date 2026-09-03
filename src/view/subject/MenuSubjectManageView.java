@@ -40,6 +40,10 @@ public class MenuSubjectManageView extends BaseMenuView {
                 ConsoleColor.printError("Subject ID cannot be empty.");
                 continue;
             }
+            if (!id.matches("SUB[1-9][0-9]*")) {
+                ConsoleColor.printError("Subject ID must be SUB + number, e.g. SUB1.");
+                continue;
+            }
             return id;
         }
     }

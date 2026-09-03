@@ -52,7 +52,10 @@ public class SubjectRepository {
                     continue;
                 }
                 if (parts[0].equalsIgnoreCase("SUBJECT") && parts.length == 5) {
-                    String id = parts[1];
+                    String id = parts[1].trim().toUpperCase();
+                    if (!id.matches("SUB[1-9][0-9]*")) {
+                        continue;
+                    }
                     String name = parts[2];
                     int credits = Integer.parseInt(parts[3]);
                     String type = parts[4];

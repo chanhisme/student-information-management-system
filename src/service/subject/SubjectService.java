@@ -4,6 +4,7 @@ import model.subject.Subject;
 import repository.subject.SubjectRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SubjectService {
 
@@ -14,6 +15,9 @@ public class SubjectService {
     }
 
     public void addSubject(Subject subject) {
+        if (!isValidSubjectId(subject.getId())) {
+            throw new IllegalArgumentException("Subject ID must be SUB + number, e.g. SUB1.");
+        }
         if (subjectRepository.findById(subject.getId()) != null) {
             throw new IllegalArgumentException("Subject ID already exists.");
         }
@@ -30,6 +34,9 @@ public class SubjectService {
     }
 
     public void updateSubject(Subject subject) {
+        if (!isValidSubjectId(subject.getId())) {
+            throw new IllegalArgumentException("Subject ID must be SUB + number, e.g. SUB1.");
+        }
         if (subjectRepository.findById(subject.getId()) == null) {
             throw new IllegalArgumentException("Subject not found.");
         }
@@ -52,8 +59,12 @@ public class SubjectService {
         return "SUB" + id;
     }
 
-    public java.util.List<Subject> searchSubjects(String query) {
-        java.util.List<Subject> result = new java.util.ArrayList<>();
+    public boolean isValidSubjectId(String id) {
+        return id != null && id.trim().toUpperCase().matches("SUB[1-9][0-9]*");
+    }
+
+    public List<Subject> searchSubjects(String query) {
+        List<Subject> result = new ArrayList<>();
         if (query == null || query.trim().isEmpty()) {
             return result;
         }
