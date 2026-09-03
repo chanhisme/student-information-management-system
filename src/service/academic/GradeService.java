@@ -2,17 +2,25 @@ package service.academic;
 
 import model.student.Student;
 import model.subject.Subject;
+import repository.academic.GradeRepository;
+import repository.student.StudentRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class GradeService {
-
+    private final GradeRepository gradeRepository;
+    private final StudentRepository studentRepository;
+    public GradeService(GradeRepository gradeRepository, StudentRepository studentRepository) {
+        this.gradeRepository = gradeRepository;
+        this.studentRepository = studentRepository;
+    }
     public void addGrade(Student student, Subject subject, double score) {
         if (!student.getRegisteredSubjects().contains(subject)) {
             throw new IllegalArgumentException("Student must register for the subject before receiving a grade.");
         }
-        student.getSubjectGrades().put(subject.getId(), score);
+        gradeRepository.add(student, subject, score);
         calculateGpa(student);
     }
 
@@ -24,16 +32,19 @@ public class GradeService {
         if (!student.getSubjectGrades().containsKey(subject.getId())) {
             throw new IllegalArgumentException("No grade found to update. Add grade first.");
         }
-        student.getSubjectGrades().put(subject.getId(), score);
+        gradeRepository.add(student, subject, score);
         calculateGpa(student);
+        gradeRepository.save((ArrayList<Student>) studentRepository.getStudents());
+
     }
 
     public void deleteGrade(Student student, Subject subject) {
         if (!student.getRegisteredSubjects().contains(subject)) {
             throw new IllegalArgumentException("Student must register for the subject before receiving a grade.");
         }
-        student.getSubjectGrades().remove(subject.getId());
+        gradeRepository.delete(student, subject);
         calculateGpa(student);
+        gradeRepository.save((ArrayList<Student>) studentRepository.getStudents());
     }
 
     public void calculateGpa(Student student) {

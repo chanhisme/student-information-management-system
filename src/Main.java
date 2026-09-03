@@ -3,6 +3,7 @@ import controller.student.*;
 import controller.faculty.*;
 import controller.subject.SubjectManageController;
 import model.student.Student;
+import repository.academic.GradeRepository;
 import repository.faculty.FacultyRepository;
 import repository.student.StudentRepository;
 import repository.subject.SubjectRepository;
@@ -16,6 +17,7 @@ import view.student.*;
 import view.faculty.*;
 import view.subject.MenuSubjectManageView;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Scanner;
@@ -28,8 +30,13 @@ public class Main {
         Map<String, Student> students = new TreeMap<>();
         StudentRepository studentRepository = new StudentRepository(students);
         FacultyRepository facultyRepository = new FacultyRepository();
+        SubjectRepository subjectRepository = new SubjectRepository();
+        GradeRepository gradeRepository = new GradeRepository();
+
         facultyRepository.load();
         studentRepository.load(facultyRepository);
+        subjectRepository.load();
+        gradeRepository.load((ArrayList<Student>) studentRepository.getStudents());
 
 
         // 1. Initialize Views
@@ -49,8 +56,6 @@ public class Main {
         StudentService studentService = new StudentService(studentRepository);
         FacultyService facultyService = new FacultyService(facultyRepository);
 
-        SubjectRepository subjectRepository = new SubjectRepository();
-        subjectRepository.load();
         SubjectService subjectService = new SubjectService(subjectRepository);
         CourseRegistrationService courseRegistrationService = new CourseRegistrationService();
         GradeService academicService = new GradeService();
