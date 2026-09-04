@@ -5,10 +5,9 @@ import model.student.Student;
 import model.subject.Subject;
 import service.academic.GradeService;
 import service.student.StudentService;
+import util.AcademicPolicy;
 import view.ConsoleColor;
 import view.student.MenuStudentInformationView;
-
-import java.util.Scanner;
 
 public class StudentInformationViewController {
     private final MenuStudentInformationView menuStudentInformationView;
@@ -108,7 +107,7 @@ public class StudentInformationViewController {
 
     private void showGraduationProgress(Student student) {
         int currentCredits = sumCredits(student);
-        int requiredCredits = 145;
+        int requiredCredits = AcademicPolicy.REQUIRED_CREDITS_FOR_GRADUATION;
         double progress = ((double) currentCredits / requiredCredits) * 100;
         System.out.println("\n--- Graduation Progress ---");
         System.out.println("Completed Credits: " + currentCredits + " / " + requiredCredits);

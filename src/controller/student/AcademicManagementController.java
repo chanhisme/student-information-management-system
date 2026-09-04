@@ -5,6 +5,7 @@ import model.subject.Subject;
 import service.academic.GradeService;
 import service.student.StudentService;
 import service.subject.SubjectService;
+import util.AcademicPolicy;
 import view.ConsoleColor;
 import view.student.MenuAcademicManagementView;
 import view.student.MenuStudentManageView;
@@ -163,8 +164,8 @@ public class AcademicManagementController {
 
     private void calculateCredit(){
         try{
-            double passedScore = 5.0;
-            int numberPassedCredit = 0, requiredCredits = 145;
+            double passedScore = AcademicPolicy.PASSED_SCORE;
+            int numberPassedCredit = 0, requiredCredits = AcademicPolicy.REQUIRED_CREDITS_FOR_GRADUATION;
 
             Student student = findStudent();
             if(student == null){
