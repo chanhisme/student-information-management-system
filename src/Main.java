@@ -54,7 +54,7 @@ public class Main {
         MenuStudentInformationView menuStudentInformationView = new MenuStudentInformationView(scanner);
         MenuAcademicManagementView menuAcademicManagementView = new MenuAcademicManagementView(scanner);
         MenuGraduationProgressView menuGraduationProgressView = new MenuGraduationProgressView(scanner);
-        MenuFaultyManagementView menuFaultyManagementView = new MenuFaultyManagementView(scanner);
+        MenuFacultyManagementView menuFacultyManagementView = new MenuFacultyManagementView(scanner);
         MenuMajorManagementView menuMajorManagementView = new MenuMajorManagementView(scanner);
         MenuSubjectManageView menuSubjectManageView = new MenuSubjectManageView(scanner);
         MenuGradeManageView menuGradeManageView = new MenuGradeManageView(scanner);
@@ -119,8 +119,8 @@ public class Main {
                 graduationProgressController
         );
 
-        FaultyManagementController faultyManagementController = new FaultyManagementController(
-                menuFaultyManagementView,
+        FacultyManagementController facultyManagementController = new FacultyManagementController(
+                menuFacultyManagementView,
                 facultyService,
                 majorManagementController
         );
@@ -131,7 +131,7 @@ public class Main {
                 menuView,
                 studentController,
                 subjectManageController,
-                faultyManagementController);
+                facultyManagementController);
 
 
         mainMenuController.run();

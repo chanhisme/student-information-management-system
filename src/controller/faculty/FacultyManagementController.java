@@ -3,24 +3,24 @@ package controller.faculty;
 import model.faculty.Faculty;
 import service.faculty.FacultyService;
 import view.ConsoleColor;
-import view.faculty.MenuFaultyManagementView;
+import view.faculty.MenuFacultyManagementView;
 
-public class FaultyManagementController {
-    private final MenuFaultyManagementView menuFaultyManagementView;
+public class FacultyManagementController {
+    private final MenuFacultyManagementView menuFacultyManagementView;
     private final FacultyService facultyService;
     private final MajorManagementController majorManagementController;
 
-    public FaultyManagementController(MenuFaultyManagementView menuFaultyManagementView, FacultyService facultyService,
-                                      MajorManagementController majorManagementController) {
-        this.menuFaultyManagementView = menuFaultyManagementView;
+    public FacultyManagementController(MenuFacultyManagementView menuFacultyManagementView, FacultyService facultyService,
+                                       MajorManagementController majorManagementController) {
+        this.menuFacultyManagementView = menuFacultyManagementView;
         this.facultyService = facultyService;
         this.majorManagementController = majorManagementController;
     }
 
     public void run() {
         while (true) {
-            menuFaultyManagementView.showMenu();
-            int choice = menuFaultyManagementView.inputChoice(0, 7);
+            menuFacultyManagementView.showMenu();
+            int choice = menuFacultyManagementView.inputChoice(0, 7);
             if (choice == -1) {
                 return;
             }
@@ -53,28 +53,27 @@ public class FaultyManagementController {
     }
 
     private void viewAllFaculties() {
-        menuFaultyManagementView.displayAllFaculties(facultyService.getAllFaculty());
+        menuFacultyManagementView.displayAllFaculties(facultyService.getAllFaculty());
     }
 
     private void addFaculty() {
 
 
         try {
-            Faculty faculty = menuFaultyManagementView.inputFaculty();
+            Faculty faculty = menuFacultyManagementView.inputFaculty();
             if (faculty == null) {
                 ConsoleColor.printError("Faculty creation cancelled.");
                 return;
             }
             facultyService.addFaculty(faculty);
             ConsoleColor.printSuccess("Faculty added successfully!");
-            ConsoleColor.printSuccess("Faculty saved successfully!");
         } catch (IllegalArgumentException e) {
             ConsoleColor.printError(e.getMessage());
         }
     }
 
     private void updateFacultyByPreFix() {
-        String updatePreFix = menuFaultyManagementView.inputPreFix();
+        String updatePreFix = menuFacultyManagementView.inputPreFix();
         if (updatePreFix == null) {
             return;
         }
@@ -87,11 +86,11 @@ public class FaultyManagementController {
     }
 
     private void deleteFacultyByPreFix() {
-        String preFix = menuFaultyManagementView.inputPreFix();
+        String preFix = menuFacultyManagementView.inputPreFix();
         if (preFix == null) {
             return;
         }
-        boolean isConfirm = menuFaultyManagementView.confirmDelete();
+        boolean isConfirm = menuFacultyManagementView.confirmDelete();
         if (!isConfirm) {
             return;
         }
@@ -105,12 +104,12 @@ public class FaultyManagementController {
 
     private void viewFacultyByPreFix() {
         try {
-            String preFix = menuFaultyManagementView.inputPreFix();
+            String preFix = menuFacultyManagementView.inputPreFix();
             if (preFix == null) {
                 return;
             }
             Faculty foundFaculty = findFacultyOrThrow(preFix);
-            menuFaultyManagementView.displayOneFaculty(foundFaculty);
+            menuFacultyManagementView.displayOneFaculty(foundFaculty);
         } catch (RuntimeException e) {
             ConsoleColor.printError(e.getMessage());
         }
@@ -118,12 +117,12 @@ public class FaultyManagementController {
 
     private void enterMajorManagement() {
         try {
-            String preFix = menuFaultyManagementView.inputPreFix();
+            String preFix = menuFacultyManagementView.inputPreFix();
             if (preFix == null) {
                 return;
             }
             Faculty foundFaculty = findFacultyOrThrow(preFix);
-            menuFaultyManagementView.displayOneFaculty(foundFaculty);
+            menuFacultyManagementView.displayOneFaculty(foundFaculty);
             majorManagementController.run(foundFaculty);
         } catch (RuntimeException e) {
             ConsoleColor.printError(e.getMessage());
@@ -132,12 +131,12 @@ public class FaultyManagementController {
 
     private void viewFacultyDetailByPreFix() {
         try {
-            String preFix = menuFaultyManagementView.inputPreFix();
+            String preFix = menuFacultyManagementView.inputPreFix();
             if (preFix == null) {
                 return;
             }
             Faculty foundFaculty = findFacultyOrThrow(preFix);
-            menuFaultyManagementView.displayDetailFaculty(foundFaculty);
+            menuFacultyManagementView.displayDetailFaculty(foundFaculty);
         } catch (RuntimeException e) {
             ConsoleColor.printError(e.getMessage());
         }
@@ -154,13 +153,13 @@ public class FaultyManagementController {
     private void handleUpdateFaculty(Faculty faculty) {
         boolean updating = true;
         while (updating) {
-            int choice = menuFaultyManagementView.displayUpdateMenuAndGetChoice(faculty);
+            int choice = menuFacultyManagementView.displayUpdateMenuAndGetChoice(faculty);
             if (choice == -1) {
                 return;
             }
             switch (choice) {
                 case 1:
-                    String newName = menuFaultyManagementView.inputFacultyName();
+                    String newName = menuFacultyManagementView.inputFacultyName();
                     if (newName == null) {
                         break;
                     }

@@ -81,6 +81,7 @@ public class RegistrationService {
             student.getRegisteredSubjects().addLast(subject);
         }
         redoStack.push(action);
+        registrationRepository.save();
         return true;
     }
 
@@ -98,6 +99,7 @@ public class RegistrationService {
             student.getRegisteredSubjects().remove(subject);
         }
         undoStack.push(action);
+        registrationRepository.save();
         return true;
     }
 }

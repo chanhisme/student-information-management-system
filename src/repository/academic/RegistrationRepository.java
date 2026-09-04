@@ -62,7 +62,9 @@ public class RegistrationRepository {
             String line;
             while( (line = reader.readLine()) != null){
                 String[] parts = line.split("\\|");
-
+                if(parts.length != 2){
+                    continue;
+                }
                 String studentId = parts[0];
                 String subjectId = parts[1];
                 Student student = students.get(studentId);

@@ -1,7 +1,7 @@
 package controller;
 
 import controller.student.StudentController;
-import controller.faculty.FaultyManagementController;
+import controller.faculty.FacultyManagementController;
 import controller.subject.SubjectManageController;
 
 import view.MenuView;
@@ -10,15 +10,15 @@ public class MainMenuController {
     private final MenuView menuView;
     private final StudentController studentController;
     private final SubjectManageController subjectManageController;
-    private final FaultyManagementController faultyManagementController;
+    private final FacultyManagementController facultyManagementController;
 
     public MainMenuController(MenuView menuView, StudentController studentController,
                               SubjectManageController subjectManageController,
-                              FaultyManagementController faultyManagementController) {
+                              FacultyManagementController facultyManagementController) {
         this.menuView = menuView;
         this.studentController = studentController;
         this.subjectManageController = subjectManageController;
-        this.faultyManagementController = faultyManagementController;
+        this.facultyManagementController = facultyManagementController;
     }
 
     public void run() {
@@ -36,7 +36,7 @@ public class MainMenuController {
                     subjectManageController.run();
                     break;
                 case 3:
-                    faultyManagementController.run();
+                    facultyManagementController.run();
                     break;
                 case 0:
                     menuView.showExitMessage();

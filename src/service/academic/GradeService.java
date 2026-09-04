@@ -4,8 +4,6 @@ import model.student.Student;
 import model.subject.Subject;
 import repository.academic.GradeRepository;
 import repository.student.StudentRepository;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,6 +20,7 @@ public class GradeService {
         }
         gradeRepository.add(student, subject, score);
         calculateGpa(student);
+        gradeRepository.save();
     }
 
 

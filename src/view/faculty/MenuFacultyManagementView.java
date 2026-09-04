@@ -8,9 +8,9 @@ import model.faculty.Major;
 import view.BaseMenuView;
 import view.ConsoleColor;
 
-public class MenuFaultyManagementView extends BaseMenuView {
+public class MenuFacultyManagementView extends BaseMenuView {
 
-    public MenuFaultyManagementView(Scanner scanner) {
+    public MenuFacultyManagementView(Scanner scanner) {
         super(scanner);
     }
 

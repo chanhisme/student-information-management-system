@@ -2,6 +2,7 @@ package repository.academic;
 
 import model.student.Student;
 import model.subject.Subject;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
@@ -57,8 +58,12 @@ public class GradeRepository {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             reader.readLine();
             String line;
-            while ( (line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
+
+                if (parts.length != 3) {
+                    continue;
+                }
 
                 String studentId = parts[0];
                 String subjectId = parts[1];
@@ -78,7 +83,7 @@ public class GradeRepository {
         student.getSubjectGrades().put(subject.getId(), score);
     }
 
-    public void delete (Student student, Subject subject) {
+    public void delete(Student student, Subject subject) {
         student.getSubjectGrades().remove(subject.getId());
     }
 
