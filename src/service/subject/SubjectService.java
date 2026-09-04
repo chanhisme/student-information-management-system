@@ -5,6 +5,7 @@ import repository.subject.SubjectRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SubjectService {
 
@@ -75,6 +76,9 @@ public class SubjectService {
             }
         }
         return result;
+    }
+    public Map<String, Subject> getSubjectsMap() {
+        return subjectRepository.getSubjectsMap();
     }
 }
 

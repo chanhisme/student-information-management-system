@@ -4,7 +4,6 @@ import controller.student.StudentController;
 import controller.faculty.FaultyManagementController;
 import controller.subject.SubjectManageController;
 
-import model.faculty.Faculty;
 import view.MenuView;
 public class MainMenuController {
 

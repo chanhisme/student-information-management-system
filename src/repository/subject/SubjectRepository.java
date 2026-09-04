@@ -97,6 +97,10 @@ public class SubjectRepository {
         return new ArrayList<>(subjectsMap.values());
     }
 
+    public Map<String, Subject> getSubjectsMap() {
+        return subjectsMap;
+    }
+
     public Subject findById(String id) {
         return id == null ? null : subjectsMap.get(id.toUpperCase());
     }

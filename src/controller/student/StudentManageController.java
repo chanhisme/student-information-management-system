@@ -122,6 +122,9 @@ public class StudentManageController {
 
     private void sortStudents() {
         int sortChoice = menuStudentManageView.displaySortMenuAndGetChoice();
+        if (sortChoice == -1 || sortChoice == 0) {
+            return;
+        }
         if (sortChoice == 1) {
             java.util.List<Student> sorted = studentService.getStudentsSorted(
                     (s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
@@ -129,6 +132,10 @@ public class StudentManageController {
         } else if (sortChoice == 2) {
             java.util.List<Student> sorted = studentService.getStudentsSorted(
                     (s1, s2) -> Double.compare(s2.getGpa(), s1.getGpa()));
+            menuStudentManageView.displayAllStudentsSorted(sorted);
+        } else if (sortChoice == 3) {
+            java.util.List<Student> sorted = studentService.getStudentsSorted(
+                    (s1, s2) -> Double.compare(s1.getGpa(), s2.getGpa()));
             menuStudentManageView.displayAllStudentsSorted(sorted);
         }
     }

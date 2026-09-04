@@ -50,6 +50,7 @@ public class AcademicManagementController {
                     viewSemesterStatistics();
                     break;
                 case 5:
+                    caculateCreadit();
                     break;
                 case 0:
                     return;
@@ -158,6 +159,30 @@ public class AcademicManagementController {
         System.out.println("Highest GPA    : " + academicService.calculateAverageGpa(students)[1]);
         System.out.println("Lowest GPA     : " + academicService.calculateAverageGpa(students)[2]);
         System.out.println("==========================================");
+    }
+
+    private void caculateCreadit(){
+        try{
+            double passedScore = 5.0;
+            int numberPassedCredit = 0, requiredCredits = 145;
+
+            Student student = findStudent();
+            Map <String, Subject> subjectMap = subjectService.getSubjectsMap();
+            for(Map.Entry<String, Double> entry : student.getSubjectGrades().entrySet()){
+                double score = entry.getValue();
+                String subjectId = entry.getKey();
+                if(score >= passedScore){
+                    numberPassedCredit += subjectMap.get(subjectId).getCredits();
+                }
+            }
+            System.out.println("\n--- Caculate credits ---");
+            menuStudentManageView.displayOneStudent(student);
+            System.out.println("Passed credits: " + numberPassedCredit);
+            System.out.println("Remained credits: " + (requiredCredits - numberPassedCredit));
+
+        } catch (RuntimeException e) {
+            ConsoleColor.printError(e.getMessage());
+        }
     }
 
 }

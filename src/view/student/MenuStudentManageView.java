@@ -41,8 +41,9 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println("\n========== SORT STUDENTS ==========");
         System.out.println("1. Sort by Name (A-Z)");
         System.out.println("2. Sort by GPA (Descending)");
+        System.out.println("3. Sort by GPA (Ascending)");
         System.out.println("0. Back");
-        return inputChoice(0, 2);
+        return inputChoice(0, 3);
     }
 
     public int displayUpdateMenuAndGetChoice(Student student) {
