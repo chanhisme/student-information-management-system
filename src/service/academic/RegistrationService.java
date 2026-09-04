@@ -11,6 +11,7 @@ public class RegistrationService {
 
 
     public enum ActionType {REGISTER, DROP}
+
     private final RegistrationRepository registrationRepository;
 
     public RegistrationService(RegistrationRepository registrationRepository) {
@@ -48,9 +49,8 @@ public class RegistrationService {
         if (student.getRegisteredSubjects().contains(subject)) {
             throw new IllegalArgumentException("Student has already registered for this subject.");
         }
-        student.getRegisteredSubjects().addLast(subject);
-        undoStack.push(new RegistrationAction(student, subject, ActionType.REGISTER));
         registrationRepository.add(student, subject);
+        undoStack.push(new RegistrationAction(student, subject, ActionType.REGISTER));
         redoStack.clear();
 
         registrationRepository.save();
@@ -60,7 +60,7 @@ public class RegistrationService {
         if (!student.getRegisteredSubjects().contains(subject)) {
             throw new IllegalArgumentException("Student is not registered for this subject.");
         }
-        student.getRegisteredSubjects().remove(subject);
+
         undoStack.push(new RegistrationAction(student, subject, ActionType.DROP));
         registrationRepository.delete(student, subject);
         redoStack.clear();

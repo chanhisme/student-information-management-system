@@ -50,7 +50,7 @@ public class AcademicManagementController {
                     viewSemesterStatistics();
                     break;
                 case 5:
-                    caculateCreadit();
+                    calculateCredit();
                     break;
                 case 0:
                     return;
@@ -161,18 +161,25 @@ public class AcademicManagementController {
         System.out.println("==========================================");
     }
 
-    private void caculateCreadit(){
+    private void calculateCredit(){
         try{
             double passedScore = 5.0;
             int numberPassedCredit = 0, requiredCredits = 145;
 
             Student student = findStudent();
+            if(student == null){
+                return;
+            }
             Map <String, Subject> subjectMap = subjectService.getSubjectsMap();
             for(Map.Entry<String, Double> entry : student.getSubjectGrades().entrySet()){
                 double score = entry.getValue();
                 String subjectId = entry.getKey();
+                Subject subject = subjectMap.get(subjectId);
+                if(subject == null){
+                    continue;
+                }
                 if(score >= passedScore){
-                    numberPassedCredit += subjectMap.get(subjectId).getCredits();
+                    numberPassedCredit += subject.getCredits();
                 }
             }
             System.out.println("\n--- Caculate credits ---");

@@ -65,7 +65,7 @@ public class Main {
 
         SubjectService subjectService = new SubjectService(subjectRepository);
         RegistrationService courseRegistrationService = new RegistrationService(registrationRepository);
-        GradeService gradeService = new GradeService(gradeRepository, studentRepository);
+        GradeService gradeService = new GradeService(gradeRepository);
         for (Student student : students.values()) {
             gradeService.calculateGpa(student);
         }

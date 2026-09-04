@@ -9,10 +9,8 @@ import java.util.List;
 
 public class GradeService {
     private final GradeRepository gradeRepository;
-    private final StudentRepository studentRepository;
-    public GradeService(GradeRepository gradeRepository, StudentRepository studentRepository) {
+    public GradeService(GradeRepository gradeRepository) {
         this.gradeRepository = gradeRepository;
-        this.studentRepository = studentRepository;
     }
     public void addGrade(Student student, Subject subject, double score) {
         if (!student.getRegisteredSubjects().contains(subject)) {
