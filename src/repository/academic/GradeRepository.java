@@ -65,9 +65,14 @@ public class GradeRepository {
                     continue;
                 }
 
-                String studentId = parts[0];
-                String subjectId = parts[1];
-                double score = Double.parseDouble(parts[2]);
+                String studentId = parts[0].trim().toUpperCase();
+                String subjectId = parts[1].trim().toUpperCase();
+                double score;
+                try {
+                    score = Double.parseDouble(parts[2].trim());
+                } catch (NumberFormatException e) {
+                    continue;
+                }
 
                 Student student = students.get(studentId);
                 if (student != null) {

@@ -182,7 +182,7 @@ public class AcademicManagementController {
                     numberPassedCredit += subject.getCredits();
                 }
             }
-            System.out.println("\n--- Caculate credits ---");
+            System.out.println("\n--- Calculate credits ---");
             menuStudentManageView.displayOneStudent(student);
             System.out.println("Passed credits: " + numberPassedCredit);
             System.out.println("Remained credits: " + (requiredCredits - numberPassedCredit));

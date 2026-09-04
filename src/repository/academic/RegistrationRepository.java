@@ -65,8 +65,8 @@ public class RegistrationRepository {
                 if(parts.length != 2){
                     continue;
                 }
-                String studentId = parts[0];
-                String subjectId = parts[1];
+                String studentId = parts[0].trim().toUpperCase();
+                String subjectId = parts[1].trim().toUpperCase();
                 Student student = students.get(studentId);
                 Subject subject = subjectMap.get(subjectId);
                 if (student != null && subject != null) {

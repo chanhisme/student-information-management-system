@@ -136,8 +136,10 @@ public class StudentRepository {
                 writer.write("Status: " + student.getStatus());
                 writer.newLine();
 
-                writer.write("Faculty ID: " + student.getFaculty().getPrefix());
-                writer.newLine();
+                if (student.getFaculty() != null) {
+                    writer.write("Faculty ID: " + student.getFaculty().getPrefix());
+                    writer.newLine();
+                }
 
                 if (student.getMajor() != null) {
                     writer.write("Major ID: " + student.getMajor().getId());
