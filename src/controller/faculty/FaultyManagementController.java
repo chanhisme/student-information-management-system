@@ -21,6 +21,9 @@ public class FaultyManagementController {
         while (true) {
             menuFaultyManagementView.showMenu();
             int choice = menuFaultyManagementView.inputChoice(0, 7);
+            if (choice == -1) {
+                return;
+            }
             switch (choice) {
                 case 1:
                     viewAllFaculties();
@@ -72,6 +75,9 @@ public class FaultyManagementController {
 
     private void updateFacultyByPreFix() {
         String updatePreFix = menuFaultyManagementView.inputPreFix();
+        if (updatePreFix == null) {
+            return;
+        }
         Faculty facultyToUpdate = facultyService.findByPreFix(updatePreFix);
         if (facultyToUpdate == null) {
             ConsoleColor.printError("This faculty does not exist");
@@ -82,6 +88,9 @@ public class FaultyManagementController {
 
     private void deleteFacultyByPreFix() {
         String preFix = menuFaultyManagementView.inputPreFix();
+        if (preFix == null) {
+            return;
+        }
         boolean isConfirm = menuFaultyManagementView.confirmDelete();
         if (!isConfirm) {
             return;
@@ -96,7 +105,11 @@ public class FaultyManagementController {
 
     private void viewFacultyByPreFix() {
         try {
-            Faculty foundFaculty = findFacultyOrThrow(menuFaultyManagementView.inputPreFix());
+            String preFix = menuFaultyManagementView.inputPreFix();
+            if (preFix == null) {
+                return;
+            }
+            Faculty foundFaculty = findFacultyOrThrow(preFix);
             menuFaultyManagementView.displayOneFaculty(foundFaculty);
         } catch (RuntimeException e) {
             ConsoleColor.printError(e.getMessage());
@@ -105,7 +118,11 @@ public class FaultyManagementController {
 
     private void enterMajorManagement() {
         try {
-            Faculty foundFaculty = findFacultyOrThrow(menuFaultyManagementView.inputPreFix());
+            String preFix = menuFaultyManagementView.inputPreFix();
+            if (preFix == null) {
+                return;
+            }
+            Faculty foundFaculty = findFacultyOrThrow(preFix);
             menuFaultyManagementView.displayOneFaculty(foundFaculty);
             majorManagementController.run(foundFaculty);
         } catch (RuntimeException e) {
@@ -115,7 +132,11 @@ public class FaultyManagementController {
 
     private void viewFacultyDetailByPreFix() {
         try {
-            Faculty foundFaculty = findFacultyOrThrow(menuFaultyManagementView.inputPreFix());
+            String preFix = menuFaultyManagementView.inputPreFix();
+            if (preFix == null) {
+                return;
+            }
+            Faculty foundFaculty = findFacultyOrThrow(preFix);
             menuFaultyManagementView.displayDetailFaculty(foundFaculty);
         } catch (RuntimeException e) {
             ConsoleColor.printError(e.getMessage());
@@ -134,9 +155,15 @@ public class FaultyManagementController {
         boolean updating = true;
         while (updating) {
             int choice = menuFaultyManagementView.displayUpdateMenuAndGetChoice(faculty);
+            if (choice == -1) {
+                return;
+            }
             switch (choice) {
                 case 1:
                     String newName = menuFaultyManagementView.inputFacultyName();
+                    if (newName == null) {
+                        break;
+                    }
                     faculty.setName(newName);
                     ConsoleColor.printSuccess("Updated name successfully.");
                     break;

@@ -26,8 +26,12 @@ public class MenuCourseRegistrationView extends BaseMenuView {
     }
 
     public String inputIdSubject() {
-        System.out.print("Enter id subject: ");
-        return normalizeInput(scanner.nextLine().toUpperCase());
+        System.out.print("Enter id subject (Q to cancel): ");
+        String line = readLineOrNull();
+        if (line == null) {
+            return null;
+        }
+        return normalizeInput(line.toUpperCase());
     }
 
     public void displayAllRegisteredCoursesOneStudent(MyLinkedList<Subject> registeredSubject) {

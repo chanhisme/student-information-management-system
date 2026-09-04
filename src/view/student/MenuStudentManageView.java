@@ -9,13 +9,15 @@ import view.ConsoleColor;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuStudentManageView extends BaseMenuView {
     private final ArrayList<Faculty> faculties;
-    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
 
     public MenuStudentManageView(Scanner scanner, ArrayList<Faculty> faculties) {
         super(scanner);
@@ -47,7 +49,7 @@ public class MenuStudentManageView extends BaseMenuView {
         System.out.println("\n============= UPDATE INFORMATION =============");
         System.out.println("[1]. Name: " + student.getName());
         System.out.println("[2]. Date of Birth: " + (
-                student.getBirth() != null ? student.getBirth().format(dateFormatter) : "N/A"));
+                student.getBirth() != null ? student.getBirth().format(DATE_FORMATTER) : "N/A"));
         System.out.println("[3]. Faculty " + (student.getFaculty() != null ? student.getFaculty().getName() : "N/A"));
         System.out.println("[4]. Major only: " + (student.getMajor() != null ? student.getMajor().getName() : "N/A"));
         System.out.println("[5]. Status: " + student.getStatus());
@@ -71,8 +73,12 @@ public class MenuStudentManageView extends BaseMenuView {
 
 
     public String inputIdStudent() {
-        System.out.print("Enter student id: ");
-        return normalizeInput(scanner.nextLine()).toUpperCase();
+        System.out.print("Enter student id (Q to cancel): ");
+        String line = readLineOrNull();
+        if (line == null) {
+            return null;
+        }
+        return normalizeInput(line).toUpperCase();
     }
 
     public boolean confirmDelete() {
@@ -94,7 +100,7 @@ public class MenuStudentManageView extends BaseMenuView {
         return inputChoice(1,2);
     }
     public Student inputStudentData() {
-        System.out.println("\n--- Enter Student Details ---");
+        System.out.println("\n--- Enter Student Details (Q to cancel) ---");
         Faculty faculty = inputFaculty();
         if (faculty == null) {
             return null;
@@ -108,10 +114,19 @@ public class MenuStudentManageView extends BaseMenuView {
         }
 
         String id = inputId(major.getId());
+        if (id == null) {
+            return null;
+        }
         String name = inputName();
+        if (name == null) {
+            return null;
+        }
 
 
         LocalDate birth = inputBirthDate();
+        if (birth == null) {
+            return null;
+        }
 
         return new Student(name, id, major, birth, faculty);
     }
@@ -147,8 +162,12 @@ public class MenuStudentManageView extends BaseMenuView {
 
             System.out.println("0. Back");
 
-            System.out.print("Enter choice: ");
-            String choice = scanner.nextLine().trim();
+            System.out.print("Enter choice (number / N / P / Q to cancel): ");
+            String choice = readLineOrNull();
+            if (choice == null) {
+                return null;
+            }
+            choice = choice.trim();
 
             if (choice.equalsIgnoreCase("N") && currentPage < totalPages - 1) {
                 currentPage++;
@@ -188,10 +207,14 @@ public class MenuStudentManageView extends BaseMenuView {
             }
 
             System.out.println("0. Back");
-            System.out.print("Enter choice: ");
+            System.out.print("Enter choice (Q to cancel): ");
 
+            String line = readLineOrNull();
+            if (line == null) {
+                return null;
+            }
             try {
-                int choice = Integer.parseInt(scanner.nextLine().trim());
+                int choice = Integer.parseInt(line.trim());
 
                 if (choice == 0) {
                     return null;
@@ -211,8 +234,12 @@ public class MenuStudentManageView extends BaseMenuView {
 
     public String inputId(String preFixId) {
         while (true) {
-            System.out.print("Enter Student ID: ");
-            String id = scanner.nextLine().trim();
+            System.out.print("Enter Student ID (Q to cancel): ");
+            String line = readLineOrNull();
+            if (line == null) {
+                return null;
+            }
+            String id = line.trim();
             if (id.isEmpty()) {
                 ConsoleColor.printError("Student ID cannot be empty.");
                 continue;
@@ -227,8 +254,12 @@ public class MenuStudentManageView extends BaseMenuView {
 
     public String inputName() {
         while (true) {
-            System.out.print("Enter Student Name: ");
-            String name = scanner.nextLine().trim();
+            System.out.print("Enter Student Name (Q to cancel): ");
+            String line = readLineOrNull();
+            if (line == null) {
+                return null;
+            }
+            String name = line.trim();
             if (name.isEmpty()) {
                 ConsoleColor.printError("Student name cannot be empty.");
                 continue;
@@ -243,12 +274,16 @@ public class MenuStudentManageView extends BaseMenuView {
 
     public LocalDate inputBirthDate() {
         while (true) {
+            System.out.print("Enter Birth Date (dd/MM/yyyy, Q to cancel): ");
+            String birthInput = readLineOrNull();
+            if (birthInput == null) {
+                return null;
+            }
+            birthInput = birthInput.trim();
             try {
-                System.out.print("Enter Birth Date (dd/MM/yyyy): ");
-                String birthInput = scanner.nextLine().trim();
-                return LocalDate.parse(birthInput, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                return LocalDate.parse(birthInput, DATE_FORMATTER);
             } catch (DateTimeParseException e) {
-                ConsoleColor.printError("Invalid date. Please use dd/MM/yyyy.");
+                ConsoleColor.printError("Invalid date. Please use day/month/year (dd/MM/yyyy), e.g. 25/12/2006.");
             }
         }
     }
@@ -271,7 +306,7 @@ public class MenuStudentManageView extends BaseMenuView {
         for (Student student : students) {
             String majorName = (student.getMajor() != null) ? student.getMajor().getName() : "N/A";
             String facultyPrefix = (student.getFaculty() != null) ? student.getFaculty().getPrefix() : "N/A";
-            String formattedBirthDate = (student.getBirth() != null) ? student.getBirth().format(dateFormatter) : "N/A";
+            String formattedBirthDate = (student.getBirth() != null) ? student.getBirth().format(DATE_FORMATTER) : "N/A";
 
             System.out.printf(
                     "%-12s | %-22s | %-32s | %-10s | %-12s | %-10s%n",
@@ -305,7 +340,7 @@ public class MenuStudentManageView extends BaseMenuView {
         for (Student student : students) {
             String majorName = (student.getMajor() != null) ? student.getMajor().getName() : "N/A";
             String facultyPrefix = (student.getFaculty() != null) ? student.getFaculty().getPrefix() : "N/A";
-            String formattedBirthDate = (student.getBirth() != null) ? student.getBirth().format(dateFormatter) : "N/A";
+            String formattedBirthDate = (student.getBirth() != null) ? student.getBirth().format(DATE_FORMATTER) : "N/A";
 
             System.out.printf(
                     "%-12s | %-22s | %-32s | %-10s | %-12s | %-10s | %-5.2f%n",
@@ -330,7 +365,7 @@ public class MenuStudentManageView extends BaseMenuView {
         }
         String majorName = (student.getMajor() != null) ? student.getMajor().getName() : "N/A";
         String facultyPrefix = (student.getFaculty() != null) ? student.getFaculty().getPrefix() : "N/A";
-        String formattedBirthDate = (student.getBirth() != null) ? student.getBirth().format(dateFormatter) : "N/A";
+        String formattedBirthDate = (student.getBirth() != null) ? student.getBirth().format(DATE_FORMATTER) : "N/A";
         System.out.printf(
                 "%-12s | %-22s | %-32s | %-10s | %-12s | %-10s%n",
                 student.getId(),

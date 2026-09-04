@@ -27,6 +27,9 @@ public class StudentController {
         while (true) {
             menuStudentView.showMenu();
             choice = menuStudentView.inputChoice(0, 5);
+            if (choice == -1) {
+                return;
+            }
             switch (choice) {
                 case 1:
                     studentManageController.run();

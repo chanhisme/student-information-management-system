@@ -33,6 +33,9 @@ public class AcademicManagementController {
         while (true) {
             menuAcademicManagementView.showMenu();
             int choice = menuAcademicManagementView.inputChoice(0, 5);
+            if (choice == -1) {
+                return;
+            }
             switch (choice) {
                 case 1:
                     gradeManageController.run();
@@ -58,6 +61,9 @@ public class AcademicManagementController {
 
         while (true) {
             String studentId = menuStudentManageView.inputIdStudent();
+            if (studentId == null) {
+                return null;
+            }
             Student student = studentService.findById(studentId);
             if (student != null) {
                 return student;
@@ -69,6 +75,9 @@ public class AcademicManagementController {
     private void calculateGpa() {
         try {
             Student student = findStudent();
+            if (student == null) {
+                return;
+            }
             academicService.calculateGpa(student);
             ConsoleColor.printSuccess("Calculate successfully\n");
             System.out.println("ID: " + student.getId());
@@ -84,6 +93,9 @@ public class AcademicManagementController {
             System.out.println("========== ACADEMIC TRANSCRIPT ==========\n");
 
             Student student = findStudent();
+            if (student == null) {
+                return;
+            }
             menuStudentManageView.displayOneStudent(student);
 
             System.out.println("--------------- TRANSCRIPT ---------------\n");

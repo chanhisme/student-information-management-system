@@ -48,7 +48,7 @@ public abstract class BaseMenuView {
         }
     }
 
-    protected boolean isQuit(String input) {
+    public boolean isQuit(String input) {
         boolean flag = false;
         if (input != null) {
             if (input.trim().equalsIgnoreCase("Q")) {
@@ -58,7 +58,7 @@ public abstract class BaseMenuView {
         return flag;
     }
 
-    protected String readLineOrNull() {
+    public String readLineOrNull() {
         String line = scanner.nextLine();
         String result = line;
         if (isQuit(line)) {
@@ -67,7 +67,7 @@ public abstract class BaseMenuView {
         return result;
     }
 
-    protected String normalizeInput(String input) {
+    public String normalizeInput(String input) {
         return input.replaceAll("\\s+", "");
     }
 

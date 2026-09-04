@@ -23,9 +23,13 @@ public class MenuGradeManageView extends BaseMenuView {
 
     public double inputGrade(){
         while(true){
+            System.out.print("Enter score (Q to cancel): ");
+            String line = readLineOrNull();
+            if (line == null) {
+                return -1;
+            }
             try{
-                System.out.print("Enter score: ");
-                double score = Double.parseDouble(scanner.nextLine());
+                double score = Double.parseDouble(line.trim());
                 if(score >= 0 && score <= 10.0){
                     return Double.parseDouble(String.format("%.2f", score));
                 }

@@ -22,6 +22,9 @@ public class StudentManageController {
         while (true) {
             menuStudentManageView.showMenu();
             int choice = menuStudentManageView.inputChoice(0, 6);
+            if (choice == -1) {
+                return;
+            }
             switch (choice) {
                 case 1: addStudent(); break;
                 case 2: updateStudentById(); break;
@@ -51,7 +54,11 @@ public class StudentManageController {
 
     private void updateStudentById() {
         try {
-            Student student = findStudentOrThrow(menuStudentManageView.inputIdStudent());
+            String id = menuStudentManageView.inputIdStudent();
+            if (id == null) {
+                return;
+            }
+            Student student = findStudentOrThrow(id);
             handleUpdateStudent(student);
         } catch (RuntimeException e) {
             ConsoleColor.printError(e.getMessage());
@@ -60,6 +67,9 @@ public class StudentManageController {
 
     private void deleteStudentById() {
         String id = menuStudentManageView.inputIdStudent();
+        if (id == null) {
+            return;
+        }
         try {
             Student student = findStudentOrThrow(id);
             menuStudentManageView.displayOneStudent(student);
@@ -94,12 +104,18 @@ public class StudentManageController {
 
     private void searchStudentById() {
         String id = menuStudentManageView.inputIdStudent();
+        if (id == null) {
+            return;
+        }
         Student student = studentService.findById(id);
         menuStudentManageView.displayOneStudent(student);
     }
 
     private void searchStudentsByName() {
         String name = menuStudentManageView.inputName();
+        if (name == null) {
+            return;
+        }
         ArrayList<Student> students = new ArrayList<>(studentService.findStudentByName(name));
         menuStudentManageView.displayAllStudents(students);
     }
@@ -129,14 +145,23 @@ public class StudentManageController {
         boolean updating = true;
         while (updating) {
             int choice = menuStudentManageView.displayUpdateMenuAndGetChoice(student);
+            if (choice == -1) {
+                return;
+            }
             switch (choice) {
                 case 1:
                     String newName = menuStudentManageView.inputName();
+                    if (newName == null) {
+                        break;
+                    }
                     student.setName(newName);
                     ConsoleColor.printSuccess("Updated name successfully.");
                     break;
                 case 2:
                     java.time.LocalDate newBirth = menuStudentManageView.inputBirthDate();
+                    if (newBirth == null) {
+                        break;
+                    }
                     student.setBirth(newBirth);
                     ConsoleColor.printSuccess("Updated date of birth successfully.");
                     break;

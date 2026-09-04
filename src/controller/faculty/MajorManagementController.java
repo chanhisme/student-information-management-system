@@ -21,6 +21,9 @@ public class MajorManagementController {
         while (true) {
             menuMajorManagementView.showMenu();
             int choice = menuMajorManagementView.inputChoice(0, 5);
+            if (choice == -1) {
+                return;
+            }
             switch (choice) {
                 case 1:
                     viewAllMajors(faculty);
@@ -48,9 +51,13 @@ public class MajorManagementController {
     }
 
     private void addMajor(Faculty faculty) {
+        String name = menuMajorManagementView.inputName();
+        if (name == null) {
+            return;
+        }
         Major major = new Major(
                 facultyService.generateMajorId(faculty),
-                menuMajorManagementView.inputName());
+                name);
         try {
             facultyService.addMajor(major, faculty.getPrefix());
             ConsoleColor.printSuccess("Add new major successfully");
@@ -62,7 +69,11 @@ public class MajorManagementController {
 
     private void updateMajorById(Faculty faculty) {
         try {
-            Major major = findMajorOrThrow(menuMajorManagementView.inputId(), faculty.getPrefix());
+            String majorId = menuMajorManagementView.inputId();
+            if (majorId == null) {
+                return;
+            }
+            Major major = findMajorOrThrow(majorId, faculty.getPrefix());
             handleUpdate(major, faculty.getPrefix());
         } catch (RuntimeException e) {
             ConsoleColor.printError(e.getMessage());
@@ -71,6 +82,9 @@ public class MajorManagementController {
 
     private void deleteMajorById(Faculty faculty) {
         String majorId = menuMajorManagementView.inputId();
+        if (majorId == null) {
+            return;
+        }
         try {
             facultyService.deleteMajor(majorId, faculty.getPrefix());
             ConsoleColor.printSuccess("Delete successfully");
@@ -82,7 +96,11 @@ public class MajorManagementController {
 
     private void viewMajorById(Faculty faculty) {
         try {
-            Major major = findMajorOrThrow(menuMajorManagementView.inputId(), faculty.getPrefix());
+            String majorId = menuMajorManagementView.inputId();
+            if (majorId == null) {
+                return;
+            }
+            Major major = findMajorOrThrow(majorId, faculty.getPrefix());
             menuMajorManagementView.displayOneMajor(major);
         } catch (RuntimeException e) {
             ConsoleColor.printError(e.getMessage());
@@ -101,9 +119,15 @@ public class MajorManagementController {
         boolean updating = true;
         while (updating) {
             int choice = menuMajorManagementView.inputUpdate(major);
+            if (choice == -1) {
+                return;
+            }
             switch (choice) {
                 case 1:
                     String newName = menuMajorManagementView.inputName();
+                    if (newName == null) {
+                        break;
+                    }
                     major.setName(newName);
                     ConsoleColor.printSuccess("Changed name successfully");
                     break;

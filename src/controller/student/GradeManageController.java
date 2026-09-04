@@ -32,6 +32,9 @@ public class GradeManageController {
         while (true) {
             menuGradeManageView.showMenu();
             int choice = menuGradeManageView.inputChoice(0, 4);
+            if (choice == -1) {
+                return;
+            }
 
             switch (choice) {
                 case 1:
@@ -54,6 +57,9 @@ public class GradeManageController {
 
     public void addGrade() {
         String studentId = menuStudentManageView.inputIdStudent();
+        if (studentId == null) {
+            return;
+        }
         Student student = studentService.findById(studentId);
         if (student == null) {
             ConsoleColor.printError("Student not found.");
@@ -61,6 +67,9 @@ public class GradeManageController {
         }
 
         String subjectId = menuSubjectManageView.inputId();
+        if (subjectId == null) {
+            return;
+        }
         Subject subject = subjectService.findById(subjectId);
         if (subject == null) {
             ConsoleColor.printError("Subject not found.");
@@ -73,6 +82,9 @@ public class GradeManageController {
         }
 
         double score = menuGradeManageView.inputGrade();
+        if (score == -1) {
+            return;
+        }
         try {
             academicService.addGrade(student, subject, score);
             studentService.updateStudent(student);
@@ -84,6 +96,9 @@ public class GradeManageController {
 
     public void deleteGrade() {
         String studentId = menuStudentManageView.inputIdStudent();
+        if (studentId == null) {
+            return;
+        }
         Student student = studentService.findById(studentId);
         if (student == null) {
             ConsoleColor.printError("Student not found.");
@@ -91,6 +106,9 @@ public class GradeManageController {
         }
 
         String subjectId = menuSubjectManageView.inputId();
+        if (subjectId == null) {
+            return;
+        }
         Subject subject = subjectService.findById(subjectId);
         if (subject == null) {
             ConsoleColor.printError("Subject not found.");
@@ -112,6 +130,9 @@ public class GradeManageController {
 
     public void updateGrade() {
         String studentId = menuStudentManageView.inputIdStudent();
+        if (studentId == null) {
+            return;
+        }
         Student student = studentService.findById(studentId);
         if (student == null) {
             ConsoleColor.printError("Student not found.");
@@ -119,6 +140,9 @@ public class GradeManageController {
         }
 
         String subjectId = menuSubjectManageView.inputId();
+        if (subjectId == null) {
+            return;
+        }
         Subject subject = subjectService.findById(subjectId);
         if (subject == null) {
             ConsoleColor.printError("Subject not found.");
@@ -133,6 +157,9 @@ public class GradeManageController {
 
         menuGradeManageView.displayCurrentGrade(currentScore);
         double score = menuGradeManageView.inputGrade();
+        if (score == -1) {
+            return;
+        }
         try {
             academicService.updateGrade(student, subject, score);
             studentService.updateStudent(student);
@@ -144,6 +171,9 @@ public class GradeManageController {
 
     public void viewGrades() {
         String studentId = menuStudentManageView.inputIdStudent();
+        if (studentId == null) {
+            return;
+        }
         Student student = studentService.findById(studentId);
         if (student == null) {
             ConsoleColor.printError("Student not found.");

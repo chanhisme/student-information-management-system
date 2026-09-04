@@ -25,17 +25,30 @@ public class MenuSubjectManageView extends BaseMenuView {
     }
 
     public Subject inputSubjectData(String id) {
-        System.out.println("\n==========Enter Subject Details==========");
+        System.out.println("\n==========Enter Subject Details (Q to cancel)==========");
         String name = inputName();
+        if (name == null) {
+            return null;
+        }
         int credits = inputCredits();
+        if (credits == -1) {
+            return null;
+        }
         String type = inputSubjectType();
+        if (type == null) {
+            return null;
+        }
         return Subject.create(type, id, name, credits);
     }
 
     public String inputId() {
         while (true) {
-            System.out.print("Enter Subject ID: ");
-            String id = scanner.nextLine().trim().toUpperCase();
+            System.out.print("Enter Subject ID (Q to cancel): ");
+            String line = readLineOrNull();
+            if (line == null) {
+                return null;
+            }
+            String id = line.trim().toUpperCase();
             if (id.isEmpty()) {
                 ConsoleColor.printError("Subject ID cannot be empty.");
                 continue;
@@ -50,8 +63,12 @@ public class MenuSubjectManageView extends BaseMenuView {
 
     public String inputName() {
         while (true) {
-            System.out.print("Enter Subject Name: ");
-            String name = scanner.nextLine().trim();
+            System.out.print("Enter Subject Name (Q to cancel): ");
+            String line = readLineOrNull();
+            if (line == null) {
+                return null;
+            }
+            String name = line.trim();
             if (name.isEmpty()) {
                 ConsoleColor.printError("Subject name cannot be empty.");
                 continue;
@@ -66,9 +83,13 @@ public class MenuSubjectManageView extends BaseMenuView {
 
     public int inputCredits() {
         while (true) {
+            System.out.print("Enter Credits (1-10, Q to cancel): ");
+            String line = readLineOrNull();
+            if (line == null) {
+                return -1;
+            }
             try {
-                System.out.print("Enter Credits (1-10): ");
-                int credits = Integer.parseInt(scanner.nextLine().trim());
+                int credits = Integer.parseInt(line.trim());
                 if (credits < 1 || credits > 10) {
                     ConsoleColor.printError("Credits must be between 1 and 10.");
                     continue;
@@ -86,18 +107,21 @@ public class MenuSubjectManageView extends BaseMenuView {
         for (int i = 0; i < types.length; i++) {
             System.out.println((i + 1) + ". " + types[i]);
         }
-        while (true) {
-            try {
-                System.out.print("Enter choice: ");
-                int choice = Integer.parseInt(scanner.nextLine().trim());
-                if (choice >= 1 && choice <= types.length) {
-                    return types[choice - 1];
-                }
-                ConsoleColor.printError("Invalid choice.");
-            } catch (NumberFormatException e) {
-                ConsoleColor.printError("Please enter a valid number.");
-            }
+        System.out.println("0. Back");
+        int choice = inputChoice(0, types.length);
+        if (choice == -1 || choice == 0) {
+            return null;
         }
+        return types[choice - 1];
+    }
+
+    public String inputSearchQuery() {
+        System.out.print("Enter search query (ID or Name, Q to cancel): ");
+        String line = readLineOrNull();
+        if (line == null) {
+            return null;
+        }
+        return line.trim();
     }
 
     public boolean confirmDelete() {

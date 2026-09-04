@@ -14,7 +14,6 @@ public class StudentInformationViewController {
     private final MenuStudentInformationView menuStudentInformationView;
     private final StudentService studentService;
     private final GradeService academicService;
-    private final Scanner scanner = new Scanner(System.in);
 
     public StudentInformationViewController(MenuStudentInformationView menuStudentInformationView,
             StudentService studentService,
@@ -28,6 +27,9 @@ public class StudentInformationViewController {
         while (true) {
             menuStudentInformationView.showMenu();
             int choice = menuStudentInformationView.inputChoice(0, 5);
+            if (choice == -1) {
+                return;
+            }
             if (choice == 0) {
                 return;
             }
@@ -60,8 +62,10 @@ public class StudentInformationViewController {
     }
 
     private Student findStudentOrContinue() {
-        System.out.print("Enter Student ID: ");
-        String studentId = scanner.nextLine().trim();
+        String studentId = menuStudentInformationView.inputStudentId();
+        if (studentId == null) {
+            return null;
+        }
         Student student = studentService.findById(studentId);
         if (student == null) {
             ConsoleColor.printError("Student not found.");
@@ -76,7 +80,7 @@ public class StudentInformationViewController {
         System.out.println("Name: " + student.getName());
         System.out.println("Faculty: " + (student.getFaculty() != null ? student.getFaculty().getName() : "N/A"));
         System.out.println("Major: " + (student.getMajor() != null ? student.getMajor().getName() : "N/A"));
-        System.out.println("Birth Date: " + (student.getBirth() != null ? student.getBirth() : "N/A"));
+        System.out.println("Birth Date: " + (student.getBirth() != null ? student.getBirth().format(view.student.MenuStudentManageView.DATE_FORMATTER) : "N/A"));
         System.out.println("Status: " + student.getStatus());
     }
 

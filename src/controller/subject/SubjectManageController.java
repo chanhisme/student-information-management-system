@@ -20,6 +20,9 @@ public class SubjectManageController {
         while (true) {
             menuSubjectManageView.showMenu();
             int choice = menuSubjectManageView.inputChoice(0, 5);
+            if (choice == -1) {
+                return;
+            }
             switch (choice) {
                 case 1:
                     viewAllSubjects();
@@ -63,7 +66,11 @@ public class SubjectManageController {
 
     private void updateSubjectById() {
         try {
-            Subject subject = findSubjectOrThrow(menuSubjectManageView.inputId());
+            String id = menuSubjectManageView.inputId();
+            if (id == null) {
+                return;
+            }
+            Subject subject = findSubjectOrThrow(id);
             handleUpdateSubject(subject);
         } catch (RuntimeException e) {
             ConsoleColor.printError(e.getMessage());
@@ -72,6 +79,9 @@ public class SubjectManageController {
 
     private void deleteSubjectById() {
         String id = menuSubjectManageView.inputId();
+        if (id == null) {
+            return;
+        }
         try {
             Subject subject = findSubjectOrThrow(id);
             menuSubjectManageView.displayOneSubject(subject);
@@ -90,8 +100,10 @@ public class SubjectManageController {
     }
 
     private void searchSubjects() {
-        System.out.print("Enter search query (ID or Name): ");
-        String query = new java.util.Scanner(System.in).nextLine();
+        String query = menuSubjectManageView.inputSearchQuery();
+        if (query == null) {
+            return;
+        }
         java.util.List<Subject> searchResults = subjectService.searchSubjects(query);
         if (searchResults.isEmpty()) {
             ConsoleColor.printError("No subjects found.");
@@ -112,14 +124,23 @@ public class SubjectManageController {
         boolean updating = true;
         while (updating) {
             int choice = menuSubjectManageView.displayUpdateMenuAndGetChoice(subject);
+            if (choice == -1) {
+                return;
+            }
             switch (choice) {
                 case 1:
                     String newName = menuSubjectManageView.inputName();
+                    if (newName == null) {
+                        break;
+                    }
                     subject.setName(newName);
                     ConsoleColor.printSuccess("Updated name successfully.");
                     break;
                 case 2:
                     int newCredits = menuSubjectManageView.inputCredits();
+                    if (newCredits == -1) {
+                        break;
+                    }
                     subject.setCredits(newCredits);
                     ConsoleColor.printSuccess("Updated credits successfully.");
                     break;

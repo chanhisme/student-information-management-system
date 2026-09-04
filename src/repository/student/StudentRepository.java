@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +20,8 @@ import repository.faculty.FacultyRepository;
 
 public class StudentRepository {
 
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
     private final Map<String, Student> students;
 
     public StudentRepository(Map<String, Student> students) {
@@ -81,11 +83,7 @@ public class StudentRepository {
                         try {
                             birthDate = LocalDate.parse(value, DATE_FORMATTER);
                         } catch (Exception e) {
-                            try {
-                                birthDate = LocalDate.parse(value);
-                            } catch (Exception ex) {
-                                birthDate = null;
-                            }
+                            birthDate = null;
                         }
                         break;
                     case "status":

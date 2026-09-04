@@ -19,4 +19,13 @@ public class MenuStudentInformationView extends BaseMenuView {
         System.out.println("0. Back");
         System.out.println("=========================================");
     }
+
+    public String inputStudentId() {
+        System.out.print("Enter Student ID (Q to cancel): ");
+        String line = readLineOrNull();
+        if (line == null) {
+            return null;
+        }
+        return normalizeInput(line).toUpperCase();
+    }
 }

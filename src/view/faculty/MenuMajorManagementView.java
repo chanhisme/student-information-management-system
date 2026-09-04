@@ -27,8 +27,12 @@ public class MenuMajorManagementView extends BaseMenuView {
 
     public String inputName() {
         while (true) {
-            System.out.print("Enter new name: ");
-            String name = scanner.nextLine().trim();
+            System.out.print("Enter new name (Q to cancel): ");
+            String line = readLineOrNull();
+            if (line == null) {
+                return null;
+            }
+            String name = line.trim();
             if (!name.isEmpty() && name.matches("^[\\p{L} ]+$")) {
                 return name;
             }
@@ -37,8 +41,12 @@ public class MenuMajorManagementView extends BaseMenuView {
     }
 
     public String inputId(){
-        System.out.print("Enter id: ");
-        return scanner.nextLine().trim().toUpperCase();
+        System.out.print("Enter id (Q to cancel): ");
+        String line = readLineOrNull();
+        if (line == null) {
+            return null;
+        }
+        return line.trim().toUpperCase();
     }
 
 

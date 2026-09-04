@@ -33,6 +33,9 @@ public class CourseRegistrationController {
         while (true) {
             menuCourseRegistrationView.showMenu();
             int choice = menuCourseRegistrationView.inputChoice(0, 5);
+            if (choice == -1) {
+                return;
+            }
             String studentId;
             String subjectId;
             Student student;
@@ -41,7 +44,13 @@ public class CourseRegistrationController {
             switch (choice) {
                 case 1:
                     studentId = menuStudentManageView.inputIdStudent();
+                    if (studentId == null) {
+                        break;
+                    }
                     subjectId = menuCourseRegistrationView.inputIdSubject();
+                    if (subjectId == null) {
+                        break;
+                    }
                     student = studentService.findById(studentId);
                     if (student == null) {
                         ConsoleColor.printError("Student not found.");
@@ -61,7 +70,13 @@ public class CourseRegistrationController {
                     break;
                 case 2:
                     studentId = menuStudentManageView.inputIdStudent();
+                    if (studentId == null) {
+                        break;
+                    }
                     subjectId = menuCourseRegistrationView.inputIdSubject();
+                    if (subjectId == null) {
+                        break;
+                    }
                     student = studentService.findById(studentId);
                     if (student == null) {
                         ConsoleColor.printError("Student not found.");
@@ -82,6 +97,9 @@ public class CourseRegistrationController {
 
                 case 3:
                     studentId = menuStudentManageView.inputIdStudent();
+                    if (studentId == null) {
+                        break;
+                    }
                     student = studentService.findById(studentId);
                     if (student == null) {
                         ConsoleColor.printError("Student not found.");

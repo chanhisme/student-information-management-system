@@ -42,8 +42,12 @@ public class MenuFaultyManagementView extends BaseMenuView {
 
     public String inputPreFix() {
         while (true) {
-            System.out.print("Enter faculty id: ");
-            String preFix = scanner.nextLine().trim().toUpperCase();
+            System.out.print("Enter faculty id (Q to cancel): ");
+            String line = readLineOrNull();
+            if (line == null) {
+                return null;
+            }
+            String preFix = line.trim().toUpperCase();
             if(!preFix.isEmpty() && preFix.matches("[A-Za-z]+")){
                 return preFix;
             }
@@ -55,8 +59,12 @@ public class MenuFaultyManagementView extends BaseMenuView {
     public String inputFacultyName() {
         String facultyName = null;
         while (facultyName == null) {
-            System.out.print("Enter name of faculty: ");
-            facultyName = scanner.nextLine();
+            System.out.print("Enter name of faculty (Q to cancel): ");
+            String line = readLineOrNull();
+            if (line == null) {
+                return null;
+            }
+            facultyName = line;
             if (facultyName.matches(".*\\d.*")) {
                 throw new IllegalArgumentException("Faculty name must not contain numbers.");
             }
