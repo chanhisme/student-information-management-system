@@ -178,7 +178,8 @@ public class AcademicManagementController {
                 if(subject == null){
                     continue;
                 }
-                if(score >= passedScore){
+                double finalScore = subject.calculateFinalScore(score);
+                if(finalScore >= passedScore){
                     numberPassedCredit += subject.getCredits();
                 }
             }
